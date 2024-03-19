@@ -88,70 +88,7 @@
         <p>Inv Bulanan</p>
     </a>
 </li>
-<li class="nav-item">
-
-    <a href="#" class="nav-link">
-        <i class="fa fa-wrench fa-fw"></i>
-        <p>
-            Invoice
-            <i class="right fas fa-angle-left"></i>
-        </p>
-    </a>
-    <ul class="nav nav-treeview">
-        <li class="nav-item">
-            <a href="/billing" class="nav-link">
-                <i class="fas fa-arrow-down nav-icon"></i>
-                <p>Import Data Invoice</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="/invoice/blast" class="nav-link">
-
-                <i class="fas fa-users nav-icon"></i>
-
-                <p>Proses Blast</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="fas fa-map nav-icon"></i>
-                <p>Monitoring</p>
-            </a>
-        </li>
-    </ul>
-</li>
-<li class="nav-item">
-    <a href="#" class="nav-link">
-        <i class="fa fa-wrench fa-fw"></i>
-        {{-- <i class="nav-icon fas fa-chart-pie"></i> --}}
-        <p>
-            Invoice
-            <i class="right fas fa-angle-left"></i>
-        </p>
-    </a>
-    <ul class="nav nav-treeview">
-        <li class="nav-item">
-            <a href="/invoice" class="nav-link">
-                <i class="fas fa-arrow-down nav-icon"></i>
-                <p>Import Data Invoice</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="/invoice/blast" class="nav-link">
-                {{-- <i class="fas fa-fw fa-whatsapp nav-icon"></i> --}}
-                <i class="fas fa-users nav-icon"></i>
-                {{-- <i class="fas fa-weixin nav-icon"></i> --}}
-                <p>Proses Blast</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="fas fa-map nav-icon"></i>
-                <p>Monitoring</p>
-            </a>
-        </li>
-    </ul>
-</li>
+{{-- bagian ini dihapus karena sudah tidak diperlukan --}}
 <li class="nav-header">COLLECTION</li>
 <li class="nav-item">
     <a href="#" class="nav-link">

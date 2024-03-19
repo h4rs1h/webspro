@@ -15,23 +15,33 @@
     <script src="{{ asset('AdminLTE/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
     <script>
         $(document).ready(function() {
+            // Inisialisasi jumlah pemanggilan yang telah dilakukan
+            var callCount = 0;
+
             // Fungsi untuk memanggil API
             function callAPI() {
-                $.ajax({
-                    url: '/api/kirimsp', // Sesuaikan dengan URL API Anda
-                    type: 'GET',
-                    success: function(response) {
-                        console.log(response);
-                        // Anda bisa melakukan sesuatu dengan response di sini
-                    },
-                    error: function(error) {
-                        console.error("Error calling API", error);
-                    }
-                });
+                // Cek apakah jumlah pemanggilan telah mencapai batas maksimal (3)
+                if (callCount < 600) {
+                    $.ajax({
+                        url: '/api/kirimsp', // Sesuaikan dengan URL API Anda
+                        type: 'GET',
+                        success: function(response) {
+                            console.log(response);
+                            // Anda bisa melakukan sesuatu dengan response di sini
+                            callCount++; // Tambahkan jumlah pemanggilan setelah berhasil
+                        },
+                        error: function(error) {
+                            console.error("Error calling API", error);
+                        }
+                    });
+                } else {
+                    // Jika jumlah pemanggilan telah mencapai batas maksimal, hentikan pemanggilan
+                    clearInterval(intervalID);
+                }
             }
 
-            // Menjadwalkan pemanggilan API setiap 5 detik
-            setInterval(callAPI, 5000);
+            // Menjadwalkan pemanggilan API setiap 15 detik
+            var intervalID = setInterval(callAPI, 15000); // 15 detik = 15,000 milidetik
         });
     </script>
 
