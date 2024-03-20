@@ -133,14 +133,53 @@
             $('#exampleInputEmail1').val('');
         });
 
-        // $('#modal-proses').on('show.bs.modal', function(e) {
-        //     $('#fin_tahun').val('');
-        //     $('#fin_bulan').val('');
-        //     $('#tower').val('');
-        //     $('#tower2').val('');
-        //     $('#lantai').val('');
-        //     $('#lantai2').val('');
-        // });
+        // btn upload outstanding
+
+        $('#btn_upload_outstanding').click(function(e) {
+            e.preventDefault();
+
+            var formData = new FormData();
+            formData.append('fin_month', $('#fin_month2').val());
+            formData.append('fin_year', $('#fin_year2').val());
+            formData.append('reminder_no', $('#reminder_no').val());
+            formData.append('file', $('#file_outstanding')[0].files[0]);
+
+            // Debug: Cetak nilai-nilai formData di konsol
+            console.log("FormData Content:");
+            console.log("fin_month:", formData.get('fin_month'));
+            console.log("fin_year:", formData.get('fin_year'));
+            console.log("reminder_no:", formData.get('reminder_no'));
+            console.log("file:", formData.get('file'));
+
+            $.ajax({
+                url: '/billing/import-invoices-outstanding',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                    console.log(data);
+                    $('#modal-import2').modal('hide');
+                    // Bersihkan form setelah upload berhasil
+                    $('#import_form_outstanding')[0].reset();
+                    // Refresh data atau tampilkan pesan sukses di sini
+                    // Tampilkan notifikasi
+                    $('#notification').removeClass('alert-danger').addClass('alert-success')
+                        .text(data.message).show();
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.log(xhr);
+                    // Handle error di sini
+                    // Tampilkan notifikasi error
+                    $('#notification').removeClass('alert-success').addClass('alert-danger')
+                        .text('Error uploading file. Please try again.').show();
+                }
+            });
+        });
+
 
         // Btn preview
 

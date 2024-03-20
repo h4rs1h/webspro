@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendMessageWA;
 use App\Models\Outbox;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -60,5 +61,23 @@ class ProsesKirimWaController extends Controller
     function run_Script()
     {
         return view('Admin.run-proses-outbox');
+    }
+
+    function kirimbyJobs()
+    {
+        $url = env('WOOWA_URL_SEND') . 'send_message';
+        $keys = env('WOOWA_KEY');
+
+        $data = Outbox::where('tglsending', null)
+            ->wherein('tipe', ['SP1', 'SP2', 'SP3', 'INV'])
+            ->orderbyraw('id')
+            // ->limit(10)
+            ->get();
+
+        foreach ($data as $item) {
+            SendMessageWA::dispatch($keys, $url, $item->id, $item->wa, $item->pesan)->onQueue('whatsappBlast');
+        }
+
+        return response()->json(['message' => 'Job running in background']);
     }
 }

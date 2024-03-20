@@ -22,4 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::controller(ProsesKirimWaController::class)->group(function () {
     Route::get('/kirimsp', 'kirimsp');
     Route::get('/run-script', 'runScript')->name('run.script');
+    Route::get('/kirimwajob', 'kirimbyJobs')->name('kirimbyJobs');
 });

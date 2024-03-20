@@ -12,11 +12,19 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
+use App\Imports\InvoiceOutstandingImport;
 
 class BillingController extends Controller
 {
     function index()
     {
+        $remin = [
+            ['id' => '1', 'name' => 'Reminder 1'],
+            ['id' => '2', 'name' => 'Reminder 2'],
+            ['id' => '3', 'name' => 'Reminder 3'],
+            ['id' => '4', 'name' => 'Reminder 4'],
+        ];
+
         $lantai = lantai::all();
         $tower = DB::select('select distinct tower as id,tower as name from vPecahUnit  order by tower');
 
@@ -49,6 +57,7 @@ class BillingController extends Controller
             'tahun' => $tahun,
             'tower' => $tower,
             'lantai' => $lantai,
+            'reminder_no' => $remin,
         ]);
     }
 
@@ -222,6 +231,26 @@ class BillingController extends Controller
         $file->move('DataInvoice', $namafile);
 
         Excel::import(new InvoiceImport(), public_path('/DataInvoice/' . $namafile));
-        return response()->json(['message' => 'File has been uploaded and data imported successfully']);
+        return response()->json(['message' => 'File ' . $namafile . ' has been uploaded and data imported successfully']);
+    }
+    function import_outstanding(Request $request)
+    {
+
+        // dd($request->all());
+        $request->validate([
+            'fin_month' => 'required',
+            'fin_year' => 'required',
+            'reminder_no' => 'required',
+            'file' => 'required|file|mimes:xls,xlsx',
+        ]);
+        $bulan = $request->fin_month;
+        $tahun = $request->fin_year;
+        $reminder_no = $request->reminder_no;
+        $file = $request->file('file');
+        $namafile = $file->getClientOriginalName();
+        $file->move('DataInvOutstansing', $namafile);
+
+        Excel::import(new InvoiceOutstandingImport($bulan, $tahun, $reminder_no, public_path('/DataInvOutstansing/' . $namafile)), public_path('/DataInvOutstansing/' . $namafile));
+        return response()->json(['message' => 'File ' . $namafile . ' has been uploaded and data imported successfully']);
     }
 }

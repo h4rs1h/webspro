@@ -21,7 +21,9 @@
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-import">
                             Import Data Invoice
                         </button>
-
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-import2">
+                            Import Data Reminder Invoice
+                        </button>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-filter">
                             Filter Data Invoice
                         </button>
@@ -94,6 +96,11 @@
     <div class="modal fade" id="modal-import">
         {{-- memisahkan modal import --}}
         @include('Billing.modal-import')
+        <!-- /.modal-dialog -->
+    </div>
+    <div class="modal fade" id="modal-import2">
+        {{-- memisahkan modal import --}}
+        @include('Billing.modal-import-reminder')
         <!-- /.modal-dialog -->
     </div>
 @endsection

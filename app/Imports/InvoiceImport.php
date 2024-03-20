@@ -113,7 +113,7 @@ class InvoiceImport implements ToModel, WithHeadingRow
             'deposit' => $row['deposit'],
             'ttl_air' => $row['ttl_air'],
             'ttl_ipl_dc' => $row['ttl_ipl_dc'],
-            'denda_ppjb_asuransi' => $row['denda_ppjb_asuransi'],
+            'Denda_ppjb_asuransi' => $row['denda_ppjb_asuransi'],
             'outstanding_ppjb_asuransi' => $row['outstanding_ppjb_asuransi'],
             'virtual_acct_real' => $row['virtual_acct_real'],
 
