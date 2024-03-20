@@ -26,7 +26,7 @@ class BillingController extends Controller
         ];
 
         $lantai = lantai::all();
-        $tower = DB::select('select distinct tower as id,tower as name from vPecahUnit  order by tower');
+        $tower = DB::select('select distinct tower as id,tower as name from vpecahunit  order by tower');
 
         $bulan = [
             ['id' => 1, 'name' => 'Januari'],
