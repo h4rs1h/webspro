@@ -88,7 +88,7 @@
         <p>Inv Bulanan</p>
     </a>
 </li>
-{{-- bagian ini dihapus karena sudah tidak diperlukan --}}
+{{-- perubahan link karena sudah tidak dipakai, bagian ini dihapus karena sudah tidak diperlukan --}}
 <li class="nav-header">COLLECTION</li>
 <li class="nav-item">
     <a href="#" class="nav-link">

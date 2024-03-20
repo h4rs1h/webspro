@@ -20,8 +20,9 @@
 
             // Fungsi untuk memanggil API
             function callAPI() {
-                // Cek apakah jumlah pemanggilan telah mencapai batas maksimal (3)
-                if (callCount < 1100) {
+                // Cek apakah jumlah pemanggilan telah mencapai batas maksimal (3) ini iseng saja ya
+
+                if (callCount < 10) {
                     $.ajax({
                         url: '/api/kirimsp', // Sesuaikan dengan URL API Anda
                         type: 'GET',
