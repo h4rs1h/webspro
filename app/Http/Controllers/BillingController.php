@@ -250,8 +250,9 @@ class BillingController extends Controller
         $file = $request->file('file');
         $namafile = $file->getClientOriginalName();
         // $file->move('DataInvOutstansing', $namafile);
-        $file->storeAs('DataInvOutstansing', $namafile);
-        Excel::import(new InvoiceOutstandingImport($bulan, $tahun, $reminder_no, public_path('storage/DataInvOutstansing/' . $namafile)), public_path('storage/DataInvOutstansing/' . $namafile));
+        $path = $file->storeAs('DataInvOutstansing', $namafile);
+        $path = str_replace(public_path(), '', $path);
+        Excel::import(new InvoiceOutstandingImport($bulan, $tahun, $reminder_no, $path/* public_path('storage/DataInvOutstansing/' . $namafile)*/), public_path('storage/DataInvOutstansing/' . $namafile));
         return response()->json(['message' => 'File ' . $namafile . ' has been uploaded and data imported successfully']);
     }
 }
