@@ -228,9 +228,9 @@ class BillingController extends Controller
         ]);
         $file = $request->file('file');
         $namafile = $file->getClientOriginalName();
-        $file->move('DataInvoice', $namafile);
-
-        Excel::import(new InvoiceImport(), public_path('/DataInvoice/' . $namafile));
+        //$file->move('DataInvoice', $namafile);
+        $file->storeAs('DataInvoice', $namafile);
+        Excel::import(new InvoiceImport(), public_path('storage/DataInvoice/' . $namafile));
         return response()->json(['message' => 'File ' . $namafile . ' has been uploaded and data imported successfully']);
     }
     function import_outstanding(Request $request)
@@ -249,9 +249,9 @@ class BillingController extends Controller
         $reminder_no = $request->reminder_no;
         $file = $request->file('file');
         $namafile = $file->getClientOriginalName();
-        $file->move('DataInvOutstansing', $namafile);
-
-        Excel::import(new InvoiceOutstandingImport($bulan, $tahun, $reminder_no, public_path('/DataInvOutstansing/' . $namafile)), public_path('/DataInvOutstansing/' . $namafile));
+        // $file->move('DataInvOutstansing', $namafile);
+        $file->storeAs('DataInvOutstansing', $namafile);
+        Excel::import(new InvoiceOutstandingImport($bulan, $tahun, $reminder_no, public_path('storage/DataInvOutstansing/' . $namafile)), public_path('storage/DataInvOutstansing/' . $namafile));
         return response()->json(['message' => 'File ' . $namafile . ' has been uploaded and data imported successfully']);
     }
 }

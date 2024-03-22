@@ -69,9 +69,10 @@ class InvoiceSPController extends Controller
         // dd($validateData);
         $file = $request->file('file');
         $namafile = $file->getClientOriginalName();
-        $file->move('DataInvoiceSP', $namafile);
+        // $file->move('DataInvoiceSP', $namafile);
+        $file->storeAs('DataInvoiceSP', $namafile);
         //dd($namafile, $file, public_path('/DataInvoice/' . $namafile));
-        Excel::import(new InvoiceSPImport($bulan, $tahun, $tgl_cetak, $tgl_batas_bayar, $tgl_tempo_awal, $tgl_tempo_akhir, $reminder_no, public_path('/DataInvoiceSP/' . $namafile)), public_path('/DataInvoiceSP/' . $namafile));
+        Excel::import(new InvoiceSPImport($bulan, $tahun, $tgl_cetak, $tgl_batas_bayar, $tgl_tempo_awal, $tgl_tempo_akhir, $reminder_no, public_path('storage/DataInvoiceSP/' . $namafile)), public_path('storage/DataInvoiceSP/' . $namafile));
         // Excel::import(new InvoiceSPImport(), public_path('/DataInvoiceSP/' . $namafile));
         return redirect('/invoicesp');
     }

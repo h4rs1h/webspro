@@ -10,6 +10,7 @@ use App\Http\Controllers\PerangkatController;
 use App\Http\Controllers\RereController;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\TenanController;
+use App\Http\Controllers\WebHookController;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
@@ -88,6 +89,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/billing/import-invoices-outstanding', 'import_outstanding')->name('billing.invoice-import-outstanding');
         Route::get('/billing/json-preview', 'preview')->name('billing.preview');
         Route::get('/billing/kirim-blast-inv', 'proseskirimblast')->name('billing.kirim-blast-inv');
+    });
+
+    Route::controller(WebHookController::class)->group(function () {
+        Route::get('/setwebhook', 'set_incoming');
     });
 
     Route::get('/logout', [SesiController::class, 'logout']);
