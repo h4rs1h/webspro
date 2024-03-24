@@ -49,8 +49,7 @@
                                                                 <th>Tahun</th>
                                                                 <th>Nama</th>
                                                                 <th>Handphone</th>
-                                                                <th>VA</th>
-
+                                                                <th>Total Tagihan</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>

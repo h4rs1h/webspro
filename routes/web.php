@@ -9,6 +9,7 @@ use App\Http\Controllers\OwnershipController;
 use App\Http\Controllers\PerangkatController;
 use App\Http\Controllers\RereController;
 use App\Http\Controllers\SesiController;
+use App\Http\Controllers\TemplatePesanController;
 use App\Http\Controllers\TenanController;
 use App\Http\Controllers\WebHookController;
 use Illuminate\Support\Facades\Redirect;
@@ -48,7 +49,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/collection', 'collection')->middleware('userAkses:3');
         Route::get('/rere1', 'rere1')->middleware('userAkses:4');
         Route::get('/rere2', 'rere2')->middleware('userAkses:5');
-
+        Route::get('/outbox', 'antrian_outbox')->name('outbox');
+        Route::get('/outbox/json', 'json_outbox')->name('filter.outbox');;
         // Route::get('/import-ownership', 'ownershipimport')->middleware('userAkses:1');
         // Route::post('/import-ownership', 'import_proses_ownership')->name('admin.import-proses');
     });
@@ -62,6 +64,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(PerangkatController::class)->group(function () {
         Route::get('/perangkat', 'index');
+        Route::get('/perangkat/json', 'json');
+        Route::get('/perangkat/{id}', 'getdetail');
+        Route::post('/perangkat/update', 'update');
     });
 
     Route::controller(InvoiceController::class)->group(function () {
@@ -91,8 +96,22 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/billing/kirim-blast-inv', 'proseskirimblast')->name('billing.kirim-blast-inv');
     });
 
+    Route::controller(CollectionController::class)->group(function () {
+        Route::get('/collection', 'index');
+        Route::get('/collection/json', 'json')->name('filter.collection');
+        Route::post('/collection/upload', 'upload');
+    });
+
+
     Route::controller(WebHookController::class)->group(function () {
         Route::get('/setwebhook', 'set_incoming');
+    });
+
+    Route::controller(TemplatePesanController::class)->group(function () {
+        Route::get('/template', 'index');
+        Route::get('/template/json', 'json');
+        Route::get('/template/{id}', 'getdetail');
+        Route::post('/template/update', 'update');
     });
 
     Route::get('/logout', [SesiController::class, 'logout']);

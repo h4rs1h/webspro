@@ -27,7 +27,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="charts/chartjs.html" class="nav-link">
+            <a href="/template" class="nav-link">
                 <i class="far fa-clipboard nav-icon"></i>
                 <p>Template Pesan</p>
             </a>
@@ -55,32 +55,6 @@
     </ul>
 </li>
 
-<li class="nav-item">
-    <a href="#" class="nav-link">
-
-        {{-- <i class="fa fa-table fa-fw"></i> --}}
-        <i class="nav-icon fas fa-copy"></i>
-        <p>
-            Broadcast (Blast Pesan)
-            <i class="right fas fa-angle-left"></i>
-        </p>
-    </a>
-    <ul class="nav nav-treeview">
-        <li class="nav-item">
-            <a href="charts/chartjs.html" class="nav-link">
-                <i class="far fa-file nav-icon"></i>
-                <p>List Template Pesan</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="charts/chartjs.html" class="nav-link">
-                <i class="far fa-file nav-icon"></i>
-                <p>Send Broadcast</p>
-            </a>
-        </li>
-    </ul>
-</li>
-
 <li class="nav-header">BILLING</li>
 <li class="nav-item">
     <a href="/billing" class="nav-link">
@@ -93,7 +67,6 @@
 <li class="nav-item">
     <a href="#" class="nav-link">
         <i class="fa fa-wrench fa-fw"></i>
-        {{-- <i class="nav-icon fas fa-chart-pie"></i> --}}
         <p>
             Blast SP
             <i class="right fas fa-angle-left"></i>
@@ -102,22 +75,26 @@
     <ul class="nav nav-treeview">
         <li class="nav-item">
             <a href="/invoicesp" class="nav-link">
-                <i class="fas fa-arrow-down nav-icon"></i>
-                <p>Import Data SP</p>
+                <i class="fas fa-arrow-right nav-icon"></i>
+                <p>Inv SP Old</p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
-                {{-- <i class="fas fa-fw fa-whatsapp nav-icon"></i> --}}
-                <i class="fas fa-users nav-icon"></i>
-                {{-- <i class="fas fa-weixin nav-icon"></i> --}}
-                <p>Proses Blast SP</p>
+            <a href="/collection?sp=1" class="nav-link">
+                <i class="fas fa-arrow-right nav-icon"></i>
+                <p>Inv SP 1</p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="fas fa-map nav-icon"></i>
-                <p>Monitoring SP</p>
+            <a href="/collection?sp=2" class="nav-link">
+                <i class="fas fa-arrow-right nav-icon"></i>
+                <p>Inv SP 2</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="/collection?sp=3" class="nav-link">
+                <i class="fas fa-arrow-right nav-icon"></i>
+                <p>Inv SP 3</p>
             </a>
         </li>
     </ul>

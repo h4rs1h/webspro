@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\OwnershipImport;
+use App\Models\Outbox;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Imports\OwnershipImport;
 //use Excel;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Yajra\DataTables\Facades\DataTables;
 
 class AdminController extends Controller
 {
@@ -73,5 +76,38 @@ class AdminController extends Controller
     // }
     function dashboard()
     {
+    }
+    function antrian_outbox()
+    {
+
+        return view('Admin.outbox', [
+            'username' => Auth::user()->name,
+            'title' => 'Data Outbox',
+            'javascript' => 'Admin.scriptoutbox',
+        ]);
+    }
+    function json_outbox(Request $request)
+    {
+
+        // dd($request->antrian);
+
+        if ($request->antrian == 'yes') {
+            $data = DB::table('outboxs')
+                ->leftJoin('ownerships', 'outboxs.debtor_acct', '=', 'ownerships.business_id')
+                ->select(['fin_month', 'fin_year', 'debtor_acct', 'name', 'tglkirim', 'wa', 'pesan', 'tipe', 'status', 'job'])
+                ->whereNull('tglsending')
+                ->wherenotNull('job')
+                ->get();
+        } else {
+
+            $data = DB::table('outboxs')
+                ->leftJoin('ownerships', 'outboxs.debtor_acct', '=', 'ownerships.business_id')
+                ->select(['fin_month', 'fin_year', 'debtor_acct', 'name', 'tglkirim', 'wa', 'pesan', 'tipe', 'status', 'job'])
+                ->whereNull('tglsending')
+                ->whereNull('job')
+                ->get();
+        }
+
+        return DataTables::of($data)->make(true);
     }
 }

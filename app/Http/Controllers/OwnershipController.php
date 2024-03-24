@@ -17,7 +17,7 @@ class OwnershipController extends Controller
         return view('ownership.index', [
             'username' => Auth::user()->name,
             'title' => 'Data Ownership',
-            // 'data' => Ownership::all()
+            'javascript' => 'ownership.script',
         ]);
     }
     function ownershipImport(Request $request)

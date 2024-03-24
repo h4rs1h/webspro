@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InvoiceSP;
 use Illuminate\Http\Request;
 use App\Imports\InvoiceSPImport;
-use App\Models\InvoiceSP;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -40,10 +41,11 @@ class InvoiceSPController extends Controller
 
         return view('Collection.invoicesp', [
             'username' => Auth::user()->name,
-            'title' => 'Form Import Invoice SP',
+            'title' => 'Data Invoice SP',
             'reminder_no' => $remin,
             'fin_month' => $bulan,
             'fin_year' => $tahun,
+            'javascript' => 'Collection.script',
         ]);
     }
     function invoicespimport(Request $request)
@@ -80,6 +82,7 @@ class InvoiceSPController extends Controller
 
     function json()
     {
-        return DataTables::of(InvoiceSP::limit(10))->make(true);
+        $sp = DB::table('vinvoicesp1');
+        return DataTables::of($sp)->make(true);
     }
 }

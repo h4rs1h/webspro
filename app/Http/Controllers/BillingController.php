@@ -58,6 +58,7 @@ class BillingController extends Controller
             'tower' => $tower,
             'lantai' => $lantai,
             'reminder_no' => $remin,
+            'javascript' => 'Billing.script'
         ]);
     }
 

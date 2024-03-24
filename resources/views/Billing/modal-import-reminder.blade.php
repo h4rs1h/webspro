@@ -9,9 +9,7 @@
                 </button>
             </div>
             <div class="card card-primary">
-
                 <div class="card-body">
-
                     <div class="form-group">
                         <label for="reminder">Reminder
                             No</label>

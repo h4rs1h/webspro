@@ -70,40 +70,7 @@
             "responsive": true,
             "buttons": ["csv", "excel", "pdf", "print"]
         }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
-        $("#example3").DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-            "buttons": ["csv", "excel", "pdf", "print"],
-            "processing": true,
-            "serverSide": true,
-            "ajax": '/ownership/getdata/json',
-            "columns": [{
-                    "data": 'owner_acct',
-                    "name": 'owner_acct'
-                },
-                {
-                    "data": 'owner_acct',
-                    "name": 'owner_acct'
-                },
-                {
-                    "data": 'name',
-                    "name": 'name'
-                },
-                {
-                    "data": 'hand_phone',
-                    "name": 'hand_phone'
-                },
-                {
-                    "data": 'hand_phone',
-                    "name": 'hand_phone'
-                },
-            ]
-        }).buttons().container().appendTo('#example3_wrapper .col-md-6:eq(0)');
+
         $("#invoice").DataTable({
             "paging": true,
             "lengthChange": false,
@@ -142,45 +109,10 @@
                 },
             ]
         }).buttons().container().appendTo('#example3_wrapper .col-md-6:eq(0)');
-        $("#invoicesp").DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-            "buttons": ["csv", "excel", "pdf", "print"],
-            "processing": true,
-            "serverSide": true,
-            "ajax": '/invoicesp/json',
-            "columns": [{
-                    "data": 'debtor_acct',
-                    "name": 'debtor_acct'
-                },
-                {
-                    "data": 'fin_month',
-                    "name": 'fin_month'
-                },
-                {
-                    "data": 'fin_year',
-                    "name": 'fin_year'
-                },
-                {
-                    "data": 'name',
-                    "name": 'name'
-                },
-                {
-                    "data": 'hand_phone',
-                    "name": 'hand_phone'
-                },
-                {
-                    "data": 'virtual_acct',
-                    "name": 'virtual_acct'
-                },
-            ]
-        }).buttons().container().appendTo('#invoicesp_wrapper .col-md-6:eq(0)');
+
 
     });
 </script>
-@include('Billing.script')
+@isset($javascript)
+    @include($javascript)
+@endisset

@@ -17,9 +17,16 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card card-primary card-outline card-tabs">
+                        <div class="card-body">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-tambah">
+                                Tambah
+                            </button>
+
+                        </div>
 
                         <div class="card-body">
                             <div id="notification" class="alert" style="display:none;"></div>
+
                             <div class="tab-content" id="custom-tabs-three-tabContent">
                                 <div class="tab-pane fade active show" id="custom-tabs-three-home" role="tabpanel"
                                     aria-labelledby="custom-tabs-three-home-tab">
@@ -29,15 +36,15 @@
                                             <div class="card">
 
                                                 <div class="card-body">
-                                                    <table id="daftarhp" class="table table-bordered table-hover">
+                                                    <table id="isi_tabel" class="table table-bordered table-hover">
                                                         <thead>
                                                             <tr>
                                                                 {{-- <th>No</th> --}}
-                                                                <th>Owner</th>
-                                                                <th>No WA</th>
-                                                                <th>API Key</th>
-                                                                <th>API Kay Number</th>
-                                                                <th>End Poin</th>
+                                                                <th>Kode</th>
+                                                                <th>Judul</th>
+                                                                <th>Template Isi Pesan</th>
+                                                                <th>Role</th>
+
                                                                 <th>Aksi</th>
                                                             </tr>
                                                         </thead>
@@ -66,9 +73,9 @@
         </div>
 
     </section>
-    <div class="modal fade" id="modal-tambah">
+    <div class="modal dialog" id="modal-tambah">
         {{-- memisahkan scritp modal filter --}}
-        {{-- @include('Billing.modal-filter') --}}
+        @include('template.modal-tambah')
     </div>
 
     <div class="modal dialog" id="editModal">

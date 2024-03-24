@@ -5,46 +5,105 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{ $title }}</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Collection</a></li>
-                        <li class="breadcrumb-item active">{{ $title }}</li>
-                    </ol>
+
+                    <input type="hidden" id="sp" value="{{ $reminder }}" name="sp">
                 </div>
             </div>
-        </div><!-- /.container-fluid -->
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-
-        <!-- Default box -->
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Title</h3>
-
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="card-body">
-                Start creating your amazing application!
-            </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-                Footer
-            </div>
-            <!-- /.card-footer-->
         </div>
-        <!-- /.card -->
-
     </section>
-    <!-- /.content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <div id="notification" class="alert" style="display:none;"></div>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-import">
+                            Import Data SP {{ $reminder }}
+                        </button>
+                        {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-import2">
+                            Import Data Reminder Invoice
+                        </button> --}}
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-filter">
+                            Filter Data SP {{ $reminder }}
+                        </button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-proses">
+                            Proses Blast Data SP {{ $reminder }}
+                        </button>
+                        {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-proses">
+                            Antrian Blast Invoice
+                        </button> --}}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>{{ $title }}</h3>
+
+                    </div>
+                    <div class="card-body" id="tabel_inv_sp">
+                        <table id="inv_sp" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Unit ID</th>
+                                    <th>Nama</th>
+                                    {{-- <th>IPL</th>
+                                    <th>DC</th>
+                                    <th>AIR</th> --}}
+                                    <th>Total Tagihan</th>
+                                    {{-- <th>IPL (Sblmnya)</th>
+                                    <th>DC (Sblmnya)</th>
+                                    <th>AIR (Sblmnya)</th>
+                                    <th>Denda</th>
+                                    <th>Asuransi (Sblmnya)</th> --}}
+                                    <th>Total (Sblmnya)</th>
+                                    <th>Total Seluruhnya</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-body" id="tabel_inv_blast" style="display:none;">
+
+                        <table id="inv_blast" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Unit ID</th>
+                                    <th>Nama</th>
+                                    <th>Handphone</th>
+                                    <th>Isi Pesan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="modal fade" id="modal-filter">
+        {{-- memisahkan scritp modal filter --}}
+        {{-- @include('Billing.modal-filter') --}}
+    </div>
+
+    <div class="modal fade" id="modal-proses">
+        {{-- memisahkan script modal-proses --}}
+        {{-- @include('Billing.modal-proses') --}}
+    </div>
+    <div class="modal fade" id="modal-import">
+        {{-- memisahkan modal import --}}
+        @include('collection.modal-import')
+        <!-- /.modal-dialog -->
+    </div>
+    <div class="modal fade" id="modal-import2">
+        {{-- memisahkan modal import --}}
+        {{-- @include('Billing.modal-import-reminder') --}}
+        <!-- /.modal-dialog -->
+    </div>
 @endsection

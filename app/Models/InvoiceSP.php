@@ -33,9 +33,22 @@ class InvoiceSP extends Model
         'filename',
     ];
 
-    public function getDataSP()
+    public function getDataSP($fin_year, $fin_month, $reminder_no)
     {
-        DB::select('select a.*,b.hand_phone,b.virtual_acct_real va
-        from invoicesps a left join ownerships b on a.debtor_acct=substring(owner_acct,9,15)');
+        $data = DB::table('vinvoicesps')
+            ->select('vinvoicesps.*')
+            ->where('vinvoicesps.fin_year', $fin_year)
+            ->where('vinvoicesps.fin_month', $fin_month)
+            ->where('vinvoicesps.reminder_no', $reminder_no)
+            ->get();
+        return $data;
+    }
+    function getreminder($reminder_no)
+    {
+        $data = DB::table('vinvoicesps')
+            ->select('vinvoicesps.*')
+            ->where('vinvoicesps.reminder_no', $reminder_no)
+            ->get();
+        return $data;
     }
 }

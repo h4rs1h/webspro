@@ -68,16 +68,33 @@ class ProsesKirimWaController extends Controller
         $url = env('WOOWA_URL_SEND') . 'send_message';
         $keys = env('WOOWA_KEY');
 
-        $data = Outbox::where('tglsending', null)
+        $data = Outbox::wherenull('tglsending')
+            ->wherenull('job')
             ->wherein('tipe', ['SP1', 'SP2', 'SP3', 'INV'])
             ->orderbyraw('id')
             // ->limit(10)
             ->get();
 
-        foreach ($data as $item) {
-            SendMessageWA::dispatch($keys, $url, $item->id, $item->wa, $item->pesan)->onQueue('whatsappBlast');
+        // Jika data kosong, kembalikan response data kosong
+        if ($data->isEmpty()) {
+            return response()->json([
+                'message' => 'Tidak ada data yang harus diproses',
+                'remove' => 'alert-success',
+                'add' => 'alert-danger'
+            ]);
         }
 
-        return response()->json(['message' => 'Job running in background']);
+        // Jika ada data, lanjutkan proses
+        foreach ($data as $item) {
+            SendMessageWA::dispatch($keys, $url, $item->id, $item->wa, $item->pesan)->onQueue('whatsappBlast');
+            Outbox::where('id', $item->id)
+                ->update(['job' => now()]);
+        }
+
+        return response()->json([
+            'remove' => 'alert-danger',
+            'add' => 'alert-success',
+            'message' => 'Pesan sudah berhasil didaftarkan pada antrian, dan akan berjalan di background'
+        ]);
     }
 }

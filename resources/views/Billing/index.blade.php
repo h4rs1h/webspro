@@ -30,9 +30,9 @@
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-proses">
                             Proses Blast Invoice
                         </button>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-proses">
+                        {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-proses">
                             Antrian Blast Invoice
-                        </button>
+                        </button> --}}
 
                     </div>
                 </div>
