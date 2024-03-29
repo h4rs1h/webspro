@@ -98,7 +98,7 @@
     </div>
     <div class="modal fade" id="modal-import">
         {{-- memisahkan modal import --}}
-        @include('collection.modal-import')
+        @include('Collection.modal-import')
         <!-- /.modal-dialog -->
     </div>
     <div class="modal fade" id="modal-import2">
