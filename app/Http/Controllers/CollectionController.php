@@ -53,7 +53,7 @@ class CollectionController extends Controller
             'reminder_no' => $remin,
             'fin_month' => $bulan,
             'fin_year' => $tahun,
-            'javascript' => 'collection.script',
+            'javascript' => 'Collection.script',
         ]);
     }
     function json(Request $request)
