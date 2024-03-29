@@ -73,12 +73,12 @@
         </p>
     </a>
     <ul class="nav nav-treeview">
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a href="/invoicesp" class="nav-link">
                 <i class="fas fa-arrow-right nav-icon"></i>
                 <p>Inv SP Old</p>
             </a>
-        </li>
+        </li> --}}
         <li class="nav-item">
             <a href="/collection?sp=1" class="nav-link">
                 <i class="fas fa-arrow-right nav-icon"></i>
@@ -95,6 +95,12 @@
             <a href="/collection?sp=3" class="nav-link">
                 <i class="fas fa-arrow-right nav-icon"></i>
                 <p>Inv SP 3</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="/collection?sp=asuransi" class="nav-link">
+                <i class="fas fa-arrow-right nav-icon"></i>
+                <p>SP Asuransi</p>
             </a>
         </li>
     </ul>

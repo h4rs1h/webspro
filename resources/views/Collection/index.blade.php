@@ -89,7 +89,7 @@
     </section>
     <div class="modal fade" id="modal-filter">
         {{-- memisahkan scritp modal filter --}}
-        {{-- @include('Billing.modal-filter') --}}
+        @include('Collection.modal-filter')
     </div>
 
     <div class="modal fade" id="modal-proses">

@@ -33,13 +33,15 @@ class InvoiceSP extends Model
         'filename',
     ];
 
-    public function getDataSP($fin_year, $fin_month, $reminder_no)
+    public function getDataSP($fin_year, $fin_month, $reminder_no, $tgl_cetak, $tgl_batas_bayar)
     {
         $data = DB::table('vinvoicesps')
             ->select('vinvoicesps.*')
             ->where('vinvoicesps.fin_year', $fin_year)
             ->where('vinvoicesps.fin_month', $fin_month)
             ->where('vinvoicesps.reminder_no', $reminder_no)
+            ->where('tgl_cetak', $tgl_cetak)
+            ->where('tgl_batas_bayar', $tgl_batas_bayar)
             ->get();
         return $data;
     }

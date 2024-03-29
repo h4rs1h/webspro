@@ -1,0 +1,51 @@
+Jakarta, [Tanggal].
+
+Kepada Yth.
+Bapak/Ibu
+Pemilik Unit [UnitID]
+Apartemen Puri Parkview
+Di Tempat.
+
+*Perihal: [REMINDER] Surat Pemberitahuan Mengenai Kewajiban Pembayaran Tagihan Asuransi yang Tertunggak.*
+
+
+Dengan hormat,
+
+Telah kami kirimkan Surat Pemberitahuan Mengenai Kewajiban Pembayaran Tagihan Asuransi yang Tertunggak ke Unit dan ke alamat Bapak/Ibu, mohon dapat diperiksa.
+
+*_Melalui pesan ini kami sampaikan bahwa Bapak/Ibu mempunyai kewajiban pembayaran tagihan Asuransi yang tertunggak sebesar Rp [TotalTagihan],- (Tagihan Asuransi tahun [thn_asuransi])._*
+
+_Penagihan ini merupakan tindak lanjut dari *Rapat Mediasi* yang diadakan di kantor Suku Dinas Perumahan Rakyat dan Kawasan Permukiman (SDPRKP) - Jakarta Barat. Adapun *hasil dari Rapat Mediasi* tersebut telah tertuang dalam Notulensi Rapat *(Dokumen Rapat Mediasi di SDPRKP terlampir dalam pesan ini)*. Kami pun telah siapkan dokumen-dokumen yang dibutuhkan (sesuai Notulensi Rapat), agar dapat diperlihatkan kepada Bapak/Ibu, untuk membuktikan adanya polis asuransi (bagian dan benda bersama) di Gedung Apartemen Puri Parkview._
+
+*Perlu kami informasikan bahwa berlaku sanksi-sanksi, sesuai dengan ketentuan yang tertera dalam Buku PERATURAN DAN TATA TERTIB PENGELOLAAN/KEPENGHUNIAN APARTEMEN PURI PARKVIEW - “TATIB APARTEMEN”/“HOUSE RULE” (terlampir dalam pesan ini), sebagai berikut:*
+
+*1. Ketentuan Pasal 7.2.3. (Poin 1), tentang Denda Keterlambatan Pembayaran:*
+Tagihan Asuransi jatuh tempo sesuai dengan tanggal yang tertera di _invoice_. Bilamana pembayaran melewati tanggal jatuh tempo tersebut maka Bapak/Ibu dikenakan sanksi Denda Keterlambatan Pembayaran sebesar 1/1000 (satu per mil) per hari dan *_Denda Keterlambatan tersebut akan terus berjalan selama tunggakan tagihan yang dimaksud belum dibayarkan_*;
+
+*2. Ketentuan Pasal 7.2.3. (Poin 3), berbunyi: “Sanksi tidak diberikan pelayanan oleh Badan Pengelola”:*
+Apabila Bapak/Ibu *_belum_* menyelesaikan pembayaran atas tunggakan tersebut di atas, maka Bapak/Ibu, secara sistem (sementara), *per tanggal 01 April 2024*, sudah *tidak* dapat memperpanjang parkir berlangganan atas Unit Bapak/Ibu sampai dengan tunggakan tagihan tersebut di atas telah diselesaikan;
+
+*3. Ketentuan Pasal 7.2.3. (Poin 5), berbunyi: “Sanksi diajukan ke pihak yang berwajib/pengadilan”:*
+Apabila sampai dengan tanggal batas maksimal Bapak/Ibu masih belum juga menyelesaikan seluruh tunggakan Bapak/Ibu di atas maka, dengan sangat menyesal, kami terpaksa akan mengajukan laporan ke pihak yang berwajib dan/atau gugatan ke pengadilan atas tunggakan tagihan Bapak/Ibu yang tersebut di atas;
+
+*4. Ketentuan Pasal 5.6. dan Pasal 7.2.3. (Poin 2), tentang penghentian pelayanan:*
+Apabila sampai dengan tanggal batas maksimal Bapak/Ibu masih belum juga menyelesaikan seluruh tunggakan Bapak/Ibu di atas, kami akan melakukan sanksi berupa *penghentian* fasilitas pelayanan-pelayanan lainnya atas Unit Bapak/Ibu dan apabila Bapak/Ibu ingin melakukan aktivasi fasilitas pelayanan-pelayanan lainnya tersebut harap Bapak/Ibu melakukan pembayaran tagihan yang tertunggak di atas, biaya aktivasi dan biaya aktivasi akumulatif (bila ada), sesuai dengan syarat dan ketentuan yang berlaku.
+
+Mohon segera melakukan pembayaran di Kasir Badan Pengelola atau melalui _transfer bank_ dengan No. _Virtual Account_ BCA: [Va], atas nama:  [VaNama].
+
+Untuk informasi lebih lanjut mengenai isi pesan ini (_termasuk bila ada selisih nilai tagihan_), Bapak/Ibu dapat menghubungi Staff _Collection_ di nomor (021) 5890 0142, hari Senin s/d Jumat, Pkl. 09.00-16.00 WIB dan hari Sabtu, Pkl. 09.00-14.00 WIB.
+
+Demikian disampaikan. Mohon Bapak/Ibu abaikan pesan ini apabila sudah melakukan pembayaran.
+
+
+Hormat kami,
+
+Collection
+Apartemen Puri Parkview
+
+
+*_LAMPIRAN (DOWNLOAD LINK):_*
+
+1). Dokumen Rapat Mediasi di SDPRKP (Surat Undangan, Notulensi Rapat dan Dokumentasi): https://bit.ly/DokRapatdiSDPRKPTgl29Feb24
+
+2). Buku PERATURAN DAN TATA TERTIB PENGELOLAAN/KEPENGHUNIAN APARTEMEN PURI PARKVIEW - “TATIB APARTEMEN”/“HOUSE RULE”: https://bit.ly/PeraturanTatibHouseruleAptPPV

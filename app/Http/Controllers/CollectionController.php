@@ -14,11 +14,13 @@ class CollectionController extends Controller
     function index(Request $request)
     {
 
-        // $remin = [
-        //     ['id' => '1', 'name' => 'SP 1'],
-        //     ['id' => '2', 'name' => 'SP 2'],
-        //     ['id' => '3', 'name' => 'SP 3'],
-        // ];
+        $remin = [
+            ['id' => '1', 'name' => 'Reminder 1'],
+            ['id' => '2', 'name' => 'Reminder 2'],
+            ['id' => '3', 'name' => 'Reminder 3'],
+            ['id' => '4', 'name' => 'Reminder 4'],
+        ];
+
         $bulan = [
             ['id' => '1', 'name' => 'Januari'],
             ['id' => '2', 'name' => 'Februari'],
@@ -38,12 +40,17 @@ class CollectionController extends Controller
             ['id' => '2025', 'name' => '2025'],
             ['id' => '2026', 'name' => '2026'],
         ];
-
+        if ($request->sp != 'asuransi') {
+            $subTitle = 'Form Filter Data Invoice SP ' . $request->sp;
+        } else {
+            $subTitle = 'Form Filter Data SP ' . $request->sp;
+        }
         return view('Collection.index', [
             'username' => Auth::user()->name,
             'title' => 'Data Invoice SP ' . $request->sp,
+            'title_form_filter' => $subTitle,
             'reminder' => $request->sp,
-            // 'reminder_no' => $remin,
+            'reminder_no' => $remin,
             'fin_month' => $bulan,
             'fin_year' => $tahun,
             'javascript' => 'collection.script',
@@ -55,10 +62,12 @@ class CollectionController extends Controller
         $bulan = $request->bulan;
         $tahun = $request->tahun;
         $reminder_no = $request->sp;
+        $tgl_cetak = $request->tgl_cetak;
+        $tgl_batas_bayar = $request->tgl_batas_bayar;
         // dd($bulan, $tahun);
         $invsp = new InvoiceSP;
         if (!empty($bulan) and !empty($tahun)) {
-            $invoices = $invsp->getDataSP($tahun, $bulan, $reminder_no);
+            $invoices = $invsp->getDataSP($tahun, $bulan, $reminder_no, $tgl_cetak, $tgl_batas_bayar);
         } else {
             $invoices = $invsp->getreminder($reminder_no);
         }
@@ -82,13 +91,19 @@ class CollectionController extends Controller
         $tgl_batas_bayar = $request->tgl_batas_bayar;
 
         $reminder_no = $request->reminder_no;
+        $reminder_no_ass = $request->reminder_no_ass;
+
         if ($reminder_no == 1) {
             $tgl_tempo_awal = $request->tgl_batas_bayar;
             $tgl_tempo_akhir = $request->tgl_batas_bayar;
+        } elseif ($reminder_no == 'asuransi') {
+            $tgl_tempo_awal = $request->tgl_tempo_akhir;
+            $tgl_tempo_akhir = $request->tgl_tempo_akhir;
         } else {
             $tgl_tempo_awal = $request->tgl_tempo_awal;
             $tgl_tempo_akhir = $request->tgl_tempo_akhir;
         }
+
         // dd($validateData);
         $file = $request->file('file');
         $namafile = $file->getClientOriginalName();
@@ -96,7 +111,7 @@ class CollectionController extends Controller
         $path = $file->storeAs('DataInvoiceSP', $namafile);
         //dd($namafile, $file, public_path('/DataInvoice/' . $namafile));
         $path = str_replace(public_path(), '', $path);
-        Excel::import(new InvoiceSPImport($bulan, $tahun, $tgl_cetak, $tgl_batas_bayar, $tgl_tempo_awal, $tgl_tempo_akhir, $reminder_no, $path /* public_path('storage/DataInvoiceSP/' . $namafile)*/), public_path('storage/DataInvoiceSP/' . $namafile));
+        Excel::import(new InvoiceSPImport($bulan, $tahun, $tgl_cetak, $tgl_batas_bayar, $tgl_tempo_awal, $tgl_tempo_akhir, $reminder_no, $reminder_no_ass, $path /* public_path('storage/DataInvoiceSP/' . $namafile)*/), public_path('storage/DataInvoiceSP/' . $namafile));
         // Excel::import(new InvoiceSPImport(), public_path('/DataInvoiceSP/' . $namafile));
         // return redirect('/invoicesp');
         return response()->json([

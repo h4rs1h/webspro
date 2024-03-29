@@ -2,11 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataWebhook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 class WebHookController extends Controller
 {
+    public function handle(Request $request)
+    {
+        // Mendapatkan data JSON dari request
+        $json = $request->getContent();
+
+        // Mendecode JSON menjadi array asosiatif
+        $data = json_decode($json, true);
+
+        // Menyimpan data ke dalam tabel datawebhook
+        try {
+            DataWebhook::create($data);
+
+            // Tulis data ke file
+            file_put_contents("listen.txt", print_r($data, true));
+
+            return response()->json(['message' => 'Data berhasil disimpan'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Gagal menyimpan data: ' . $e->getMessage()], 500);
+        }
+    }
     public function set_incoming(Request $request)
     {
         $data = [

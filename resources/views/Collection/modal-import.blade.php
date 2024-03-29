@@ -50,6 +50,27 @@
                                         <input type="hidden" id="reminder_no" value="{{ $reminder }}"
                                             name="reminder_no">
                                     </div>
+                                    @if ($reminder == 'asuransi')
+                                        <div class="form-group">
+                                            <label for="reminder">Reminder
+                                                No</label>
+                                            <select class="form-control" name="reminder_no_ass" id="reminder_no_ass">
+                                                <option value="">-- Pilih --</option>
+                                                @foreach ($reminder_no as $item)
+                                                    @if (old('reminder_no_ass') == $item['id'])
+                                                        )
+                                                        <option value="{{ $item['id'] }}" selected>
+                                                            {{ $item['name'] }}</option>
+                                                    @else
+                                                        <option value="{{ $item['id'] }}">
+                                                            {{ $item['name'] }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                    @endif
+
                                     <div class="form-group">
                                         <label for="tgl_cetak">Tanggal Kirim</label>
                                         <input type="date" name="tgl_cetak" {{-- value={{ old('tgl_cetak') }} --}}
@@ -62,13 +83,15 @@
                                             class="form-control" id="tgl_batas_bayar" placeholder="Tanggal batas Bayar">
                                     </div>
                                     @if ($reminder != 1)
-                                        <div class="form-group">
-                                            <label for="tgl_tempo_awal">Tanggal Tempo Awal
-                                            </label>
-                                            <input type="date" name="tgl_tempo_awal" {{-- value={{ old('tgl_tempo_akhir') }} --}}
-                                                class="form-control" id="tgl_tempo_awal"
-                                                placeholder="Tanggal Tempo Awal">
-                                        </div>
+                                        @if ($reminder != 'asuransi')
+                                            <div class="form-group">
+                                                <label for="tgl_tempo_awal">Tanggal Tempo Awal
+                                                </label>
+                                                <input type="date" name="tgl_tempo_awal" {{-- value={{ old('tgl_tempo_akhir') }} --}}
+                                                    class="form-control" id="tgl_tempo_awal"
+                                                    placeholder="Tanggal Tempo Awal">
+                                            </div>
+                                        @endif
                                         <div class="form-group">
                                             <label for="tgl_tempo_akhir">Tanggal Tempo
                                                 Terakhir</label>

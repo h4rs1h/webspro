@@ -1,0 +1,49 @@
+Jakarta, [Tanggal].
+
+Kepada Yth.
+Bapak/Ibu
+Pemilik Unit [UnitID]
+Apartemen Puri Parkview
+Di Tempat.
+
+*Perihal: [REMINDER] Surat Peringatan ke - [reminder_no] Mengenai Kewajiban Pembayaran Tagihan yang Tertunggak (IPL / DC / AIR).*
+
+
+Dengan hormat,
+
+Melalui _WhatsApp Blast_ ini kami informasikan bahwa Bapak/Ibu masih mempunyai kewajiban pembayaran yang tertunggak. Adapun kewajiban pembayaran tagihan yang tertunggak yang dimaksud kami rincikan sebagai berikut:
+
+- Tagihan bulan *[blntempo]* sebesar Rp [Tunggakan],- ;
+
+- Tagihan *SEBELUM* bulan [blntempo] sebesar Rp [TunggakanLalu],- .
+
+*Total Tunggakan Tagihan yang Harus Dibayarkan Segera menjadi Rp [TotalTagihan],-*.
+
+Kami telah / akan segera mengirimkan Surat Peringatan ke - [reminder_no] Mengenai Kewajiban Pembayaran Tagihan yang Tertunggak ke Unit Bapak/Ibu.
+
+*Sesuai dengan buku PERATURAN DAN TATA TERTIB PENGELOLAAN/KEPENGHUNIAN APARTEMEN PURI PARKVIEW - "TATIB APARTEMEN" / "HOUSE RULE" (_download link_ terlampir dalam pesan ini):*
+
+*1. Pasal 5.6. dan Pasal 7.2.3. (Poin 1):*
+Kami informasikan kembali bahwa untuk tagihan-tagihan IPL, DC dan Air jatuh tempo tanggal 20 tiap bulannya dan tagihan PBB dan Asuransi jatuh tempo sesuai dengan tanggal yang tertera di _invoice_. Bilamana telah melewati batas waktu pembayaran maka, dengan sangat menyesal, kami akan mengenakan Denda Keterlambatan Pembayaran sebesar 1/1000 (satu per mil) per hari dan _*Denda Keterlambatan tersebut akan terus berjalan selama tunggakan tagihan yang dimaksud belum dibayarkan*_.
+
+*2. Sesuai dengan ketentuan Pasal 7.2.3. (Poin 3) yang berbunyi "Sanksi tidak diberikan pelayanan oleh Badan Pengelola":*
+Maka kami informasikan juga bahwa, apabila Bapak/Ibu _*belum*_ juga melakukan (dan menyelesaikan) pembayaran atas tunggakan _tertentu_ tersebut di atas sampai dengan _*paling lambat tanggal [tgl_batas_bayar]*_, maka Bapak/Ibu secara sistem (sementara), tidak dapat memperpanjang parkir berlangganan dan tidak dapat membeli _voucher_/_token_ listrik atas Unit Bapak/Ibu sampai dengan tunggakan _tertentu_ di atas diselesaikan terlebih dahulu;
+
+Silahkan melakukan pembayaran secara langsung ke bagian Kasir Badan Pengelola atau melalui _transfer bank_ dengan No. _Virtual Account_ BCA: [Va], atas nama:  [VaNama].
+
+Pesan _WhatsApp Blast REMINDER_ ini dikirimkan dengan menggunakan data pembayaran (_cut-off_) beberapa hari sebelumnya, *mohon abaikan pesan ini jika Bapak/Ibu sudah membayarkan seluruh tagihan di atas*.
+
+Untuk keterangan lebih lanjut mengenai _WhatsApp Blast_ ini (_terutama bila ada selisih perhitungan tunggakan tagihan_), Bapak/Ibu dapat menghubungi Staff _Collection_ Apartemen Puri Parkview di nomor (021) 5890 0142 hari Senin s/d hari Jumat, pukul 09.00 - 16.00 WIB dan hari Sabtu pukul 09.00- 14.00 WIB (_jadwal selama bulan Ramadhan_).
+
+Demikian kami sampaikan. Atas perhatian dan kerjasamanya kami ucapkan terima kasih.
+
+
+Hormat kami,
+
+Collection
+Apartemen Puri Parkview
+
+
+_*LAMPIRAN PESAN:*_
+
+_Download Link_ Buku PERATURAN DAN TATA TERTIB PENGELOLAAN/KEPENGHUNIAN APARTEMEN PURI PARKVIEW - "TATIB APARTEMEN" / "HOUSE RULE": https://bit.ly/PeraturanTatibHouseruleAptPPV
