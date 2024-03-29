@@ -70,7 +70,7 @@ class ProsesKirimWaController extends Controller
 
         $data = Outbox::wherenull('tglsending')
             ->wherenull('job')
-            ->wherein('tipe', ['SP1', 'SP2', 'SP3', 'INV'])
+            ->wherein('tipe', ['SP1', 'SP2', 'SP3', 'INV', 'Ass'])
             ->orderbyraw('id')
             // ->limit(10)
             ->get();
