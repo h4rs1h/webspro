@@ -16,7 +16,7 @@ class ProsesKirimWaController extends Controller
         $keys = env('WOOWA_KEY');
 
         $data = Outbox::where('tglsending', null)
-            ->wherein('tipe', ['SP1', 'SP2', 'SP3', 'INV'])
+            ->wherein('tipe', ['SP1', 'SP2', 'SP3', 'INV', 'Ass'])
             ->orderbyraw('id')
             ->first();
         // dd($data);
