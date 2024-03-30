@@ -35,14 +35,67 @@ class InvoiceSP extends Model
 
     public function getDataSP($fin_year, $fin_month, $reminder_no, $tgl_cetak, $tgl_batas_bayar)
     {
+
         $data = DB::table('vinvoicesps')
             ->select('vinvoicesps.*')
             ->where('vinvoicesps.fin_year', $fin_year)
             ->where('vinvoicesps.fin_month', $fin_month)
             ->where('vinvoicesps.reminder_no', $reminder_no)
-            ->where('tgl_cetak', $tgl_cetak)
-            ->where('tgl_batas_bayar', $tgl_batas_bayar)
+            ->where('vinvoicesps.tgl_cetak', $tgl_cetak)
+            // ->where('vinvoicesps.tgl_batas_bayar', $tgl_batas_bayar)
             ->get();
+        // dd($fin_month, $fin_year, $tgl_cetak, $reminder_no);
+        return $data;
+    }
+    public function getPreviewDataSP($fin_year, $fin_month, $reminder_no, $tgl_cetak, $tgl_batas_bayar, $ass)
+    {
+
+        if ($reminder_no == '1') {
+            $data = DB::table('vinvoicesp1')
+                ->select('vinvoicesp1.*')
+                ->where('vinvoicesp1.fin_year', $fin_year)
+                ->where('vinvoicesp1.fin_month', $fin_month)
+                ->where('vinvoicesp1.reminder_no', $reminder_no)
+                ->where('vinvoicesp1.tgl_cetak', $tgl_cetak)
+                // ->where('vinvoicesps.tgl_batas_bayar', $tgl_batas_bayar)
+                ->get();
+        } elseif ($reminder_no == '2') {
+            $data = DB::table('vinvoicesp2')
+                ->select('vinvoicesp2.*')
+                ->where('vinvoicesp2.fin_year', $fin_year)
+                ->where('vinvoicesp2.fin_month', $fin_month)
+                ->where('vinvoicesp2.reminder_no', $reminder_no)
+                ->where('vinvoicesp2.tgl_cetak', $tgl_cetak)
+                // ->where('vinvoicesps.tgl_batas_bayar', $tgl_batas_bayar)
+                ->get();
+        } elseif ($reminder_no == '3') {
+            $data = DB::table('vinvoicesp3')
+                ->select('vinvoicesp3.*')
+                ->where('vinvoicesp3.fin_year', $fin_year)
+                ->where('vinvoicesp3.fin_month', $fin_month)
+                ->where('vinvoicesp3.reminder_no', $reminder_no)
+                ->where('vinvoicesp3.tgl_cetak', $tgl_cetak)
+                // ->where('vinvoicesps.tgl_batas_bayar', $tgl_batas_bayar)
+                ->get();
+        } elseif ($reminder_no == '1' && $ass == 'asuransi') {
+            $data = DB::table('vinvoicesp1versi1')
+                ->select('vinvoicesp1versi1.*')
+                ->where('vinvoicesp1versi1.fin_year', $fin_year)
+                ->where('vinvoicesp1versi1.fin_month', $fin_month)
+                ->where('vinvoicesp1versi1.reminder_no', $reminder_no)
+                ->where('vinvoicesp1versi1.tgl_cetak', $tgl_cetak)
+                // ->where('vinvoicesps.tgl_batas_bayar', $tgl_batas_bayar)
+                ->get();
+        }
+        // $data = DB::table('vinvoicesps')
+        //     ->select('vinvoicesps.*')
+        //     ->where('vinvoicesps.fin_year', $fin_year)
+        //     ->where('vinvoicesps.fin_month', $fin_month)
+        //     ->where('vinvoicesps.reminder_no', $reminder_no)
+        //     ->where('vinvoicesps.tgl_cetak', $tgl_cetak)
+        //     // ->where('vinvoicesps.tgl_batas_bayar', $tgl_batas_bayar)
+        //     ->get();
+        // dd($fin_month, $fin_year, $tgl_cetak, $reminder_no);
         return $data;
     }
     function getreminder($reminder_no)

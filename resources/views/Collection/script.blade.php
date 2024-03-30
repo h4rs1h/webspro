@@ -17,10 +17,10 @@
 
                 "ajax": {
                     "url": "{{ route('filter.collection') }}",
-                    "method": "GET", // Mengubah metode HTTP menjadi GET
-                    "data": {
-                        "sp": sp // Menambahkan parameter sp ke dalam data AJAX
-                    }
+                    // "method": "GET", // Mengubah metode HTTP menjadi GET
+                    // "data": {
+                    //     "sp": sp // Menambahkan parameter sp ke dalam data AJAX
+                    // }
                 },
                 "columns": [{
                         "data": "unitid",
@@ -30,42 +30,12 @@
                         "data": "name",
                         "name": 'name'
                     },
-                    // {
-                    //     "data": "ipl",
-                    //     "name": 'ipl'
-                    // },
-                    // {
-                    //     "data": "dc",
-                    //     "name": 'dc'
-                    // },
-                    // {
-                    //     "data": "air",
-                    //     "name": 'air'
-                    // },
+
                     {
                         "data": "total_tagihan",
                         "name": 'total_tagihan'
                     },
-                    // {
-                    //     "data": "ipl_lalu",
-                    //     "name": 'ipl_lalu'
-                    // },
-                    // {
-                    //     "data": "dc_lalu",
-                    //     "name": 'dc_lalu'
-                    // },
-                    // {
-                    //     "data": "air_lalu",
-                    //     "name": 'air_lalu'
-                    // },
-                    // {
-                    //     "data": "denda_lalu",
-                    //     "name": 'denda_lalu'
-                    // },
-                    // {
-                    //     "data": "asuransi",
-                    //     "name": 'asuransi'
-                    // },
+
                     {
                         "data": "total_tagihan_lalu",
                         "name": 'total_tagihan_lalu'
@@ -77,7 +47,35 @@
                     // dan seterusnya
                 ]
             });
+        var table_blast =
+            $('#inv_blast').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "autoWidth": false,
+                "responsive": true,
+                "ajax": "{{ route('collection.preview') }}",
+                "columns": [
+                    // Sesuaikan dengan kolom tabel Anda
+                    {
+                        "data": "unitid",
+                        "name": 'unitid'
+                    },
+                    {
+                        "data": "name",
+                        "name": 'name'
+                    },
+                    {
+                        "data": "wa",
+                        "name": 'wa'
+                    },
+                    {
+                        "data": "isi_pesan",
+                        "name": 'isi_pesan'
+                    },
 
+                    // dan seterusnya
+                ]
+            });
         $(function() {
             $("#invoicesp").DataTable({
                 "paging": true,
@@ -182,24 +180,164 @@
             });
         });
 
-        // save change botton filter
+        // $('#modal-filter').on('show.bs.modal', function(e) {
+        // });
+        $('#btn-reset').click(function() {
+            $('#fin_year2').val('');
+            $('#fin_month2').val('');
+            $('#tgl_cetak2').val('');
+            $('#tgl_batas_bayar2').val('');
+
+        })
+        // btn filter
         $('#btn-filter').click(function() {
             var tahun = $('#fin_year2').val();
             var bulan = $('#fin_month2').val();
             var tgl_cetak = $('#tgl_cetak2').val();
             var tgl_batas_bayar = $('#tgl_batas_bayar2').val();
+            var reminder_no = $('#reminder_no2').val();
+
             console.log("Tahun: " + tahun + ", Bulan: " + bulan + " tgl_cetak: " + tgl_cetak +
                 ", tgl_batas_bayar: " + tgl_batas_bayar); // Cek nilai yang dikirim
-            // table.ajax.url("{{ route('filter.invoices') }}?tahun=" + tahun + "&bulan=" + bulan).load();
 
-            $('#filter_form').trigger('reset');
-            $('#modal-filter').modal('hide');
-            // Tampilkan pesan sukses atau lakukan aksi lainnya
             table.ajax.url("{{ route('filter.collection') }}?sp=" + reminder_no +
-                "&bulan=" + fin_month +
-                "&tahun=" + fin_year +
-                "&tgl_cetak" + tgl_cetak +
-                "&tgl_batas_bayar" + tgl_batas_bayar).load();
+                "&bulan=" + bulan +
+                "&tahun=" + tahun +
+                "&tgl_cetak=" + tgl_cetak +
+                "&tgl_batas_bayar=" + tgl_batas_bayar).load();
+
+            $('#tabel_inv_sp').show();
+            $('#tabel_inv_blast').hide();
+            $('#modal-filter').modal('hide'); // Tutup modal setelah submit
         });
+
+        //btn preview
+        $('#btn-preview-sp').click(function() {
+            var tahun = $('#fin_year2').val();
+            var bulan = $('#fin_month2').val();
+            var tgl_cetak = $('#tgl_cetak2').val();
+            var tgl_batas_bayar = $('#tgl_batas_bayar2').val();
+            var reminder_no = $('#reminder_no2').val();
+
+            console.log("Tahun: " + tahun + ", Bulan: " + bulan + " tgl_cetak: " + tgl_cetak +
+                ", tgl_batas_bayar: " + tgl_batas_bayar); // Cek nilai yang dikirim
+
+            table_blast.ajax.url("{{ route('collection.preview') }}?sp=" + reminder_no +
+                "&bulan=" + bulan +
+                "&tahun=" + tahun +
+                "&tgl_cetak=" + tgl_cetak +
+                "&tgl_batas_bayar=" + tgl_batas_bayar).load();
+
+            $('#tabel_inv_sp').hide();
+            $('#tabel_inv_blast').show();
+            $('#modal-filter').modal('hide'); // Tutup modal setelah submit
+        });
+
+        //btn Proses kirim SP
+        $('#btn-proses-sp').click(function() {
+            var tahun = $('#fin_year2').val();
+            var bulan = $('#fin_month2').val();
+            var tgl_cetak = $('#tgl_cetak2').val();
+            var tgl_batas_bayar = $('#tgl_batas_bayar2').val();
+            var reminder_no = $('#reminder_no2').val();
+
+            console.log("Tahun: " + tahun + ", Bulan: " + bulan + " tgl_cetak: " + tgl_cetak +
+                ", tgl_batas_bayar: " + tgl_batas_bayar); // Cek nilai yang dikirim
+
+            // table_blast.ajax.url("{{ route('collection.proses-kirim-sp') }}?sp=" + reminder_no +
+            //     "&bulan=" + bulan +
+            //     "&tahun=" + tahun +
+            //     "&tgl_cetak=" + tgl_cetak +
+            //     "&tgl_batas_bayar=" + tgl_batas_bayar).load();
+
+            $.ajax({
+                url: "{{ route('collection.proses-kirim-sp') }}",
+                type: "GET",
+                data: {
+                    tahun: tahun,
+                    bulan: bulan,
+                    sp: reminder_no,
+                    tgl_cetak: tgl_cetak,
+                    tgl_batas_bayar: tgl_batas_bayar
+                },
+                success: function(data) {
+                    $('#notification').removeClass('alert-danger').addClass('alert-success')
+                        .text(data.message).show();
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    // Tampilkan pesan kesalahan jika ada
+                    $('#notification').removeClass('alert-success').addClass('alert-danger')
+                        .text(data.message).show();
+                }
+            });
+            $('#modal-filter').modal('hide'); // Tutup modal setelah submit
+        });
+
+        //btn preview Asuransi
+        $('#btn-preview-sp-asuransi').click(function() {
+            var tahun = $('#fin_year2').val();
+            var bulan = $('#fin_month2').val();
+            var tgl_cetak = $('#tgl_cetak2').val();
+            var tgl_batas_bayar = $('#tgl_batas_bayar2').val();
+            var reminder_no = $('#reminder_no2').val();
+
+            console.log("Tahun: " + tahun + ", Bulan: " + bulan + " tgl_cetak: " + tgl_cetak +
+                ", tgl_batas_bayar: " + tgl_batas_bayar); // Cek nilai yang dikirim
+
+            table_blast.ajax.url("{{ route('collection.preview') }}?sp=" + reminder_no +
+                "&bulan=" + bulan +
+                "&tahun=" + tahun +
+                "&tgl_cetak=" + tgl_cetak +
+                "&tgl_batas_bayar=" + tgl_batas_bayar + "&tipe=asuransi").load();
+
+            $('#tabel_inv_sp').hide();
+            $('#tabel_inv_blast').show();
+            $('#modal-filter').modal('hide'); // Tutup modal setelah submit
+        });
+
+        //btn Proses kirim SP asuransi
+        $('#btn-proses-sp-asuransi').click(function() {
+            var tahun = $('#fin_year2').val();
+            var bulan = $('#fin_month2').val();
+            var tgl_cetak = $('#tgl_cetak2').val();
+            var tgl_batas_bayar = $('#tgl_batas_bayar2').val();
+            var reminder_no = $('#reminder_no2').val();
+
+            console.log("Tahun: " + tahun + ", Bulan: " + bulan + " tgl_cetak: " + tgl_cetak +
+                ", tgl_batas_bayar: " + tgl_batas_bayar); // Cek nilai yang dikirim
+
+            // table_blast.ajax.url("{{ route('collection.proses-kirim-sp') }}?sp=" + reminder_no +
+            //     "&bulan=" + bulan +
+            //     "&tahun=" + tahun +
+            //     "&tgl_cetak=" + tgl_cetak +
+            //     "&tgl_batas_bayar=" + tgl_batas_bayar,
+            // tipe=asuransi).load();
+
+            $.ajax({
+                url: "{{ route('collection.proses-kirim-sp') }}",
+                type: "GET",
+                data: {
+                    tahun: tahun,
+                    bulan: bulan,
+                    sp: reminder_no,
+                    tgl_cetak: tgl_cetak,
+                    tgl_batas_bayar: tgl_batas_bayar,
+                    tipe: asuransi
+                },
+                success: function(data) {
+                    $('#notification').removeClass('alert-danger').addClass('alert-success')
+                        .text(data.message).show();
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    // Tampilkan pesan kesalahan jika ada
+                    $('#notification').removeClass('alert-success').addClass('alert-danger')
+                        .text(data.message).show();
+                }
+            });
+            $('#modal-filter').modal('hide'); // Tutup modal setelah submit
+        });
+
     });
 </script>

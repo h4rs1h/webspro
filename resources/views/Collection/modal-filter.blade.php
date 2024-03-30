@@ -70,9 +70,21 @@
                     </div>
                 </form>
             </div>
+            <div class="form-group">
+                <input type="hidden" id="reminder_no2" value="{{ $reminder }}" name="reminder_no">
+            </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="btn-filter">Save changes</button>
+                <button type="button" class="btn btn-default" id="btn-reset">Reset</button>
+                <button type="button" class="btn btn-primary" id="btn-filter">Show SP {{ $reminder }}</button>
+                <button type="button" class="btn btn-primary" id="btn-preview-sp">Preview Pesan SP
+                    {{ $reminder }}</button>
+                <button type="button" class="btn btn-primary" id="btn-proses-sp">Kirim SP {{ $reminder }}</button>
+                @if ($reminder == '1')
+                    <button type="button" class="btn btn-primary" id="btn-preview-sp-asuransi">Preview SP
+                        Asuransi</button>
+                    <button type="button" class="btn btn-primary" id="btn-proses-sp-asuransi">Kirim SP
+                        Asuransi</button>
+                @endif
             </div>
         </div>
         <!-- /.modal-content -->

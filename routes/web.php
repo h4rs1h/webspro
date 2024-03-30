@@ -99,6 +99,8 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(CollectionController::class)->group(function () {
         Route::get('/collection', 'index');
         Route::get('/collection/json', 'json')->name('filter.collection');
+        Route::get('/collection/preview', 'preview')->name('collection.preview');
+        Route::get('/collection/kirim-blast-sp', 'proseskirimblastsp')->name('collection.proses-kirim-sp');
         Route::post('/collection/upload', 'upload');
     });
 
