@@ -80,6 +80,7 @@
                     {{ $reminder }}</button>
                 <button type="button" class="btn btn-primary" id="btn-proses-sp">Kirim SP {{ $reminder }}</button>
                 @if ($reminder == '1')
+                    <input type="hidden" id="tipe" value="asuransi" name="tipe">
                     <button type="button" class="btn btn-primary" id="btn-preview-sp-asuransi">Preview SP
                         Asuransi</button>
                     <button type="button" class="btn btn-primary" id="btn-proses-sp-asuransi">Kirim SP

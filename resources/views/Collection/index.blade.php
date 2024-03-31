@@ -25,11 +25,11 @@
                             Import Data Reminder Invoice
                         </button> --}}
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-filter">
-                            Filter Data SP {{ $reminder }}
+                            Proses Data SP {{ $reminder }}
                         </button>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-proses">
+                        {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-proses">
                             Proses Blast Data SP {{ $reminder }}
-                        </button>
+                        </button> --}}
                         {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-proses">
                             Antrian Blast Invoice
                         </button> --}}

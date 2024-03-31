@@ -121,25 +121,45 @@ class CollectionController extends Controller
         } else {
             $ass = '';
         }
-
+        // dd($bulan, $tahun, $tgl_cetak, $tgl_batas_bayar, $reminder_no);
         if ($reminder_no == '1') {
-            $simpan = DB::table('outboxs')->insertUsing(
-                ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
-                DB::table('vinvoicesp1')->select([
-                    'debtor_acct', 'fin_month', 'fin_year',
-                    DB::raw("'" . $now . "' as tglkirim"),
-                    DB::raw("null as tglsending"),
-                    'wa', 'isi_pesan',
-                    DB::raw("'" . $status . "' as status"),
-                    DB::raw("'" . $tipe . "' as tipe"),
-                    DB::raw("'" . $now . "' as created_at"),
-                    'reminder_no'
-                ])
-                    ->where('fin_year', $tahun)
-                    ->where('fin_month', $bulan)
-                    ->whereNotNull('isi_pesan')
-                    ->where('tgl_cetak', $tgl_cetak)
-            );
+            if ($ass != 'asuransi') {
+                $simpan = DB::table('outboxs')->insertUsing(
+                    ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
+                    DB::table('vinvoicesp1')->select([
+                        'debtor_acct', 'fin_month', 'fin_year',
+                        DB::raw("'" . $now . "' as tglkirim"),
+                        DB::raw("null as tglsending"),
+                        'wa', 'isi_pesan',
+                        DB::raw("'" . $status . "' as status"),
+                        DB::raw("'" . $tipe . "' as tipe"),
+                        DB::raw("'" . $now . "' as created_at"),
+                        'reminder_no'
+                    ])
+                        ->where('fin_year', $tahun)
+                        ->where('fin_month', $bulan)
+                        ->whereNotNull('wa')
+                        ->where('tgl_cetak', $tgl_cetak)
+                );
+            } else {
+                $simpan = DB::table('outboxs')->insertUsing(
+                    ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
+                    DB::table('vinvoicesp1versi1')->select([
+                        'debtor_acct', 'fin_month', 'fin_year',
+                        DB::raw("'" . $now . "' as tglkirim"),
+                        DB::raw("null as tglsending"),
+                        'wa', 'isi_pesan',
+                        DB::raw("'" . $status . "' as status"),
+                        DB::raw("'" . $tipe . "' as tipe"),
+                        DB::raw("'" . $now . "' as created_at"),
+                        'reminder_no'
+                    ])
+                        ->where('fin_year', $tahun)
+                        ->where('fin_month', $bulan)
+                        ->whereNotNull('wa')
+                        ->where('tgl_cetak', $tgl_cetak)
+                );
+            }
         } elseif ($reminder_no == '2') {
             $simpan = DB::table('outboxs')->insertUsing(
                 ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
@@ -155,7 +175,7 @@ class CollectionController extends Controller
                 ])
                     ->where('fin_year', $tahun)
                     ->where('fin_month', $bulan)
-                    ->whereNotNull('isi_pesan')
+                    ->whereNotNull('wa')
                     ->where('tgl_cetak', $tgl_cetak)
             );
         } elseif ($reminder_no == '3') {
@@ -173,25 +193,7 @@ class CollectionController extends Controller
                 ])
                     ->where('fin_year', $tahun)
                     ->where('fin_month', $bulan)
-                    ->whereNotNull('isi_pesan')
-                    ->where('tgl_cetak', $tgl_cetak)
-            );
-        } elseif ($reminder_no == '1' and $ass == 'asuransi') {
-            $simpan = DB::table('outboxs')->insertUsing(
-                ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
-                DB::table('vinvoicesp1versi1')->select([
-                    'debtor_acct', 'fin_month', 'fin_year',
-                    DB::raw("'" . $now . "' as tglkirim"),
-                    DB::raw("null as tglsending"),
-                    'wa', 'isi_pesan',
-                    DB::raw("'" . $status . "' as status"),
-                    DB::raw("'" . $tipe . "' as tipe"),
-                    DB::raw("'" . $now . "' as created_at"),
-                    'reminder_no'
-                ])
-                    ->where('fin_year', $tahun)
-                    ->where('fin_month', $bulan)
-                    ->whereNotNull('isi_pesan')
+                    ->whereNotNull('wa')
                     ->where('tgl_cetak', $tgl_cetak)
             );
         }

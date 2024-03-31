@@ -154,15 +154,17 @@
             console.log("Tahun: " + fin_year + ", Bulan: " + fin_month + ", Reminder:" + reminder_no +
                 " tgl_cetak: " + tgl_cetak +
                 ", tgl_batas_bayar:" + tgl_batas_bayar + " tgl_tempo_awal " + tgl_tempo_awal +
-                " tgl_tempo_akhir " + tgl_tempo_akhir); // Cek nilai yang dikirim
+                " tgl_tempo_akhir " + tgl_tempo_akhir +
+                " file: " + file); // Cek nilai yang dikirim
             $.ajax({
-                type: 'POST',
+                type: 'POST', // Tentukan tipe permintaan
                 url: '/collection/upload', // Sesuaikan dengan URL endpoint untuk upload data SP
                 data: formData,
                 contentType: false,
                 processData: false,
                 dataType: 'json',
                 success: function(data) {
+                    console.log(data.message);
                     $('#import_form_sp').trigger('reset');
                     $('#modal-import').modal('hide');
                     // Tampilkan pesan sukses atau lakukan aksi lainnya
@@ -179,6 +181,7 @@
                 }
             });
         });
+
 
         // $('#modal-filter').on('show.bs.modal', function(e) {
         // });
@@ -281,9 +284,12 @@
             var tgl_cetak = $('#tgl_cetak2').val();
             var tgl_batas_bayar = $('#tgl_batas_bayar2').val();
             var reminder_no = $('#reminder_no2').val();
+            var tipe = $('#tipe').val();
+
 
             console.log("Tahun: " + tahun + ", Bulan: " + bulan + " tgl_cetak: " + tgl_cetak +
-                ", tgl_batas_bayar: " + tgl_batas_bayar); // Cek nilai yang dikirim
+                ", tgl_batas_bayar: " + tgl_batas_bayar + " tipe SP: " + reminder_no + " plus: " +
+                tipe); // Cek nilai yang dikirim
 
             table_blast.ajax.url("{{ route('collection.preview') }}?sp=" + reminder_no +
                 "&bulan=" + bulan +
@@ -303,7 +309,7 @@
             var tgl_cetak = $('#tgl_cetak2').val();
             var tgl_batas_bayar = $('#tgl_batas_bayar2').val();
             var reminder_no = $('#reminder_no2').val();
-
+            var tipe = 'asuransi';
             console.log("Tahun: " + tahun + ", Bulan: " + bulan + " tgl_cetak: " + tgl_cetak +
                 ", tgl_batas_bayar: " + tgl_batas_bayar); // Cek nilai yang dikirim
 
@@ -323,7 +329,7 @@
                     sp: reminder_no,
                     tgl_cetak: tgl_cetak,
                     tgl_batas_bayar: tgl_batas_bayar,
-                    tipe: asuransi
+                    tipe: tipe
                 },
                 success: function(data) {
                     $('#notification').removeClass('alert-danger').addClass('alert-success')

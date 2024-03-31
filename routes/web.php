@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ArtisanController;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\InvoiceController;
@@ -101,7 +102,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/collection/json', 'json')->name('filter.collection');
         Route::get('/collection/preview', 'preview')->name('collection.preview');
         Route::get('/collection/kirim-blast-sp', 'proseskirimblastsp')->name('collection.proses-kirim-sp');
-        Route::post('/collection/upload', 'upload');
+        Route::post('/collection/upload', 'upload')->name('collection.upload');
     });
 
 
@@ -115,6 +116,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/template/{id}', 'getdetail');
         Route::post('/template/update', 'update');
     });
+
+    // Route::controller(ArtisanController::class)->group(function () {
+    //     Route::get('/run-antrian-outbox', 'runArtisanCommand');
+    // });
 
     Route::get('/logout', [SesiController::class, 'logout']);
 });
