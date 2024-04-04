@@ -1,0 +1,55 @@
+Jakarta, [Tanggal].
+
+Kepada Yth.
+Bapak/Ibu
+Pemilik Unit [UnitID]
+Apartemen Puri Parkview
+Di Tempat.
+
+*Perihal: [REMINDER] Informasi Total Tagihan Bulan [blntempo].*
+
+
+Dengan hormat,
+
+Melalui _WhatsApp Blast REMINDER_ ini kami informasikan bahwa total tagihan Bapak/Ibu di Apartemen Puri Parkview untuk bulan *[blntempo]* adalah sebagai berikut:
+
+Tagihan IPL dan DC (Bulan [blntempo]): Rp [IPL_DC],- ;
+
+Tagihan Air (Bulan [blntempo]): Rp [AIR],- ;
+
+Total Tunggakan Tagihan (Sebelum Bulan [blntempo]): Rp [tunggakan_sebelumnya],- ;
+
+
+_TOTAL TAGIHAN (PER BULAN [blntempo2]): Rp [tagihan_bln_ini],- ._
+
+_DEPOSIT (PER BULAN [blntempo2]): Rp [deposit],- ._
+
+_*TOTAL TAGIHAN YANG MASIH HARUS DIBAYARKAN (PER BULAN [blntempo2]): Rp [tagihan_dibayar],-.*_
+
+No. Virtual Account BCA: [Va].
+
+No. Unit: [UnitID].
+Nama Pemilik Unit: [nama].
+No. Telp: [hand_phone].
+
+Pembayaran dapat dilakukan di Bagian Kasir Kantor Badan Pengelola atau transfer ke Rek. BCA _Virtual Account_, yang telah diinformasikan di atas, paling lambat _*tanggal [due_date]*_.
+
+*Apabila pembayaran dilakukan _setelah_ tanggal yang telah disebutkan di atas, maka Bapak/Ibu akan dikenakan sanksi berupa: sanksi denda dan sanksi tidak diberikan pelayanan oleh Badan Pengelola, antara lain pemblokiran (secara sistem): pembelian _voucher_/_token_ listrik dan perpanjangan langganan parkir, sesuai dengan ketentuan pasal 7.2.3. (halaman 22) yang disebutkan di dalam Buku PERATURAN DAN TATA TERTIB PENGELOLAAN/KEPENGHUNIAN APARTEMEN PURI PARKVIEW (_download link_ terlampir dalam pesan ini).*
+
+Untuk informasi lebih lanjut dapat menghubungi: Bagian _Billing_/_Collection_ kami di no. telp 021-58900141 dengan sdr-i Novi/Rina.
+
+Pesan _WhatsApp Blast REMINDER_ ini (dan beberapa pesan-pesan _WhatsApp Blast REMINDER_ yang *sama* kedepannya) dikirimkan dengan menggunakan data pembayaran (_cut-off_) beberapa hari sebelumnya (berdekatan dengan hari pembuatan dan penerbitan _invoice_), *mohon abaikan pesan ini jika Bapak/Ibu sudah membayarkan seluruh tagihan di atas*.
+
+Pesan _WhatsApp Blast REMINDER_ ini (dan beberapa pesan-pesan _WhatsApp Blast REMINDER_ yang *sama* kedepannya) dapat dikirimkan bersamaan dengan pesan-pesan _WhatsApp Blast REMINDER_ yang *lain* untuk tagihan-tagihan periode sebelumnya dan berlaku ketentuan-ketentuan sesuai dengan isi pesan yang telah disampaikan.
+
+Demikian kami sampaikan. Atas perhatian dan kerjasamanya kami ucapkan terima kasih.
+
+Hormat kami,
+
+Billing
+Apartemen Puri Parkview
+
+
+_*LAMPIRAN PESAN:*_
+
+_Download Link_ Buku PERATURAN DAN TATA TERTIB PENGELOLAAN/KEPENGHUNIAN APARTEMEN PURI PARKVIEW - “TATIB APARTEMEN” / “HOUSE RULE” : https://bit.ly/PeraturanTatibHouseruleAptPPV

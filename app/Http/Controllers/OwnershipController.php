@@ -24,10 +24,12 @@ class OwnershipController extends Controller
     {
         $file = $request->file('file');
         $namafile = $file->getClientOriginalName();
-        $file->move('DataOwnership', $namafile);
-
-        Excel::import(new OwnershipImport(), public_path('/DataOwnership/' . $namafile));
-        return redirect('/ownership');
+        // $file->move('DataOwnership', $namafile);
+        $file->storeAs('DataOwnership', $namafile);
+        // Excel::import(new OwnershipImport(), public_path('/DataOwnership/' . $namafile));
+        // return redirect('/ownership');
+        Excel::import(new OwnershipImport(), public_path('storage/DataOwnership/' . $namafile));
+        return response()->json(['message' => 'File ' . $namafile . ' has been uploaded and data imported successfully']);
     }
     function getData()
     {

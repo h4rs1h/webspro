@@ -105,3 +105,10 @@
         </li>
     </ul>
 </li>
+<li class="nav-header">LAPORAN</li>
+<li class="nav-item">
+    <a href="/laporan" class="nav-link">
+        <i class="fas fa-arrow-right nav-icon"></i>
+        <p>Summary Blasting</p>
+    </a>
+</li>

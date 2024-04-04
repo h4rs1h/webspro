@@ -41,6 +41,7 @@
                             </ul>
                         </div>
                         <div class="card-body">
+                            <div id="notification" class="alert" style="display:none;"></div>
                             <div class="tab-content" id="custom-tabs-three-tabContent">
                                 <div class="tab-pane fade active show" id="custom-tabs-three-home" role="tabpanel"
                                     aria-labelledby="custom-tabs-three-home-tab">

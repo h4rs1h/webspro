@@ -6,6 +6,7 @@ use App\Http\Controllers\BillingController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\InvoiceSPController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\OwnershipController;
 use App\Http\Controllers\PerangkatController;
 use App\Http\Controllers\RereController;
@@ -105,6 +106,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/collection/upload', 'upload')->name('collection.upload');
     });
 
+    Route::controller(LaporanController::class)->group(function () {
+        Route::get('/laporan', 'index');
+        Route::get('/laporan/json', 'json')->name('filter.laporan');
+    });
 
     Route::controller(WebHookController::class)->group(function () {
         Route::get('/setwebhook', 'set_incoming');
