@@ -27,7 +27,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="/template" class="nav-link">
+            <a href="/broadcast" class="nav-link">
                 <i class="far fa-clipboard nav-icon"></i>
                 <p>Template Pesan</p>
             </a>

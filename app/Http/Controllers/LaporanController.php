@@ -34,6 +34,14 @@ class LaporanController extends Controller
             ['id' => '2028', 'name' => '2028'],
         ];
 
+        $tipe = [
+            ['id' => '1', 'name' => 'Invoice'],
+            ['id' => '2', 'name' => 'Invoice Reminder 1'],
+            ['id' => '3', 'name' => 'Invoice Reminder 2'],
+            ['id' => '4', 'name' => 'Invoice Reminder 3'],
+            ['id' => '5', 'name' => 'Invoice Reminder 4'],
+        ];
+
         return view('Laporan.index', [
             'username' => Auth::user()->name,
             'title' => 'Laporan Rekap Pengiriman Pesan Blast',

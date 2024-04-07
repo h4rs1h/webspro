@@ -42,11 +42,17 @@ class CollectionController extends Controller
             ['id' => '2025', 'name' => '2025'],
             ['id' => '2026', 'name' => '2026'],
         ];
+        $tipe = [
+            ['id' => '1', 'name' => 'IPL DC AIR'],
+            ['id' => '2', 'name' => 'IPL DC AIR & ASURANSI'],
+
+        ];
         if ($request->sp != 'asuransi') {
             $subTitle = 'Form Filter Data Invoice SP ' . $request->sp;
         } else {
             $subTitle = 'Form Filter Data SP ' . $request->sp;
         }
+
         return view('Collection.index', [
             'username' => Auth::user()->name,
             'title' => 'Data Invoice SP ' . $request->sp,
@@ -55,6 +61,7 @@ class CollectionController extends Controller
             'reminder_no' => $remin,
             'fin_month' => $bulan,
             'fin_year' => $tahun,
+            'tipe_sp' => $tipe,
             'javascript' => 'Collection.script',
         ]);
     }
@@ -66,11 +73,13 @@ class CollectionController extends Controller
         $reminder_no = $request->sp;
         $tgl_cetak = $request->tgl_cetak;
         $tgl_batas_bayar = $request->tgl_batas_bayar;
+        $tipe_sp = $request->tipe_sp;
         // dd($bulan, $tahun, $tgl_cetak, $request->sp, $request->tgl_cetak);
         $invsp = new InvoiceSP;
+
         if (!empty($bulan) and !empty($tahun)) {
             // dd($tahun, $bulan, $reminder_no, $tgl_cetak, $tgl_batas_bayar);
-            $invoices = $invsp->getDataSP($tahun, $bulan, $reminder_no, $tgl_cetak, $tgl_batas_bayar);
+            $invoices = $invsp->getDataSP($tahun, $bulan, $reminder_no, $tgl_cetak, $tgl_batas_bayar, $tipe_sp);
         } else {
             $invoices = $invsp->getreminder($reminder_no);
         }
@@ -85,6 +94,7 @@ class CollectionController extends Controller
         $reminder_no = $request->sp;
         $tgl_cetak = $request->tgl_cetak;
         $tgl_batas_bayar = $request->tgl_batas_bayar;
+        $tipe_sp = $request->tipe_sp;
 
         if (isset($request->tipe) && $request->tipe != null) {
             $ass = $request->tipe;
@@ -95,7 +105,7 @@ class CollectionController extends Controller
         $invsp = new InvoiceSP;
         if (!empty($bulan) and !empty($tahun)) {
             // dd($tahun, $bulan, $reminder_no, $tgl_cetak, $tgl_batas_bayar);
-            $invoices = $invsp->getPreviewDataSP($tahun, $bulan, $reminder_no, $tgl_cetak, $tgl_batas_bayar, $ass);
+            $invoices = $invsp->getPreviewDataSP($tahun, $bulan, $reminder_no, $tgl_cetak, $tgl_batas_bayar, $tipe_sp, $ass);
         } else {
             $invoices = $invsp->getreminder($reminder_no);
         }
@@ -110,6 +120,7 @@ class CollectionController extends Controller
         $reminder_no = $request->sp;
         $tgl_cetak = $request->tgl_cetak;
         $tgl_batas_bayar = $request->tgl_batas_bayar;
+        $tipe_sp = $request->tipe_sp;
 
         $now = Carbon::now();
         $null = 'null';
@@ -121,9 +132,10 @@ class CollectionController extends Controller
         } else {
             $ass = '';
         }
+
         // dd($bulan, $tahun, $tgl_cetak, $tgl_batas_bayar, $reminder_no);
         if ($reminder_no == '1') {
-            if ($ass != 'asuransi') {
+            if ($tipe_sp == '1') {
                 $simpan = DB::table('outboxs')->insertUsing(
                     ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
                     DB::table('vinvoicesp1')->select([
@@ -144,7 +156,7 @@ class CollectionController extends Controller
             } else {
                 $simpan = DB::table('outboxs')->insertUsing(
                     ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
-                    DB::table('vinvoicesp1versi1')->select([
+                    DB::table('vinvoicesp1_ass')->select([
                         'debtor_acct', 'fin_month', 'fin_year',
                         DB::raw("'" . $now . "' as tglkirim"),
                         DB::raw("null as tglsending"),
@@ -161,51 +173,99 @@ class CollectionController extends Controller
                 );
             }
         } elseif ($reminder_no == '2') {
-            $simpan = DB::table('outboxs')->insertUsing(
-                ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
-                DB::table('vinvoicesp2')->select([
-                    'debtor_acct', 'fin_month', 'fin_year',
-                    DB::raw("'" . $now . "' as tglkirim"),
-                    DB::raw("null as tglsending"),
-                    'wa', 'isi_pesan',
-                    DB::raw("'" . $status . "' as status"),
-                    DB::raw("'" . $tipe . "' as tipe"),
-                    DB::raw("'" . $now . "' as created_at"),
-                    'reminder_no'
-                ])
-                    ->where('fin_year', $tahun)
-                    ->where('fin_month', $bulan)
-                    ->whereNotNull('wa')
-                    ->where('tgl_cetak', $tgl_cetak)
-            );
+            if ($tipe_sp == '1') {
+                $simpan = DB::table('outboxs')->insertUsing(
+                    ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
+                    DB::table('vinvoicesp2')->select([
+                        'debtor_acct', 'fin_month', 'fin_year',
+                        DB::raw("'" . $now . "' as tglkirim"),
+                        DB::raw("null as tglsending"),
+                        'wa', 'isi_pesan',
+                        DB::raw("'" . $status . "' as status"),
+                        DB::raw("'" . $tipe . "' as tipe"),
+                        DB::raw("'" . $now . "' as created_at"),
+                        'reminder_no'
+                    ])
+                        ->where('fin_year', $tahun)
+                        ->where('fin_month', $bulan)
+                        ->whereNotNull('wa')
+                        ->where('tgl_cetak', $tgl_cetak)
+                );
+            } else {
+                $simpan = DB::table('outboxs')->insertUsing(
+                    ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
+                    DB::table('vinvoicesp2_ass')->select([
+                        'debtor_acct', 'fin_month', 'fin_year',
+                        DB::raw("'" . $now . "' as tglkirim"),
+                        DB::raw("null as tglsending"),
+                        'wa', 'isi_pesan',
+                        DB::raw("'" . $status . "' as status"),
+                        DB::raw("'" . $tipe . "' as tipe"),
+                        DB::raw("'" . $now . "' as created_at"),
+                        'reminder_no'
+                    ])
+                        ->where('fin_year', $tahun)
+                        ->where('fin_month', $bulan)
+                        ->whereNotNull('wa')
+                        ->where('tgl_cetak', $tgl_cetak)
+                );
+            }
         } elseif ($reminder_no == '3') {
-            $simpan = DB::table('outboxs')->insertUsing(
-                ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
-                DB::table('vinvoicesp3')->select([
-                    'debtor_acct', 'fin_month', 'fin_year',
-                    DB::raw("'" . $now . "' as tglkirim"),
-                    DB::raw("null as tglsending"),
-                    'wa', 'isi_pesan',
-                    DB::raw("'" . $status . "' as status"),
-                    DB::raw("'" . $tipe . "' as tipe"),
-                    DB::raw("'" . $now . "' as created_at"),
-                    'reminder_no'
-                ])
-                    ->where('fin_year', $tahun)
-                    ->where('fin_month', $bulan)
-                    ->whereNotNull('wa')
-                    ->where('tgl_cetak', $tgl_cetak)
-            );
+            if ($tipe_sp == '1') {
+                $simpan = DB::table('outboxs')->insertUsing(
+                    ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
+                    DB::table('vinvoicesp3')->select([
+                        'debtor_acct', 'fin_month', 'fin_year',
+                        DB::raw("'" . $now . "' as tglkirim"),
+                        DB::raw("null as tglsending"),
+                        'wa', 'isi_pesan',
+                        DB::raw("'" . $status . "' as status"),
+                        DB::raw("'" . $tipe . "' as tipe"),
+                        DB::raw("'" . $now . "' as created_at"),
+                        'reminder_no'
+                    ])
+                        ->where('fin_year', $tahun)
+                        ->where('fin_month', $bulan)
+                        ->whereNotNull('wa')
+                        ->where('tgl_cetak', $tgl_cetak)
+                );
+            } else {
+                $simpan = DB::table('outboxs')->insertUsing(
+                    ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
+                    DB::table('vinvoicesp3_ass')->select([
+                        'debtor_acct', 'fin_month', 'fin_year',
+                        DB::raw("'" . $now . "' as tglkirim"),
+                        DB::raw("null as tglsending"),
+                        'wa', 'isi_pesan',
+                        DB::raw("'" . $status . "' as status"),
+                        DB::raw("'" . $tipe . "' as tipe"),
+                        DB::raw("'" . $now . "' as created_at"),
+                        'reminder_no'
+                    ])
+                        ->where('fin_year', $tahun)
+                        ->where('fin_month', $bulan)
+                        ->whereNotNull('wa')
+                        ->where('tgl_cetak', $tgl_cetak)
+                );
+            }
         }
         // dd($simpan);
         if ($simpan) {
             // Berhasil
 
-            return response()->json(['message' => 'Proses Kirim Blast SP  successfully']);
+            return response()->json([
+                'remove' => 'alert-danger',
+                'add' => 'alert-success',
+                'message' => 'Proses Kirim Blast SP  successfully'
+            ]);
         } else {
             // Gagal
 
-            return response()->json(['message' => 'Gagal menyimpan data Blast ke tabel outboxs.']);
+            return response()->json([
+                'add' => 'alert-danger',
+                'remove' => 'alert-success',
+                'message' => 'Gagal menyimpan data Blast ke tabel outboxs.'
+            ]);
         }
     }
     function upload(Request $request)
@@ -214,6 +274,7 @@ class CollectionController extends Controller
         $validateData = $request->validate([
             'fin_month' => 'required',
             'fin_year' => 'required',
+            'tipe_sp' => 'required',
             'tgl_cetak' => 'required',
             'tgl_batas_bayar' => 'required',
             'file' => 'required|file|mimes:xls,xlsx',
@@ -223,6 +284,7 @@ class CollectionController extends Controller
         $tahun = $request->fin_year;
         $tgl_cetak = $request->tgl_cetak;
         $tgl_batas_bayar = $request->tgl_batas_bayar;
+        $tipe_sp = $request->tipe_sp;
 
         $reminder_no = $request->reminder_no;
         $reminder_no_ass = $request->reminder_no_ass;
@@ -245,7 +307,7 @@ class CollectionController extends Controller
         $path = $file->storeAs('DataInvoiceSP', $namafile);
         //dd($namafile, $file, public_path('/DataInvoice/' . $namafile));
         $path = str_replace(public_path(), '', $path);
-        Excel::import(new InvoiceSPImport($bulan, $tahun, $tgl_cetak, $tgl_batas_bayar, $tgl_tempo_awal, $tgl_tempo_akhir, $reminder_no, $reminder_no_ass, $path /* public_path('storage/DataInvoiceSP/' . $namafile)*/), public_path('storage/DataInvoiceSP/' . $namafile));
+        Excel::import(new InvoiceSPImport($bulan, $tahun, $tgl_cetak, $tgl_batas_bayar, $tgl_tempo_awal, $tgl_tempo_akhir, $reminder_no, $tipe_sp, $reminder_no_ass, $path /* public_path('storage/DataInvoiceSP/' . $namafile)*/), public_path('storage/DataInvoiceSP/' . $namafile));
         // Excel::import(new InvoiceSPImport(), public_path('/DataInvoiceSP/' . $namafile));
         // return redirect('/invoicesp');
         return response()->json([

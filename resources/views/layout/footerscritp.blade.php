@@ -13,10 +13,10 @@
 <!-- Sparkline -->
 <script src="{{ asset('AdminLTE/plugins/sparklines/sparkline.js') }}"></script>
 <!-- JQVMap -->
-<script src="{{ asset('AdminLTE/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
-<script src="{{ asset('AdminLTE/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
+{{-- <script src="{{ asset('AdminLTE/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
+<script src="{{ asset('AdminLTE/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script> --}}
 <!-- jQuery Knob Chart -->
-<script src="{{ asset('AdminLTE/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
+{{-- <script src="{{ asset('AdminLTE/plugins/jquery-knob/jquery.knob.min.js') }}"></script> --}}
 <!-- daterangepicker -->
 <script src="{{ asset('AdminLTE/plugins/moment/moment.min.js') }}"></script>
 <script src="{{ asset('AdminLTE/plugins/daterangepicker/daterangepicker.js') }}"></script>
@@ -29,7 +29,7 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('AdminLTE/dist/js/adminlte.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('AdminLTE/dist/js/pages/dashboard.js') }}"></script>
+{{-- <script src="{{ asset('AdminLTE/dist/js/pages/dashboard.js') }}"></script> --}}
 
 <!-- DataTables  & Plugins -->
 <script src="{{ asset('AdminLTE/plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -46,7 +46,7 @@
 <script src="{{ asset('AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
 <!-- Page specific script -->
-<script>
+{{-- <script>
     $(function() {
         $("#polos").DataTable({
             "responsive": true,
@@ -112,7 +112,7 @@
 
 
     });
-</script>
+</script> --}}
 @isset($javascript)
     @include($javascript)
 @endisset

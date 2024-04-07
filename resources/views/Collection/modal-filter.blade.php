@@ -52,6 +52,26 @@
                             @enderror
                         </div>
                     </div>
+                    @if ($reminder != 'asuransi')
+                        <div class="form-group row">
+                            <label for="tahun" class="col-sm-5 col-form-label">Tipe SP {{ $reminder }}</label>
+                            <div class="col-sm-7">
+
+                                <select class="form-control" name="tipe_sp2" id="tipe_sp2">
+                                    <option value="">-- Pilih --</option>
+                                    @foreach ($tipe_sp as $item)
+                                        @if (old('tipe_sp2') == $item['id'])
+                                            <option value="{{ $item['id'] }}" selected>
+                                                {{ $item['name'] }}</option>
+                                        @else
+                                            <option value="{{ $item['id'] }}">
+                                                {{ $item['name'] }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    @endif
                     <div class="form-group row">
                         <label for="tgl_cetak" class="col-sm-5 col-form-label">Tanggal Kirim</label>
                         <div class="col-sm-7">
@@ -79,13 +99,14 @@
                 <button type="button" class="btn btn-primary" id="btn-preview-sp">Preview Pesan SP
                     {{ $reminder }}</button>
                 <button type="button" class="btn btn-primary" id="btn-proses-sp">Kirim SP {{ $reminder }}</button>
-                @if ($reminder == '1')
+
+                {{-- @if ($reminder == '1')
                     <input type="hidden" id="tipe" value="asuransi" name="tipe">
                     <button type="button" class="btn btn-primary" id="btn-preview-sp-asuransi">Preview SP
                         Asuransi</button>
                     <button type="button" class="btn btn-primary" id="btn-proses-sp-asuransi">Kirim SP
                         Asuransi</button>
-                @endif
+                @endif --}}
             </div>
         </div>
         <!-- /.modal-content -->

@@ -116,15 +116,16 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::controller(TemplatePesanController::class)->group(function () {
-        Route::get('/template', 'index');
+        Route::get('/broadcast', 'index');
         Route::get('/template/json', 'json');
         Route::get('/template/{id}', 'getdetail');
         Route::post('/template/update', 'update');
     });
 
-    // Route::controller(ArtisanController::class)->group(function () {
-    //     Route::get('/run-antrian-outbox', 'runArtisanCommand');
-    // });
+
+    Route::get('/pdf/coba', function () {
+        return view('pdf.template');
+    });
 
     Route::get('/logout', [SesiController::class, 'logout']);
 });

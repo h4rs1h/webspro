@@ -54,7 +54,7 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>Debtor Acct</th>
-                                                                <th>Unit</th>
+                                                                {{-- <th>Unit</th> --}}
                                                                 <th>Nama</th>
                                                                 <th>Handphone</th>
                                                                 <th>Nomor WA</th>
@@ -83,6 +83,7 @@
                                                         </tfoot> --}}
                                                     </table>
                                                 </div>
+
                                                 <!-- /.card-body -->
                                             </div>
                                             <!-- /.card -->

@@ -46,6 +46,23 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    @if ($reminder != 'asuransi')
+                                        <div class="form-group">
+                                            <label for="tahun">Tipe SP {{ $reminder }}</label>
+                                            <select class="form-control" name="tipe_sp" id="tipe_sp">
+                                                <option value="">-- Pilih --</option>
+                                                @foreach ($tipe_sp as $item)
+                                                    @if (old('tipe_sp') == $item['id'])
+                                                        <option value="{{ $item['id'] }}" selected>
+                                                            {{ $item['name'] }}</option>
+                                                    @else
+                                                        <option value="{{ $item['id'] }}">
+                                                            {{ $item['name'] }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    @endif
                                     <div class="form-group">
                                         <input type="hidden" id="reminder_no" value="{{ $reminder }}"
                                             name="reminder_no">

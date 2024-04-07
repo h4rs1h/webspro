@@ -52,7 +52,7 @@
                                                     <table id="example3" class="table table-bordered table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th>Debtor Acct</th>
+                                                                <th>Debtor Acctttt</th>
                                                                 <th>Unit</th>
                                                                 <th>Nama</th>
                                                                 <th>Handphone</th>

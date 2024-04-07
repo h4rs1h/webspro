@@ -129,6 +129,7 @@
             var tgl_tempo_awal = $('#tgl_tempo_awal').val();
             var tgl_tempo_akhir = $('#tgl_tempo_akhir').val();
             var file = $('#exampleInputFile').val();
+            var tipe_sp = $('#tipe_sp').val();
 
             if (fin_month == '' || fin_year == '' || tgl_cetak == '' || tgl_batas_bayar == '' || file ==
                 '') {
@@ -151,6 +152,8 @@
             formData.append('tgl_tempo_awal', $('#tgl_tempo_awal').val());
             formData.append('tgl_tempo_akhir', $('#tgl_tempo_akhir').val());
             formData.append('file', $('input[type=file]')[0].files[0]);
+            formData.append('tipe_sp', $('#tipe_sp').val());
+
             console.log("Tahun: " + fin_year + ", Bulan: " + fin_month + ", Reminder:" + reminder_no +
                 " tgl_cetak: " + tgl_cetak +
                 ", tgl_batas_bayar:" + tgl_batas_bayar + " tgl_tempo_awal " + tgl_tempo_awal +
@@ -190,6 +193,7 @@
             $('#fin_month2').val('');
             $('#tgl_cetak2').val('');
             $('#tgl_batas_bayar2').val('');
+            $('#tipe_sp2').val('');
 
         })
         // btn filter
@@ -199,15 +203,23 @@
             var tgl_cetak = $('#tgl_cetak2').val();
             var tgl_batas_bayar = $('#tgl_batas_bayar2').val();
             var reminder_no = $('#reminder_no2').val();
+            var tipe_sp = $('#tipe_sp2').val();
+
+            if (!tahun || !bulan || !tgl_cetak || !tgl_batas_bayar || !tipe_sp) {
+                alert('Harap lengkapi semua inputan.');
+                return;
+            }
 
             console.log("Tahun: " + tahun + ", Bulan: " + bulan + " tgl_cetak: " + tgl_cetak +
-                ", tgl_batas_bayar: " + tgl_batas_bayar); // Cek nilai yang dikirim
+                ", tgl_batas_bayar: " + tgl_batas_bayar +
+                ", tipe_sp: " + tipe_sp); // Cek nilai yang dikirim
 
             table.ajax.url("{{ route('filter.collection') }}?sp=" + reminder_no +
                 "&bulan=" + bulan +
                 "&tahun=" + tahun +
                 "&tgl_cetak=" + tgl_cetak +
-                "&tgl_batas_bayar=" + tgl_batas_bayar).load();
+                "&tgl_batas_bayar=" + tgl_batas_bayar +
+                "&tipe_sp=" + tipe_sp).load();
 
             $('#tabel_inv_sp').show();
             $('#tabel_inv_blast').hide();
@@ -221,15 +233,24 @@
             var tgl_cetak = $('#tgl_cetak2').val();
             var tgl_batas_bayar = $('#tgl_batas_bayar2').val();
             var reminder_no = $('#reminder_no2').val();
+            var tipe_sp = $('#tipe_sp2').val();
+
+            // Periksa apakah variabel yang diperlukan telah diisi
+            if (!tahun || !bulan || !tgl_cetak || !tgl_batas_bayar || !tipe_sp) {
+                alert('Harap lengkapi semua inputan.');
+                return;
+            }
 
             console.log("Tahun: " + tahun + ", Bulan: " + bulan + " tgl_cetak: " + tgl_cetak +
-                ", tgl_batas_bayar: " + tgl_batas_bayar); // Cek nilai yang dikirim
+                ", tgl_batas_bayar: " + tgl_batas_bayar +
+                ", tipe_sp: " + tipe_sp); // Cek nilai yang dikirim
 
             table_blast.ajax.url("{{ route('collection.preview') }}?sp=" + reminder_no +
                 "&bulan=" + bulan +
                 "&tahun=" + tahun +
                 "&tgl_cetak=" + tgl_cetak +
-                "&tgl_batas_bayar=" + tgl_batas_bayar).load();
+                "&tgl_batas_bayar=" + tgl_batas_bayar +
+                "&tipe_sp=" + tipe_sp).load();
 
             $('#tabel_inv_sp').hide();
             $('#tabel_inv_blast').show();
@@ -243,15 +264,16 @@
             var tgl_cetak = $('#tgl_cetak2').val();
             var tgl_batas_bayar = $('#tgl_batas_bayar2').val();
             var reminder_no = $('#reminder_no2').val();
+            var tipe_sp = $('#tipe_sp2').val();
+
+            // Periksa apakah variabel yang diperlukan telah diisi
+            if (!tahun || !bulan || !tgl_cetak || !tgl_batas_bayar || !tipe_sp) {
+                alert('Harap lengkapi semua inputan.');
+                return;
+            }
 
             console.log("Tahun: " + tahun + ", Bulan: " + bulan + " tgl_cetak: " + tgl_cetak +
                 ", tgl_batas_bayar: " + tgl_batas_bayar); // Cek nilai yang dikirim
-
-            // table_blast.ajax.url("{{ route('collection.proses-kirim-sp') }}?sp=" + reminder_no +
-            //     "&bulan=" + bulan +
-            //     "&tahun=" + tahun +
-            //     "&tgl_cetak=" + tgl_cetak +
-            //     "&tgl_batas_bayar=" + tgl_batas_bayar).load();
 
             $.ajax({
                 url: "{{ route('collection.proses-kirim-sp') }}",
@@ -261,10 +283,54 @@
                     bulan: bulan,
                     sp: reminder_no,
                     tgl_cetak: tgl_cetak,
-                    tgl_batas_bayar: tgl_batas_bayar
+                    tgl_batas_bayar: tgl_batas_bayar,
+                    tipe_sp: tipe_sp
                 },
                 success: function(data) {
-                    $('#notification').removeClass('alert-danger').addClass('alert-success')
+                    $('#notification').removeClass(data.remove).addClass(data.add)
+                        .text(data.message).show();
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    // Tampilkan pesan kesalahan jika ada
+                    $('#notification').removeClass('alert-success').addClass('alert-danger')
+                        .text(data.message).show();
+                }
+            });
+            $('#modal-filter').modal('hide'); // Tutup modal setelah submit
+        });
+
+        $('#btn-proses-sampel').click(function() {
+            var tahun = $('#fin_year2').val();
+            var bulan = $('#fin_month2').val();
+            var tgl_cetak = $('#tgl_cetak2').val();
+            var tgl_batas_bayar = $('#tgl_batas_bayar2').val();
+            var reminder_no = $('#reminder_no2').val();
+            var tipe_sp = $('#tipe_sp2').val();
+
+            // Periksa apakah variabel yang diperlukan telah diisi
+            if (!tahun || !bulan || !tgl_cetak || !tgl_batas_bayar || !tipe_sp) {
+                alert('Harap lengkapi semua inputan.');
+                return;
+            }
+
+            console.log("Tahun: " + tahun + ", Bulan: " + bulan + " tgl_cetak: " + tgl_cetak +
+                ", tgl_batas_bayar: " + tgl_batas_bayar); // Cek nilai yang dikirim
+
+            $.ajax({
+                url: "{{ route('collection.proses-kirim-sp') }}",
+                type: "GET",
+                data: {
+                    tahun: tahun,
+                    bulan: bulan,
+                    sp: reminder_no,
+                    tgl_cetak: tgl_cetak,
+                    tgl_batas_bayar: tgl_batas_bayar,
+                    tipe_sp: tipe_sp,
+                    sampel: 'yes'
+                },
+                success: function(data) {
+                    $('#notification').removeClass(data.remove).addClass(data.add)
                         .text(data.message).show();
                 },
                 error: function(xhr, status, error) {

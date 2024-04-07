@@ -21,10 +21,11 @@
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-filter">
                             Filter Laporan
                         </button>
-
-                        {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-import">
-                            Import Data Invoice
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-filter2">
+                            Filter Laporan Detail
                         </button>
+
+                        {{--
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-import2">
                             Import Data Reminder Invoice
                         </button>
@@ -63,6 +64,15 @@
                                     <th>Offline</th>
                                 </tr>
                             </thead>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="10" class="text-right">
+                                        <button class="btn btn-primary btn-sm" id="printBtn">Print</button>
+                                        <button class="btn btn-primary btn-sm" id="exportBtn">Export</button>
+                                        <button class="btn btn-primary btn-sm" id="pdfBtn">PDF</button>
+                                    </th>
+                                </tr>
+                            </tfoot>
                             <tbody>
                             </tbody>
                         </table>
@@ -76,7 +86,10 @@
         {{-- memisahkan scritp modal filter --}}
         @include('Laporan.modal-filter')
     </div>
-
+    <div class="modal fade" id="modal-filter2">
+        {{-- memisahkan scritp modal filter --}}
+        @include('Laporan.modal-filter2')
+    </div>
     <div class="modal fade" id="modal-proses">
         {{-- memisahkan script modal-proses --}}
         {{-- @include('Billing.modal-proses') --}}

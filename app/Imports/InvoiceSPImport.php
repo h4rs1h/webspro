@@ -13,7 +13,7 @@ class InvoiceSPImport implements ToModel, WithStartRow
     /**
      * @param Collection $collection
      */
-    public function __construct($bulan, $tahun,  $tgl_cetak, $tgl_batas_bayar, $tgl_tempo_awal, $tgl_tempo_akhir, $reminder_no, $reminder_no_ass, $filename)
+    public function __construct($bulan, $tahun,  $tgl_cetak, $tgl_batas_bayar, $tgl_tempo_awal, $tgl_tempo_akhir, $reminder_no, $tipe_sp, $reminder_no_ass, $filename)
     {
         $this->fin_month = $bulan;
         $this->fin_year = $tahun;
@@ -24,10 +24,11 @@ class InvoiceSPImport implements ToModel, WithStartRow
         $this->reminder_no = $reminder_no;
         $this->reminder_no_ass = $reminder_no_ass;
         $this->filename = $filename;
+        $this->tipe_sp = $tipe_sp;
     }
     public function startRow(): int
     {
-        return 2;
+        return 4;
     }
     public function model(array $row)
     {
@@ -55,6 +56,7 @@ class InvoiceSPImport implements ToModel, WithStartRow
                 'tgl_tempo_awal' => $this->tgl_tempo_awal,
                 'tgl_tempo_terakhir' => $this->tgl_tempo_akhir,
                 'reminder_no' => $this->reminder_no,
+                'tipe_sp' => $this->tipe_sp,
                 'debtor_acct' => $row[0],
                 'name' => $row[2],
                 'tag_ipl' => $row[3],

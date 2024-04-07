@@ -12,7 +12,7 @@ class PerangkatController extends Controller
 {
     function index()
     {
-        return view('perangkat.index', [
+        return view('Perangkat.index', [
             'username' => Auth::user()->name,
             'title' => 'Data Device Whastapp Blast',
             'javascript' => 'perangkat.script'
