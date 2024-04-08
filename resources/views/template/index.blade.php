@@ -80,6 +80,6 @@
 
     <div class="modal dialog" id="editModal">
         {{-- memisahkan scritp modal filter --}}
-        @include('perangkat.modal-edit')
+        @include('Perangkat.modal-edit')
     </div>
 @endsection
