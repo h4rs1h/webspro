@@ -15,7 +15,7 @@ class PerangkatController extends Controller
         return view('Perangkat.index', [
             'username' => Auth::user()->name,
             'title' => 'Data Device Whastapp Blast',
-            'javascript' => 'perangkat.script'
+            'javascript' => 'Perangkat.script'
             // 'data' => Ownership::all()
         ]);
     }
