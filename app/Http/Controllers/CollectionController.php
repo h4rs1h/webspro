@@ -80,10 +80,11 @@ class CollectionController extends Controller
         if (!empty($bulan) and !empty($tahun)) {
             // dd($tahun, $bulan, $reminder_no, $tgl_cetak, $tgl_batas_bayar);
             $invoices = $invsp->getDataSP($tahun, $bulan, $reminder_no, $tgl_cetak, $tgl_batas_bayar, $tipe_sp);
-        } else {
-            $invoices = $invsp->getreminder($reminder_no);
         }
-        // dd($invoices);
+        // else {
+        //     $invoices = $invsp->getreminder($reminder_no);
+        // }
+        dd($invoices);
         return DataTables::of($invoices)->make(true);
     }
     function preview(Request $request)

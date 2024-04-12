@@ -42,11 +42,11 @@ class InvoiceSP extends Model
             ->where('vinvoicesps.fin_year', $fin_year)
             ->where('vinvoicesps.fin_month', $fin_month)
             ->where('vinvoicesps.reminder_no', $reminder_no)
-            ->where('vinvoicesps.tgl_cetak', $tgl_cetak)
-            ->where('vinvoicesps.tgl_batas_bayar', $tgl_batas_bayar)
+            // ->where('vinvoicesps.tgl_cetak', $tgl_cetak)
+            // ->where('vinvoicesps.tgl_batas_bayar', $tgl_batas_bayar)
             ->where('tipe_sp', $tipe_sp)
             ->get();
-        // dd($fin_month, $fin_year, $tgl_cetak, $reminder_no);
+        dd($data, $fin_month, $fin_year, $tgl_cetak, $reminder_no, $tgl_batas_bayar, $tipe_sp);
         return $data;
     }
     public function getPreviewDataSP($fin_year, $fin_month, $reminder_no, $tgl_cetak, $tgl_batas_bayar, $tipe_sp, $ass)
