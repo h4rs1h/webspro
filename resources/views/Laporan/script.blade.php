@@ -117,7 +117,7 @@
             console.log("Tahun: " + tahun + ", Bulan: " + bulan, ", tanggal: " +
                 tanggal); // Cek nilai yang dikirim
             table.ajax.url("{{ route('filter.laporan') }}?tahun=" + tahun + "&bulan=" + bulan +
-                "&tanggal=" + today).load();
+                "&tanggal=" + tanggal).load();
             $('#tabel_inv_billing').show();
 
             $('#modal-filter').modal('hide'); // Tutup modal setelah submit
