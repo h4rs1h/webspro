@@ -115,7 +115,7 @@
             var tahun = today.getFullYear();
 
             console.log("Tahun: " + tahun + ", Bulan: " + bulan, ", tanggal: " +
-                today); // Cek nilai yang dikirim
+                tanggal); // Cek nilai yang dikirim
             table.ajax.url("{{ route('filter.laporan') }}?tahun=" + tahun + "&bulan=" + bulan +
                 "&tanggal=" + today).load();
             $('#tabel_inv_billing').show();

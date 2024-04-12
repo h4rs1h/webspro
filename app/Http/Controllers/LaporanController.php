@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\LaporanModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,10 +57,12 @@ class LaporanController extends Controller
         $bulan = $request->bulan;
         $tahun = $request->tahun;
         // dd($bulan, $tahun);
+        $now = Carbon::now();
+
         $data = new LaporanModel;
 
         if (isset($request->tanggal) && $request->tanggal != null) {
-            $today = $request->tanggal;
+            $today = $now;
         } else {
             $today = null;
         }
