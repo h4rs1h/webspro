@@ -27,6 +27,7 @@ class LaporanModel extends Model
                 ->where('fin_year', $tahun)
                 ->get();
         }
+        dd($data);
         return $data;
     }
 }
