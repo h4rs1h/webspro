@@ -110,8 +110,8 @@
             // var tahun = $('#fin_year').val();
             // var bulan = $('#fin_month').val();
             var today = new Date(); // Mendapatkan tanggal hari ini
-            var tanggal = today.getDate();
-            var bulan = today.getMonth() + 1; // Ingat, bulan dimulai dari 0
+            var tanggal = String(today.getDate()).padStart(2, '0');
+            var bulan = String(today.getMonth() + 1).padStart(2, '0'); // Ingat, bulan dimulai dari 0
             var tahun = today.getFullYear();
 
             console.log("Tahun: " + tahun + ", Bulan: " + bulan, ", tanggal: " +

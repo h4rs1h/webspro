@@ -17,7 +17,7 @@ class LaporanModel extends Model
                 // ->select('vsummaryoutbox.*')
                 ->where('fin_month', $bulan)
                 ->where('fin_year', $tahun)
-                ->where('tgl_kirim', $today)
+                ->where('tgl_kirim', $tahun . '-' . $bulan . '-' . $today)
                 ->get();
         } else {
 
@@ -27,7 +27,7 @@ class LaporanModel extends Model
                 ->where('fin_year', $tahun)
                 ->get();
         }
-        dd($data);
+        dd($data, $bulan, $tahun, $today);
         return $data;
     }
 }

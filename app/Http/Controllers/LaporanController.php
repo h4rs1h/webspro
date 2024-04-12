@@ -62,7 +62,7 @@ class LaporanController extends Controller
         $data = new LaporanModel;
 
         if (isset($request->tanggal) && $request->tanggal != null) {
-            $today = $now;
+            $today = $request->tanggal;
         } else {
             $today = null;
         }
