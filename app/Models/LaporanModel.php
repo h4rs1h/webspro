@@ -12,22 +12,14 @@ class LaporanModel extends Model
 
     function getsumaryoutbox($bulan, $tahun, $today)
     {
-        if ($today != null) {
-            $data = DB::table('vsummaryoutbox2')
-                // ->select('vsummaryoutbox.*')
-                ->where('fin_month', $bulan)
-                ->where('fin_year', $tahun)
-                ->where('tgl_kirim', $tahun . '-' . $bulan . '-' . $today)
-                ->get();
-        } else {
 
-            $data = DB::table('vsummaryoutbox2')
-                // ->select('vsummaryoutbox.*')
-                ->where('fin_month', $bulan)
-                ->where('fin_year', $tahun)
-                ->get();
-        }
-        dd($data, $bulan, $tahun, $today);
+        $data = DB::table('vsummaryoutbox2')
+            // ->select('vsummaryoutbox.*')
+            ->where('fin_month', $bulan)
+            ->where('fin_year', $tahun)
+            ->get();
+
+
         return $data;
     }
 }
