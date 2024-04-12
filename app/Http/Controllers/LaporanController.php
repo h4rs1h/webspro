@@ -56,9 +56,16 @@ class LaporanController extends Controller
         $bulan = $request->bulan;
         $tahun = $request->tahun;
         // dd($bulan, $tahun);
-
         $data = new LaporanModel;
-        $invoices = $data->getsumaryoutbox($bulan, $tahun);
+
+        if (isset($request->tanggal) && $request->tanggal != null) {
+            $today = $request->tanggal;
+        } else {
+            $today = null;
+        }
+
+        $invoices = $data->getsumaryoutbox($bulan, $tahun, $today);
+
 
         return DataTables::of($invoices)->make(true);
     }

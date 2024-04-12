@@ -106,6 +106,22 @@
 
             $('#modal-filter').modal('hide'); // Tutup modal setelah submit
         });
+        $('#btn-filter-today').click(function() {
+            // var tahun = $('#fin_year').val();
+            // var bulan = $('#fin_month').val();
+            var today = new Date(); // Mendapatkan tanggal hari ini
+            var tanggal = today.getDate();
+            var bulan = today.getMonth() + 1; // Ingat, bulan dimulai dari 0
+            var tahun = today.getFullYear();
+
+            console.log("Tahun: " + tahun + ", Bulan: " + bulan, ", tanggal: " +
+            tanggal); // Cek nilai yang dikirim
+            table.ajax.url("{{ route('filter.laporan') }}?tahun=" + tahun + "&bulan=" + bulan +
+                "&tanggal=" + tanggal).load();
+            $('#tabel_inv_billing').show();
+
+            $('#modal-filter').modal('hide'); // Tutup modal setelah submit
+        });
         // btn import
         // Menangani klik tombol-tombol aksi (print, export, pdf)
         $('#printBtn').click(function() {

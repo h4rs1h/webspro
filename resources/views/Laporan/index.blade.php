@@ -25,10 +25,8 @@
                             Filter Laporan Detail
                         </button>
 
+
                         {{--
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-import2">
-                            Import Data Reminder Invoice
-                        </button>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-proses">
                             Proses Blast Invoice
                         </button> --}}

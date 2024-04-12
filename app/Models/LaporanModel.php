@@ -10,13 +10,23 @@ class LaporanModel extends Model
 {
     use HasFactory;
 
-    function getsumaryoutbox($bulan, $tahun)
+    function getsumaryoutbox($bulan, $tahun, $today)
     {
-        $data = DB::table('vsummaryoutbox2')
-            // ->select('vsummaryoutbox.*')
-            ->where('fin_month', $bulan)
-            ->where('fin_year', $tahun)
-            ->get();
+        if ($today != null) {
+            $data = DB::table('vsummaryoutbox2')
+                // ->select('vsummaryoutbox.*')
+                ->where('fin_month', $bulan)
+                ->where('fin_year', $tahun)
+                ->where('tgl_kirim', $today)
+                ->get();
+        } else {
+
+            $data = DB::table('vsummaryoutbox2')
+                // ->select('vsummaryoutbox.*')
+                ->where('fin_month', $bulan)
+                ->where('fin_year', $tahun)
+                ->get();
+        }
         return $data;
     }
 }
