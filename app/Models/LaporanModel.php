@@ -10,7 +10,7 @@ class LaporanModel extends Model
 {
     use HasFactory;
 
-    function getsumaryoutbox($bulan, $tahun, $today)
+    function getsumaryoutbox($bulan, $tahun)
     {
 
         $data = DB::table('vsummaryoutbox2')
