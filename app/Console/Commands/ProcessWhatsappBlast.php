@@ -50,6 +50,6 @@ class ProcessWhatsappBlast extends Command
     {
         // Tulis logika untuk menghentikan proses di sini
         // Misalnya, panggil perintah shell untuk menghentikan proses
-        exec('killall -9 whatsappblast'); // Ganti process_name dengan nama proses yang ingin Anda hentikan
+        exec('killall -9 whatsapp:process'); // Ganti process_name dengan nama proses yang ingin Anda hentikan
     }
 }
