@@ -1,6 +1,6 @@
 <div class="modal-dialog">
     <div class="modal-content">
-        <form id="import_form_outstanding">
+        <form id="import_form_outstanding" method="POST">
             {{-- @csrf --}}
             <div class="modal-header">
                 <h4 class="modal-title">Form Import Data Reminder Invoice</h4>

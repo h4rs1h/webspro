@@ -27,4 +27,28 @@ class InvoiceOutstanding extends Model
         'tung_asuransi',
         'filename',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($invoice) {
+            // Memeriksa apakah business_id sudah ada dalam database
+            $existingInvoice = static::where('fin_month', $invoice->fin_month)
+                ->where('fin_year', $invoice->fin_year)
+                ->where('debtor_acct', $invoice->debtor_acct)
+                ->where('reminder_no', $invoice->reminder_no)
+
+                ->first();
+
+            // Jika business_id sudah ada
+            if ($existingInvoice) {
+                // Memperbarui data yang sudah ada
+                // $existingOwnership->update($ownership->toArray());
+                $existingInvoice->delete();
+                // Hentikan proses penyimpanan
+                //  return false;
+            }
+        });
+    }
 }

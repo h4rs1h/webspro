@@ -138,22 +138,35 @@
         $('#btn_upload_outstanding').click(function(e) {
             e.preventDefault();
 
+            // Ambil nilai input
+            var fin_month = $('#fin_month2').val();
+            var fin_year = $('#fin_year2').val();
+            var reminder_no = $('#reminder_no').val();
+            var file = $('#file_outstanding')[0].files[0];
+
+            // Lakukan pengecekan input
+            if (!fin_month || !fin_year || !reminder_no || !file) {
+                alert('Harap isi semua field!');
+                return; // Berhenti jika ada field yang kosong
+            }
+
+            // Buat objek FormData dan tambahkan data
             var formData = new FormData();
-            formData.append('fin_month', $('#fin_month2').val());
-            formData.append('fin_year', $('#fin_year2').val());
-            formData.append('reminder_no', $('#reminder_no').val());
-            formData.append('file', $('#file_outstanding')[0].files[0]);
+            formData.append('fin_month', fin_month);
+            formData.append('fin_year', fin_year);
+            formData.append('reminder_no', reminder_no);
+            formData.append('file', file);
 
             // Debug: Cetak nilai-nilai formData di konsol
             console.log("FormData Content:");
-            console.log("fin_month:", formData.get('fin_month'));
-            console.log("fin_year:", formData.get('fin_year'));
-            console.log("reminder_no:", formData.get('reminder_no'));
-            console.log("file:", formData.get('file'));
+            console.log("fin_month:", fin_month);
+            console.log("fin_year:", fin_year);
+            console.log("reminder_no:", reminder_no);
+            console.log("file:", file);
 
             $.ajax({
-                url: '/billing/import-invoices-outstanding',
-                type: 'POST',
+                url: "{{ route('billing.invoice-import-outstanding') }}",
+                method: "POST", // Menggunakan method: 'POST'
                 data: formData,
                 contentType: false,
                 processData: false,

@@ -56,7 +56,8 @@ class LaporanController extends Controller
         // dd($request->all());
         $bulan = $request->bulan;
         $tahun = $request->tahun;
-
+        $now = Carbon::now();
+        dd($now->format('Y-m-d'));
         $data = new LaporanModel;
 
 

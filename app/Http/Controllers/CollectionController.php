@@ -124,6 +124,7 @@ class CollectionController extends Controller
         $tipe_sp = $request->tipe_sp;
 
         $now = Carbon::now();
+
         $null = 'null';
         $status = 'Prosess';
         $tipe = 'SP' . $reminder_no;

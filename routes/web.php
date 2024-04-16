@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/rere1', 'rere1')->middleware('userAkses:4');
         Route::get('/rere2', 'rere2')->middleware('userAkses:5');
         Route::get('/outbox', 'antrian_outbox')->name('outbox');
-        Route::get('/outbox/json', 'json_outbox')->name('filter.outbox');;
+        Route::get('/outbox/json', 'json_outbox')->name('filter.outbox');
         // Route::get('/import-ownership', 'ownershipimport')->middleware('userAkses:1');
         // Route::post('/import-ownership', 'import_proses_ownership')->name('admin.import-proses');
     });
