@@ -19,8 +19,8 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- ChartJS -->
 {{-- <script src="{{ asset('AdminLTE/plugins/chart.js/Chart.min.js') }}"></script> --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"
-    integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw=="
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
+    integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- Sparkline -->
 {{-- <script src="{{ asset('AdminLTE/plugins/sparklines/sparkline.js') }}"></script> --}}
@@ -33,10 +33,10 @@
 <!-- jQuery Knob Chart -->
 {{-- <script src="{{ asset('AdminLTE/plugins/jquery-knob/jquery.knob.min.js') }}"></script> --}}
 <!-- daterangepicker -->
-{{-- <script src="{{ asset('AdminLTE/plugins/moment/moment.min.js') }}"></script> --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"
+<script src="{{ asset('AdminLTE/plugins/moment/moment.min.js') }}"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"
     integrity="sha512-hUhvpC5f8cgc04OZb55j0KNGh4eh7dLxd/dPSJ5VyzqDWxsayYbojWyl5Tkcgrmb/RVKCRJI1jNlRbVP4WWC4w=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 {{-- <script src="{{ asset('AdminLTE/plugins/daterangepicker/daterangepicker.js') }}"></script> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.js"
     integrity="sha512-W76C8qrNYavcaycIH9EijxRuswoS+LCqA1+hq+ECrmjzAbe/SHhTgrwA1uc84husS/Gz50mxOEHPzrcd3sxBqQ=="
@@ -71,8 +71,8 @@
     integrity="sha512-OQlawZneA7zzfI6B1n1tjUuo3C5mtYuAWpQdg+iI9mkDoo7iFzTqnQHf+K5ThOWNJ9AbXL4+ZDwH7ykySPQc+A=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {{-- <script src="{{ asset('AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script> --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-responsive/3.0.2/dataTables.responsive.min.js"
-    integrity="sha512-hnZiCVOs9PjUEJwieRTgT4IkBVRHV709UeN8/muPdDdP1RkjMoqnm69D4q6GCgdaRjdephZr7gHII1l77mrYlg=="
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-responsive/2.2.9/dataTables.responsive.min.js"
+    integrity="sha512-4knl+8+KWBNyMb27V1fosX42eCyJFH383Sus6gnxuqzwmQpiLpyBJyuC17RRwLd5X6cmVUQeT5lOkVXbwajvCA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {{-- <script src="{{ asset('AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-responsive-bs4/3.0.2/responsive.bootstrap4.min.js"
