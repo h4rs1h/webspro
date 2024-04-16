@@ -30,14 +30,18 @@ class ProcessWhatsappBlast extends Command
     public function handle()
     {
         $processRunning = $this->checkProcessStatus();
+        $jobCount = DB::table('jobs')->count();
 
         if ($processRunning) {
-            $this->info('WhatsApp Blast process is already running. Exiting...');
-            return;
+            if ($jobCount == 0) {
+                $this->stopProcess();
+            } else {
+                $this->info('WhatsApp Blast process is already running. Exiting...');
+                return;
+            }
         }
 
 
-        $jobCount = DB::table('jobs')->count();
 
         if ($jobCount > 0) {
             $this->info('Processing WhatsApp Blast jobs...');
