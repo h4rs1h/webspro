@@ -29,14 +29,24 @@ class ProcessWhatsappBlast extends Command
      */
     public function handle()
     {
-        $job = DB::table('jobs')->count();
-        if ($job == 0) {
-            $this->stopProcess();
-            $this->info('Tidak ada pekerjaan dalam antrian.');
-        } else {
-            $this->info('Pekerjaan dalam antrian sedang diproses.');
-            $this->call('queue:work', ['--queue' => 'whatsappblast']);
+        $processRunning = $this->checkProcessStatus();
+
+        if ($processRunning) {
+            $this->info('WhatsApp Blast process is already running. Exiting...');
+            return;
         }
+
+
+        $jobCount = DB::table('jobs')->count();
+
+        if ($jobCount > 0) {
+            $this->info('Processing WhatsApp Blast jobs...');
+            $this->call('queue:work', ['--queue' => 'whatsappblast']);
+        } else {
+            $this->info('No WhatsApp Blast jobs in the queue. Stopping process...');
+            $this->stopProcess();
+        }
+
         // if (Queue::size('whatsappblast') == 0) {
         //     // Tidak ada pekerjaan dalam antrian, tampilkan pesan
         //     $this->info('Tidak ada pekerjaan dalam antrian.');
@@ -46,6 +56,19 @@ class ProcessWhatsappBlast extends Command
         //     $this->call('queue:work', ['--queue' => 'whatsappblast']);
         // }
     }
+    protected function checkProcessStatus()
+    {
+        // Tulis logika untuk memeriksa status proses WhatsApp Blast di sini
+        // Anda dapat menggunakan perintah shell 'ps' untuk memeriksa proses yang sedang berjalan
+        // Misalnya, gunakan perintah 'ps aux | grep "whatsapp:process"' dan periksa hasilnya
+        $output = shell_exec('ps aux | grep "whatsapp:process"');
+        $processCount = substr_count($output, 'whatsapp:process');
+
+        // Jika jumlah proses lebih dari 1, proses berjalan
+        return $processCount > 1;
+    }
+
+
     protected function stopProcess()
     {
         // Tulis logika untuk menghentikan proses di sini
