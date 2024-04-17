@@ -103,7 +103,18 @@ class AdminController extends Controller
         if ($request->antrian == 'yes') {
             $data = DB::table('outboxs')
                 ->leftJoin('ownerships', 'outboxs.debtor_acct', '=', 'ownerships.business_id')
-                ->select(['fin_month', 'fin_year', 'debtor_acct', 'name', 'tglkirim', 'wa', 'pesan', 'tipe', 'status', 'job'])
+                ->select([
+                    'fin_month',
+                    'fin_year',
+                    'debtor_acct',
+                    'name',
+                    'tglkirim',
+                    'wa',
+                    DB::raw('LEFT(pesan, 100) as pesan'), // Mengambil 100 karakter pertama dari kolom 'pesan'
+                    'tipe',
+                    'status',
+                    'job'
+                ])
                 ->whereNull('tglsending')
                 ->wherenotNull('job')
                 ->get();
@@ -111,7 +122,18 @@ class AdminController extends Controller
 
             $data = DB::table('outboxs')
                 ->leftJoin('ownerships', 'outboxs.debtor_acct', '=', 'ownerships.business_id')
-                ->select(['fin_month', 'fin_year', 'debtor_acct', 'name', 'tglkirim', 'wa', 'pesan', 'tipe', 'status', 'job'])
+                ->select([
+                    'fin_month',
+                    'fin_year',
+                    'debtor_acct',
+                    'name',
+                    'tglkirim',
+                    'wa',
+                    DB::raw('LEFT(pesan, 100) as pesan'), // Mengambil 100 karakter pertama dari kolom 'pesan'
+                    'tipe',
+                    'status',
+                    'job'
+                ])
                 ->whereNull('tglsending')
                 ->whereNull('job')
                 ->get();
