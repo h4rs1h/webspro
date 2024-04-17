@@ -69,7 +69,7 @@ class ProcessWhatsappBlast extends Command
         $processCount = substr_count($output, 'whatsapp:process');
 
         // Jika jumlah proses lebih dari 1, proses berjalan
-        return $processCount > 1;
+        return $processCount > 0;
     }
 
 
