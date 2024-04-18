@@ -56,13 +56,17 @@ class LaporanController extends Controller
         // dd($request->all());
         $bulan = $request->bulan;
         $tahun = $request->tahun;
-        $now = Carbon::now();
-        dd($now->format('Y-m-d'));
         $data = new LaporanModel;
 
-
-        $invoices = $data->getsumaryoutbox($bulan, $tahun);
-
+        if (isset($request->filter) && $request->filter != null) {
+            // $ass = $request->filter;
+            $now = Carbon::now();
+            $today = $now->format('Y-m-d');
+            dd($now->format('Y-m-d'));
+            $invoices = $data->getsumarytoday($today);
+        } else {
+            $invoices = $data->getsumaryoutbox($bulan, $tahun);
+        }
 
         return DataTables::of($invoices)->make(true);
     }

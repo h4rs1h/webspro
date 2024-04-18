@@ -107,17 +107,11 @@
             $('#modal-filter').modal('hide'); // Tutup modal setelah submit
         });
         $('#btn-filter-today').click(function() {
-            // var tahun = $('#fin_year').val();
-            // var bulan = $('#fin_month').val();
-            var today = new Date(); // Mendapatkan tanggal hari ini
-            var tanggal = String(today.getDate()).padStart(2, '0');
-            var bulan = String(today.getMonth() + 1).padStart(2, '0'); // Ingat, bulan dimulai dari 0
-            var tahun = today.getFullYear();
 
-            console.log("Tahun: " + tahun + ", Bulan: " + bulan, ", tanggal: " +
-                tanggal); // Cek nilai yang dikirim
-            table.ajax.url("{{ route('filter.laporan') }}?tahun=" + tahun + "&bulan=" + bulan +
-                "&tanggal=" + tanggal).load();
+
+            console.log("filter=today");
+
+            table.ajax.url("{{ route('filter.laporan') }}?filter=today").load();
             $('#tabel_inv_billing').show();
 
             $('#modal-filter').modal('hide'); // Tutup modal setelah submit

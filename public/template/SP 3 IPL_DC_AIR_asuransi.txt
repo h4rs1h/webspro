@@ -1,0 +1,52 @@
+Jakarta, [Tanggal].
+
+Kepada Yth.
+Bapak/Ibu
+Pemilik Unit [UnitID]
+Apartemen Puri Parkview
+Di Tempat.
+
+*Perihal: [REMINDER] Surat Peringatan ke - [reminder_no] Mengenai Kewajiban Pembayaran Tagihan yang Tertunggak (IPL / DC / AIR + ASURANSI).*
+
+
+Dengan hormat,
+
+Melalui _WhatsApp Blast_ ini kami informasikan bahwa Bapak/Ibu masih mempunyai kewajiban pembayaran yang tertunggak sebagai berikut:
+
+- Tagihan bulan *[blntempo]* sebesar Rp [Tunggakan],- ;
+
+- Tagihan *SEBELUM* bulan [blntempo] sebesar Rp [TunggakanLalu],- .
+
+*Total Tunggakan Tagihan yang Harus Dibayarkan Segera menjadi Rp [TotalTagihan],-*.
+
+_Kami telah mengirimkan Surat Peringatan ke - [reminder_no] Mengenai Kewajiban Pembayaran Tagihan yang Tertunggak dan Surat Pemberitahuan Mengenai Kewajiban Pembayaran Tagihan Asuransi yang Tertunggak ke Unit dan ke alamat Bapak/Ibu *(download link Dokumen Rapat Mediasi di SDPRKP (Surat Undangan, Notulensi Rapat dan Dokumentasi) kembali kami lampirkan dalam pesan ini)*, mohon dapat segera diperiksa dan dipelajari._
+
+*Sesuai dengan buku PERATURAN DAN TATA TERTIB PENGELOLAAN/KEPENGHUNIAN APARTEMEN PURI PARKVIEW - "TATIB APARTEMEN" / "HOUSE RULE" (_download link_ terlampir dalam pesan ini):*
+
+*1. Pasal 5.6. dan Pasal 7.2.3. (Poin 1):*
+Tagihan-tagihan IPL, DC dan Air jatuh tempo tanggal 20 tiap bulannya dan tagihan Asuransi jatuh tempo sesuai dengan tanggal yang tertera di _invoice_. Bilamana telah melewati batas waktu pembayaran maka kami akan mengenakan Denda Keterlambatan Pembayaran sebesar 1/1000 (satu per mil) per hari dan _*Denda Keterlambatan tersebut akan terus berjalan selama tunggakan tagihan yang dimaksud belum dibayarkan*_.
+
+*2. Sesuai dengan ketentuan Pasal 7.2.3. (Poin 3), yang berbunyi "Sanksi tidak diberikan pelayanan oleh Badan Pengelola":*
+Dikarenakan Bapak/Ibu _*belum*_ juga melakukan (dan menyelesaikan) pembayaran atas tunggakan _tertentu_ tersebut di atas, maka Bapak/Ibu secara sistem (sementara), *saat ini*, sudah *tidak* dapat memperpanjang parkir berlangganan dan *tidak* dapat membeli _voucher_/_token_ listrik atas Unit Bapak/Ibu sampai dengan tunggakan _tertentu_ di atas diselesaikan terlebih dahulu;
+
+*3. Sesuai dengan ketentuan Pasal 5.6. dan Pasal 7.2.3. (Poin 2):*
+Apabila Bapak/Ibu masih belum juga melakukan pembayaran atas tunggakan _tertentu_ di atas *_paling lambat tanggal [tgl_batas_bayar]_*, maka, dengan sangat menyesal, pada *_tanggal [tgl_batas_bayar2]_, _kami akan melakukan pemutusan listrik / air / access card dan pelayanan lainnya atas Unit Bapak/Ibu_*. Apabila Bapak/Ibu ingin aktivasi pelayanan kembali harap melakukan pembayaran yang tertunggak _tertentu_ tersebut di atas dan biaya aktivasi sebesar Rp 2.000.000,- (dua juta rupiah) yang berlaku 60 (enam puluh) hari kalender sejak tanggal batas maksimal yang akan kami sampaikan di atas. Jika sampai dengan hari ke - 61 (enam puluh satu) kami belum juga menerima pembayaran, maka biaya aktivasi tersebut akan bertambah secara akumulatif sebesar Rp 500.000,- (lima ratus ribu rupih) per bulan sampai dengan penyelesaian pembayaran tunggakan, biaya aktivasi dan tagihan lainnya kami terima seluruhnya.
+
+Silahkan melakukan pembayaran secara langsung ke bagian Kasir Badan Pengelola atau melalui _transfer bank_ dengan No. _Virtual Account_ BCA: [Va], atas nama: [VaNama].
+
+Untuk keterangan lebih lanjut mengenai isi dari _WhatsApp Blast REMINDER ini (terutama bila ada selisih nilai penagihan), Bapak/Ibu dapat menghubungi Staff _Collection_ Apartemen Puri Parkview di nomor (021) 5890 0142 hari Senin s/d hari Jumat, pukul 09.00 - 17.00 WIB dan hari Sabtu pukul 09.00 - 15.00 WIB.
+
+Demikian kami sampaikan. *Mohon abaikan _WA Blast_ ini apabila Bapak/Ibu sudah bayar dan mohon Bapak/Ibu segera kirimkan bukti bayar tersebut kepada kami*.
+
+
+Hormat kami,
+
+Collection
+Apartemen Puri Parkview
+
+
+_*LAMPIRAN PESAN (DOWNLOAD LINK):*_
+
+1). Dokumen Rapat Mediasi di SDPRKP (Surat Undangan, Notulensi Rapat dan Dokumentasi): https://bit.ly/DokRapatdiSDPRKPTgl29Feb24
+
+2). Buku PERATURAN DAN TATA TERTIB PENGELOLAAN/KEPENGHUNIAN APARTEMEN PURI PARKVIEW - “TATIB APARTEMEN”/“HOUSE RULE”: https://bit.ly/PeraturanTatibHouseruleAptPPV

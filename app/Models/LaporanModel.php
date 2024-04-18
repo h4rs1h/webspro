@@ -22,4 +22,17 @@ class LaporanModel extends Model
 
         return $data;
     }
+
+    function getsumarytoday($today)
+    {
+
+        $data = DB::table('vsummaryoutbox2')
+            // ->select('vsummaryoutbox.*')
+            ->where('tgl_cetak', $today)
+            // ->where('fin_year', $tahun)
+            ->get();
+
+
+        return $data;
+    }
 }
