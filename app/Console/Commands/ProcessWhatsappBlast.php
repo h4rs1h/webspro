@@ -33,12 +33,12 @@ class ProcessWhatsappBlast extends Command
         $jobCount = DB::table('jobs')->count();
 
         if ($processRunning) {
-            if ($jobCount == 0) {
-                $this->stopProcess();
-            } else {
-                $this->info('WhatsApp Blast process is already running. Exiting...');
-                return;
-            }
+            // if ($jobCount == 0) {
+            //     $this->stopProcess();
+            // } else {
+            $this->info('WhatsApp Blast process is already running. Exiting...');
+            return;
+            // }
         }
 
 
