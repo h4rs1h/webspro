@@ -21,7 +21,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // Menjalankan perintah queue:work setiap menit
-        $schedule->command('whatsapp:process --max-time=300')->everyMinute()->withoutOverlapping();
+        $schedule->command('whatsapp:process')->everyMinute()->withoutOverlapping();
         // $schedule->command('inspire')->hourly();
     }
 
