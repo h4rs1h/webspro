@@ -36,7 +36,7 @@ class ProcessWhatsappBlast extends Command
             // if ($jobCount == 0) {
             //     $this->stopProcess();
             // } else {
-            $this->info('WhatsApp Blast process is already running. Exiting...');
+            $this->info('WhatsApp masih jalan, Blast process is already running. Exiting...');
             return;
             // }
         }
@@ -77,6 +77,8 @@ class ProcessWhatsappBlast extends Command
     {
         // Tulis logika untuk menghentikan proses di sini
         // Misalnya, panggil perintah shell untuk menghentikan proses
-        exec('killall -9 whatsapp:process'); // Ganti process_name dengan nama proses yang ingin Anda hentikan
+        exec('pkill -f whatsapp:process');
+
+        // exec('kill all -9 whatsapp:process'); // Ganti process_name dengan nama proses yang ingin Anda hentikan
     }
 }
