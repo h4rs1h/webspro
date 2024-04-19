@@ -28,7 +28,7 @@ class LaporanModel extends Model
 
         $data = DB::table('vsummaryoutbox2')
             // ->select('vsummaryoutbox.*')
-            ->where('tgl_cetak', $today)
+            ->where('tgl_kirim', $today)
             // ->where('fin_year', $tahun)
             ->get();
 

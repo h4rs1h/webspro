@@ -7,7 +7,7 @@
                 // "info": true,
                 // "autoWidth": false,
                 "responsive": true,
-                "buttons": ["csv", "excel", "pdf", "print"],
+                // "buttons": ["csv", "excel", "pdf", "print"],
                 "ajax": "{{ route('filter.laporan') }}",
                 "columns": [
                     // Sesuaikan dengan kolom tabel Anda
@@ -112,6 +112,7 @@
             console.log("filter=today");
 
             table.ajax.url("{{ route('filter.laporan') }}?filter=today").load();
+
             $('#tabel_inv_billing').show();
 
             $('#modal-filter').modal('hide'); // Tutup modal setelah submit
