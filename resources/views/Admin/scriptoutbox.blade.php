@@ -49,8 +49,27 @@
 
         // Event listener untuk tombol btn_data_antrian
         $('#btn_data_antrian').click(function() {
+            $('#total_outbox').hide();
+            $('#tabel_outbox').show();
             $('#tabel_outbox tbody').empty();
             loadTableWithParam();
+        });
+        $('#btn_monitor_antrian').click(function() {
+
+            $('#tabel_outbox').hide();
+            $.ajax({
+                url: '/outbox/json-antrian', // Sesuaikan dengan rute Anda
+                type: 'GET',
+                success: function(response) {
+                    // console.response.total;
+                    $('#total_outbox').text('Total Outbox: ' + response.total)
+                        .show();
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.error('Error:', errorThrown);
+                }
+            });
+
         });
         $('#btn_proses_job').click(function() {
             $.ajax({

@@ -95,6 +95,14 @@ class AdminController extends Controller
             'javascript' => 'Admin.scriptoutbox',
         ]);
     }
+    function json_outbox_antrian()
+    {
+        $data = DB::table('jobs')->count();
+        // dd($data);
+        $total = $data;
+        // $this->yourModel->getTotalOutboxCount(); // Panggil metode yang menghitung total jumlah baris
+        return response()->json(['total' => $total]);
+    }
     function json_outbox(Request $request)
     {
 

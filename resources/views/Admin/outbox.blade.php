@@ -21,6 +21,9 @@
                         <button type="button" class="btn btn-primary" id="btn_data_antrian">
                             Data Antrian
                         </button>
+                        <button type="button" class="btn btn-primary" id="btn_monitor_antrian">
+                            Monitoring Antrian
+                        </button>
                         <button type="button" class="btn btn-primary" id="btn_proses_job">
                             Proses Daftar Antrian
                         </button>
@@ -35,6 +38,7 @@
                         <h3>{{ $title }}</h3>
 
                     </div>
+                    <div class="card-body" id="total_outbox" style="display: none;"></div>
                     <div class="card-body" id="tabel_outbox">
                         <table id="outbox" class="table table-bordered table-hover">
                             <thead>
@@ -51,6 +55,7 @@
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
         </div>
