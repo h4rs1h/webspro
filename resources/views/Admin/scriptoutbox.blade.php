@@ -61,7 +61,7 @@
                 url: '/outbox/json-antrian', // Sesuaikan dengan rute Anda
                 type: 'GET',
                 success: function(response) {
-                    console.response.total;
+                    // console(response.total);
                     $('#total_outbox').text('Total Outbox: ' + response.total)
                         .show();
                 },
