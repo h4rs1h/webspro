@@ -19,7 +19,7 @@ Melalui _WhatsApp Blast_ ini kami informasikan bahwa Bapak/Ibu masih mempunyai k
 
 *Total Tunggakan Tagihan yang Harus Dibayarkan Segera menjadi Rp [TotalTagihan],-*.
 
-Kami telah / akan segera mengirimkan Surat Peringatan ke - [reminder_no] Mengenai Kewajiban Pembayaran Tagihan yang Tertunggak ke Unit Bapak/Ibu.
+Kami telah mengirimkan Surat Peringatan ke - [reminder_no] Mengenai Kewajiban Pembayaran Tagihan yang Tertunggak (tertanggal 21 [blntempo]) ke Unit Bapak/Ibu.
 
 *Sesuai dengan buku PERATURAN DAN TATA TERTIB PENGELOLAAN/KEPENGHUNIAN APARTEMEN PURI PARKVIEW - "TATIB APARTEMEN" / "HOUSE RULE" (_download link_ terlampir dalam pesan ini):*
 
@@ -27,7 +27,10 @@ Kami telah / akan segera mengirimkan Surat Peringatan ke - [reminder_no] Mengena
 Kami informasikan kembali bahwa untuk tagihan-tagihan IPL, DC dan Air jatuh tempo tanggal 20 tiap bulannya dan tagihan PBB dan Asuransi jatuh tempo sesuai dengan tanggal yang tertera di _invoice_. Bilamana telah melewati batas waktu pembayaran maka, dengan sangat menyesal, kami akan mengenakan Denda Keterlambatan Pembayaran sebesar 1/1000 (satu per mil) per hari dan _*Denda Keterlambatan tersebut akan terus berjalan selama tunggakan tagihan yang dimaksud belum dibayarkan*_.
 
 *2. Sesuai dengan ketentuan Pasal 7.2.3. (Poin 3) yang berbunyi "Sanksi tidak diberikan pelayanan oleh Badan Pengelola":*
-Maka kami informasikan juga bahwa, apabila Bapak/Ibu _*belum*_ juga melakukan (dan menyelesaikan) pembayaran atas tunggakan _tertentu_ tersebut di atas, maka Bapak/Ibu secara sistem (sementara), *per tanggal [tgl_batas_bayar]*, tidak dapat memperpanjang parkir berlangganan dan tidak dapat membeli _voucher_/_token_ listrik atas Unit Bapak/Ibu sampai dengan tunggakan _tertentu_ di atas diselesaikan terlebih dahulu;
+Perlu kami informasikan juga bahwa, dikarenakan Bapak/Ibu *_belum_* juga melakukan (dan menyelesaikan) pembayaran atas tunggakan _tertentu_ tersebut di atas, maka, secara sistem (sementara), *sejak tanggal 21 [blntempo]*, Bapak/Ibu sudah *tidak* dapat memperpanjang parkir berlangganan dan *tidak* dapat membeli _voucher_/_token_ listrik atas Unit Bapak/Ibu sampai dengan tunggakan _tertentu_ di atas diselesaikan terlebih dahulu;
+
+*3. Sesuai dengan ketentuan Pasal 5.6. dan Pasal 7.2.3. (Poin 2):*
+Apabila sampai dengan tanggal batas maksimal Bapak/Ibu masih belum juga melakukan pembayaran atas tunggakan _tertentu_ di atas, maka dengan sangat menyesal kami akan melakukan pemutusan listrik / air / _access card_ dan pelayanan lainnya atas Unit Bapak/Ibu. Apabila Bapak/Ibu ingin aktivasi pelayanan kembali harap melakukan pembayaran yang tertunggak _tertentu_ tersebut di atas dan biaya aktivasi sebesar Rp 2.000.000,- (dua juta rupiah) yang berlaku 60 (enam puluh) hari kalender sejak tanggal batas maksimal yang akan kami sampaikan di atas. Jika sampai dengan hari ke - 61 (enam puluh satu) kami belum juga menerima pembayaran, maka biaya aktivasi tersebut akan bertambah sebesar Rp 500.000.- (lima ratus ribu rupiah) dan akan terus bertambah setiap 30 (tiga puluh) hari kalender yang dihitung secara akumulatif sampai dengan penyelesaian pembayaran tunggakan, biaya aktivasi dan tagihan lainnya kami terima seluruhnya.
 
 Silahkan melakukan pembayaran secara langsung ke bagian Kasir Badan Pengelola atau melalui _transfer bank_ dengan No. _Virtual Account_ BCA: [Va], atas nama:  [VaNama].
 

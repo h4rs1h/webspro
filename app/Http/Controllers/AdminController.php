@@ -80,14 +80,27 @@ class AdminController extends Controller
     function antrian_outbox()
     {
 
-        // $data = DB::table('outboxs')
-        //     ->leftJoin('ownerships', 'outboxs.debtor_acct', '=', 'ownerships.business_id')
-        //     ->select(['fin_month', 'fin_year', 'debtor_acct', 'name', 'tglkirim', 'wa', 'pesan', 'tipe', 'status', 'job'])
-        //     ->whereNull('tglsending')
-        //     ->wherenotNull('job')
-        //     ->count();
-        // $job = DB::table('jobs')->count();
+        $data_antrian = DB::table('outboxs')
+            ->leftJoin('ownerships', 'outboxs.debtor_acct', '=', 'ownerships.business_id')
+            ->select(['fin_month', 'fin_year', 'debtor_acct', 'name', 'tglkirim', 'wa', 'pesan', 'tipe', 'status', 'job'])
+            ->whereNull('tglsending')
+            ->wherenotNull('job')
+            ->count();
+        $job = DB::table('jobs')->count();
         // dd($data, $job);
+        if ($data_antrian > 0 && $job == 0) {
+
+            // $update_kolom_job = "Lakukan";
+            $upd = DB::table('outboxs')
+                ->whereNull('tglsending')
+                ->wherenotNull('job')
+                ->update(['job' => null]);
+        }
+        // else {
+        //     $update_kolom_job = "lewati";
+        //     // $upd = 0;
+        // }
+        // dd($update_kolom_job, $upd);
 
         return view('Admin.outbox', [
             'username' => Auth::user()->name,
