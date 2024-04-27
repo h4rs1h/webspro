@@ -13,7 +13,7 @@ class LaporanModel extends Model
     function getsumaryoutbox($bulan, $tahun)
     {
 
-        $data = DB::table('vsummaryoutbox2')
+        $data = DB::table('vsummaryoutbox')
             // ->select('vsummaryoutbox.*')
             ->where('fin_month', $bulan)
             ->where('fin_year', $tahun)
@@ -26,7 +26,7 @@ class LaporanModel extends Model
     function getsumarytoday($today)
     {
 
-        $data = DB::table('vsummaryoutbox2')
+        $data = DB::table('vsummaryoutbox')
             // ->select('vsummaryoutbox.*')
             ->where('tgl_kirim', $today)
             // ->where('fin_year', $tahun)
