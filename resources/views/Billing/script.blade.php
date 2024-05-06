@@ -11,6 +11,12 @@
                 "columns": [
                     // Sesuaikan dengan kolom tabel Anda
                     {
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
                         "data": "unitid",
                         "name": 'unitid'
                     },
@@ -59,6 +65,12 @@
                 "columns": [
                     // Sesuaikan dengan kolom tabel Anda
                     {
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
                         "data": "unitid",
                         "name": 'unitid'
                     },
@@ -81,6 +93,12 @@
         $('#modal-filter').on('show.bs.modal', function(e) {
             $('#fin_year').val('');
             $('#fin_month').val('');
+
+            $('.alert-danger').addClass('d-none');
+            $('.alert-danger').html('');
+
+            $('.alert-success').addClass('d-none');
+            $('.alert-success').html('');
         });
 
         $('#btn-filter').click(function() {
@@ -91,6 +109,14 @@
             $('#tabel_inv_billing').show();
             $('#tabel_inv_blast').hide();
             $('#modal-filter').modal('hide'); // Tutup modal setelah submit
+        });
+        $('#exampleInputEmail1').change(function() {
+
+            $('.alert-danger').addClass('d-none');
+            $('.alert-danger').html('');
+
+            $('.alert-success').addClass('d-none');
+            $('.alert-success').html('');
         });
         // btn import
         $('#btn_upload').click(function(e) {
@@ -108,29 +134,49 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function(data) {
-                    console.log(data);
-                    $('#modal-import').modal('hide');
-                    // Bersihkan form setelah upload berhasil
-                    $('form')[0].reset();
-                    // Refresh data atau tampilkan pesan sukses di sini
-                    // Tampilkan notifikasi
-                    $('#notification').removeClass('alert-danger').addClass('alert-success')
-                        .text(data.message).show();
+                success: function(response) {
+                    if (response.errors) {
+                        console.log(response.errors);
+                        $('.alert-success').addClass('d-none');
+                        $('.alert-danger').removeClass('d-none');
+                        $('.alert-danger').html("<ul>");
+                        $.each(response.errors, function(key, value) {
+                            $('.alert-danger').find('ul').append("<li>" + value +
+                                "</li>");
+                        });
+                        $('.alert-danger').append("</ul>");
+                    } else {
+                        $('.alert-danger').addClass('d-none');
+                        $('.alert-success').removeClass('d-none');
+                        $('.alert-success').html(response.success);
+                    }
+                    // console.log(data);
+                    // $('#modal-import').modal('hide');
+                    // // Bersihkan form setelah upload berhasil
+                    // $('form')[0].reset();
+                    // // Refresh data atau tampilkan pesan sukses di sini
+                    // // Tampilkan notifikasi
+                    // $('#notification').removeClass('alert-danger').addClass('alert-success')
+                    //     .text(data.message).show();
                 },
-                error: function(data) {
-                    console.log(data);
-                    // Handle error di sini
-                    // Tampilkan notifikasi error
-                    $('#notification').removeClass('alert-success').addClass('alert-danger')
-                        .text('Error uploading file. Please try again.').show();
-                }
+                // error: function(data) {
+                //     console.log(data);
+                //     // Handle error di sini
+                //     // Tampilkan notifikasi error
+                //     $('#notification').removeClass('alert-success').addClass('alert-danger')
+                //         .text('Error uploading file. Please try again.').show();
+                // }
             });
         });
 
         // Bersihkan isian file saat modal dibuka
         $('#modal-import').on('show.bs.modal', function(e) {
             $('#exampleInputEmail1').val('');
+            $('.alert-danger').addClass('d-none');
+            $('.alert-danger').html('');
+
+            $('.alert-success').addClass('d-none');
+            $('.alert-success').html('');
         });
 
         // btn upload outstanding

@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 use App\Imports\InvoiceOutstandingImport;
+use App\Jobs\ImportFile;
+use Illuminate\Support\Facades\Validator;
 
 class BillingController extends Controller
 {
@@ -73,7 +75,9 @@ class BillingController extends Controller
             // ->limit(10)
             ->get();
         // Mengembalikan data menggunakan DataTables
-        return DataTables::of($invoices)->make(true);
+        return DataTables::of($invoices)
+            ->addIndexColumn()
+            ->make(true);
     }
 
     function preview(Request $request)
@@ -122,7 +126,9 @@ class BillingController extends Controller
         //     // ->limit(10)
         //     ->get();
         // Mengembalikan data menggunakan DataTables
-        return DataTables::of($invoices)->make(true);
+        return DataTables::of($invoices)
+            ->addIndexColumn()
+            ->make(true);
     }
     function proseskirimblast(Request $request)
     {
@@ -224,15 +230,29 @@ class BillingController extends Controller
     {
 
         // dd($request->all());
-        $request->validate([
-            'file' => 'required|file|mimes:xls,xlsx',
+        // $request->validate([
+        //     'file' => 'required|file|mimes:xls,xlsx',
+        // ]);
+        $validasi = Validator::make($request->all(), [
+            'file' => 'required|file|mimes:xls,xlsx'
+        ], [
+            'file.required' => 'File wajib diisi',
+            'file.mimes' => 'Format file wajib xls atau xlsx',
         ]);
-        $file = $request->file('file');
-        $namafile = $file->getClientOriginalName();
-        //$file->move('DataInvoice', $namafile);
-        $file->storeAs('DataInvoice', $namafile);
-        Excel::import(new InvoiceImport(), public_path('storage/DataInvoice/' . $namafile));
-        return response()->json(['message' => 'File ' . $namafile . ' has been uploaded and data imported successfully']);
+
+        if ($validasi->fails()) {
+            return response()->json(['errors' => $validasi->errors()]);
+        } else {
+
+            $file = $request->file('file');
+            $namafile = $file->getClientOriginalName();
+            //$file->move('DataInvoice', $namafile);
+            $path = $file->storeAs('DataInvoice', $namafile);
+
+            ImportFile::dispatch($path);
+            // Excel::import(new InvoiceImport(), public_path('storage/DataInvoice/' . $namafile));
+            return response()->json(['success' => 'File ' . $namafile . ' has been uploaded and data imported successfully']);
+        }
     }
     function import_outstanding(Request $request)
     {

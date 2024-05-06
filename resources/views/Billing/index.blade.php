@@ -50,6 +50,7 @@
                         <table id="inv_billing" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
+                                    <th>No</th>
                                     <th>Unit ID</th>
                                     <th>Nama</th>
                                     <th>Handphone</th>
@@ -70,6 +71,7 @@
                         <table id="inv_blast" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
+                                    <th>No</th>
                                     <th>Unit ID</th>
                                     <th>Nama</th>
                                     <th>Handphone</th>

@@ -9,8 +9,10 @@
                 </button>
             </div>
             <div class="card card-primary">
-
+                <div class="alert alert-danger d-none"></div>
+                <div class="alert alert-success d-none"></div>
                 <div class="card-body">
+
                     <div class="form-group">
                         <label for="exampleInputEmail1">File</label>
                         <input type="file" class="form-control" id="exampleInputEmail1" name="file">
