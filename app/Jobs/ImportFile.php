@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
 use App\Imports\InvoiceImport;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -33,6 +34,14 @@ class ImportFile implements ShouldQueue
      */
     public function handle()
     {
-        Excel::import(new InvoiceImport(), $this->path);
+        dd($this->path);
+        try {
+            // Lakukan sesuatu di sini...
+            Excel::import(new InvoiceImport(), $this->path);
+            // Excel::import(new InvoiceOutstandingImport($this->bulan, $this->tahun, $this->reminder_no, $this->path), $this->pathfile);
+        } catch (\Exception $e) {
+            Log::error('ImportFile job failed: ' . $e->getMessage());
+            throw $e; // Rethrow exception untuk menampilkan informasi kesalahan ke queue
+        }
     }
 }
