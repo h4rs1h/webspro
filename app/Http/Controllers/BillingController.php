@@ -247,8 +247,9 @@ class BillingController extends Controller
             $file = $request->file('file');
             $namafile = $file->getClientOriginalName();
             //$file->move('DataInvoice', $namafile);
-            $path = $file->storeAs('DataInvoice', $namafile);
-            $path = public_path('storage/DataInvoice/' . $namafile);
+            // $path = $file->storeAs('DataInvoice', $namafile);
+            $file->storePubliclyAs('DataInvoicePub/', $namafile);
+            $path = public_path('storage/DataInvoicePub/' . $namafile);
             // $path = str_replace(public_path(), '', $path);
             // dd($path);
             ImportFile::dispatch($path);
