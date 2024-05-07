@@ -13,6 +13,11 @@ class InvoiceOutstandingImport implements ToModel, WithStartRow
     /**
      * @param Collection $collection
      */
+    protected $fin_month;
+    protected $fin_year;
+    protected $reminder_no;
+    protected $filename;
+
     public function __construct($bulan, $tahun, $reminder_no, $filename)
     {
         $this->fin_month = $bulan;
@@ -26,7 +31,7 @@ class InvoiceOutstandingImport implements ToModel, WithStartRow
     }
     public function model(array $row)
     {
-        $deposit = doubleval($row[14]);
+        // $deposit = doubleval(0);
 
         return new InvoiceOutstanding([
             'fin_month' => $this->fin_month,
@@ -42,7 +47,7 @@ class InvoiceOutstandingImport implements ToModel, WithStartRow
             'tung_air' => $row[9],
             'tung_denda' => $row[11],
             'tung_asuransi' => $row[12],
-            'deposit' => $deposit, // Gunakan nilai deposit yang sudah dikonversi
+            // 'deposit' => $deposit, // Gunakan nilai deposit yang sudah dikonversi
             'filename' => $this->filename,
         ]);
     }

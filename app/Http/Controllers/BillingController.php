@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 use App\Imports\InvoiceOutstandingImport;
 use App\Jobs\ImportFile;
+use App\Jobs\ImportOutstandingInvoice;
 use Illuminate\Support\Facades\Validator;
 
 class BillingController extends Controller
@@ -262,21 +263,43 @@ class BillingController extends Controller
         // penambahan fungsi disini untuk penympanan upload file excel outstanding inv
 
         // dd($request->all());
-        $request->validate([
+        // $request->validate([
+        //     'fin_month' => 'required',
+        //     'fin_year' => 'required',
+        //     'reminder_no' => 'required',
+        //     'file' => 'required|file|mimes:xls,xlsx',
+        // ]);
+        $validasi = Validator::make($request->all(), [
             'fin_month' => 'required',
             'fin_year' => 'required',
             'reminder_no' => 'required',
-            'file' => 'required|file|mimes:xls,xlsx',
+            'file' => 'required|file|mimes:xls,xlsx'
+        ], [
+            'fin_month.required' => 'Wajib isi bulan',
+            'fin_year.required' => 'Wajib isi tahun',
+            'reminder_no.required' => 'Wajib isi reminder no',
+            'file.required' => 'File wajib diisi',
+            'file.mimes' => 'Format file wajib xls atau xlsx',
         ]);
-        $bulan = $request->fin_month;
-        $tahun = $request->fin_year;
-        $reminder_no = $request->reminder_no;
-        $file = $request->file('file');
-        $namafile = $file->getClientOriginalName();
-        // $file->move('DataInvOutstansing', $namafile);
-        $path = $file->storeAs('DataInvOutstansing', $namafile);
-        $path = str_replace(public_path(), '', $path);
-        Excel::import(new InvoiceOutstandingImport($bulan, $tahun, $reminder_no, $path/* public_path('storage/DataInvOutstansing/' . $namafile)*/), public_path('storage/DataInvOutstansing/' . $namafile));
-        return response()->json(['message' => 'File ' . $namafile . ' has been uploaded and data imported successfully']);
+
+        if ($validasi->fails()) {
+            return response()->json(['errors' => $validasi->errors()]);
+        } else {
+
+            $bulan = $request->fin_month;
+            $tahun = $request->fin_year;
+            $reminder_no = $request->reminder_no;
+            $file = $request->file('file');
+            $namafile = $file->getClientOriginalName();
+            // $file->move('DataInvOutstansing', $namafile);
+            // $path = $file->storeAs('DataInvOutstansing', $namafile);
+            $path = $file->storeAs('DataInvOutstansing', $namafile);
+            $path = str_replace(public_path(), '', $path);
+
+            // ImportFile::dispatch($path);
+            ImportOutstandingInvoice::dispatch($bulan, $tahun, $reminder_no, $path, public_path('storage/DataInvOutstansing/' . $namafile));
+            // Excel::import(new InvoiceOutstandingImport($bulan, $tahun, $reminder_no, $path/* public_path('storage/DataInvOutstansing/' . $namafile)*/), public_path('storage/DataInvOutstansing/' . $namafile));
+            return response()->json(['success' => 'File ' . $namafile . ' has been uploaded and data imported successfully. bulan: ' . $bulan . ' tahun: ' . $tahun . ' reminder: ' . $reminder_no . 'path simpan:' . $path . ' file: ' . public_path('storage/DataInvOutstansing/' . $namafile)]);
+        }
     }
 }

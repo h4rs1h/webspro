@@ -191,10 +191,10 @@
             var file = $('#file_outstanding')[0].files[0];
 
             // Lakukan pengecekan input
-            if (!fin_month || !fin_year || !reminder_no || !file) {
-                alert('Harap isi semua field!');
-                return; // Berhenti jika ada field yang kosong
-            }
+            // if (!fin_month || !fin_year || !reminder_no || !file) {
+            //     alert('Harap isi semua field!');
+            //     return; // Berhenti jika ada field yang kosong
+            // }
 
             // Buat objek FormData dan tambahkan data
             var formData = new FormData();
@@ -219,23 +219,39 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function(data) {
-                    console.log(data);
-                    $('#modal-import2').modal('hide');
-                    // Bersihkan form setelah upload berhasil
-                    $('#import_form_outstanding')[0].reset();
-                    // Refresh data atau tampilkan pesan sukses di sini
-                    // Tampilkan notifikasi
-                    $('#notification').removeClass('alert-danger').addClass('alert-success')
-                        .text(data.message).show();
+                success: function(response) {
+                    if (response.errors) {
+                        console.log(response.errors);
+                        $('.alert-success').addClass('d-none');
+                        $('.alert-danger').removeClass('d-none');
+                        $('.alert-danger').html("<ul>");
+                        $.each(response.errors, function(key, value) {
+                            $('.alert-danger').find('ul').append("<li>" + value +
+                                "</li>");
+                        });
+                        $('.alert-danger').append("</ul>");
+                    } else {
+                        $('.alert-danger').addClass('d-none');
+                        $('.alert-success').removeClass('d-none');
+                        $('.alert-success').html(response.success);
+                    }
+
+                    // console.log(data);
+                    // $('#modal-import2').modal('hide');
+                    // // Bersihkan form setelah upload berhasil
+                    // $('#import_form_outstanding')[0].reset();
+                    // // Refresh data atau tampilkan pesan sukses di sini
+                    // // Tampilkan notifikasi
+                    // $('#notification').removeClass('alert-danger').addClass('alert-success')
+                    //     .text(data.message).show();
                 },
-                error: function(xhr, textStatus, errorThrown) {
-                    console.log(xhr);
-                    // Handle error di sini
-                    // Tampilkan notifikasi error
-                    $('#notification').removeClass('alert-success').addClass('alert-danger')
-                        .text('Error uploading file. Please try again.').show();
-                }
+                // error: function(xhr, textStatus, errorThrown) {
+                //     console.log(xhr);
+                //     // Handle error di sini
+                //     // Tampilkan notifikasi error
+                //     $('#notification').removeClass('alert-success').addClass('alert-danger')
+                //         .text('Error uploading file. Please try again.').show();
+                // }
             });
         });
 

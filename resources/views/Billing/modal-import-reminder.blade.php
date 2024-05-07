@@ -9,6 +9,8 @@
                 </button>
             </div>
             <div class="card card-primary">
+                <div class="alert alert-danger d-none"></div>
+                <div class="alert alert-success d-none"></div>
                 <div class="card-body">
                     <div class="form-group">
                         <label for="reminder">Reminder
