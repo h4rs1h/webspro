@@ -249,11 +249,17 @@ class BillingController extends Controller
             $namafile = $file->getClientOriginalName();
             //$file->move('DataInvoice', $namafile);
             // $path = $file->storeAs('DataInvoice', $namafile);
-            $file->storeAs('DataInvoice', $namafile);
-            $path = public_path('storage/DataInvoice/' . $namafile);
-            // $path = str_replace(public_path(), '', $path);
+            // $file->storeAs('DataInvoice', $namafile);
+            // $path = public_path('storage/DataInvoice/' . $namafile);
+            // // $path = str_replace(public_path(), '', $path);
             // dd($path);
-            ImportFile::dispatch($path);
+            $path = $file->storeAs('DataInvOutstansing', $namafile);
+            // $path = str_replace(public_path(), '', $path);
+
+            // ImportFile::dispatch($path);
+            // ImportOutstandingInvoice::dispatch($bulan, $tahun, $reminder_no, $path, public_path('storage/DataInvOutstansing/' . $namafile));
+
+            ImportFile::dispatch(public_path('storage/DataInvOutstansing/' . $namafile));
             // Excel::import(new InvoiceImport(), public_path('storage/DataInvoice/' . $namafile));
             return response()->json(['success' => 'File ' . $namafile . ' has been uploaded and data imported successfully, lokasi file: ' . $path]);
         }
