@@ -27,6 +27,9 @@ class BillingController extends Controller
             ['id' => '2', 'name' => 'Reminder 2'],
             ['id' => '3', 'name' => 'Reminder 3'],
             ['id' => '4', 'name' => 'Reminder 4'],
+            ['id' => '5', 'name' => 'Reminder 5'],
+            ['id' => '6', 'name' => 'Reminder 6'],
+            ['id' => '7', 'name' => 'Reminder 7'],
         ];
 
         $lantai = lantai::all();
@@ -455,8 +458,8 @@ class BillingController extends Controller
             $path = str_replace(public_path(), '', $path);
 
             // ImportFile::dispatch($path);
-            // ImportOutstandingInvoice::dispatch($bulan, $tahun, $reminder_no, $path, public_path('storage/DataInvOutstansing/' . $namafile))->onQueue('whatsappBlast');
-            Excel::import(new InvoiceOutstandingImport($bulan, $tahun, $reminder_no, $path/* public_path('storage/DataInvOutstansing/' . $namafile)*/), public_path('storage/DataInvOutstansing/' . $namafile));
+            ImportOutstandingInvoice::dispatch($bulan, $tahun, $reminder_no, $path, public_path('storage/DataInvOutstansing/' . $namafile))->onQueue('whatsappBlast');
+            // Excel::import(new InvoiceOutstandingImport($bulan, $tahun, $reminder_no, $path/* public_path('storage/DataInvOutstansing/' . $namafile)*/), public_path('storage/DataInvOutstansing/' . $namafile));
             return response()->json(['success' => 'File ' . $namafile . ' has been uploaded and data imported successfully.']);
             //  bulan: ' . $bulan . ' tahun: ' . $tahun . ' reminder: ' . $reminder_no . 'path simpan:' . $path . ' file: ' . public_path('storage/DataInvOutstansing/' . $namafile)]);
         }
