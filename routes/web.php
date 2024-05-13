@@ -93,10 +93,12 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(BillingController::class)->group(function () {
         Route::get('/billing', 'index');
         Route::get('/billing/json', 'json')->name('filter.invoices');
+        Route::get('/billing/json-reminder', 'json_reminder')->name('filter.invoices_reminder');
         Route::post('/billing/import-invoices', 'import')->name('billing.invoice-import');
         // penambahan route di sini untuk outstanding
         Route::post('/billing/import-invoices-outstanding', 'import_outstanding')->name('billing.invoice-import-outstanding');
         Route::get('/billing/json-preview', 'preview')->name('billing.preview');
+        Route::post('/billing/getpreview', 'getpreview')->name('billing.getpreview');
         Route::get('/billing/kirim-blast-inv', 'proseskirimblast')->name('billing.kirim-blast-inv');
     });
 

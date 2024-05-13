@@ -90,6 +90,7 @@
                     // dan seterusnya
                 ]
             });
+
         $('#modal-filter').on('show.bs.modal', function(e) {
             $('#fin_year').val('');
             $('#fin_month').val('');
@@ -104,12 +105,15 @@
         $('#btn-filter').click(function() {
             var tahun = $('#fin_year').val();
             var bulan = $('#fin_month').val();
+
+
             console.log("Tahun: " + tahun + ", Bulan: " + bulan); // Cek nilai yang dikirim
             table.ajax.url("{{ route('filter.invoices') }}?tahun=" + tahun + "&bulan=" + bulan).load();
             $('#tabel_inv_billing').show();
             $('#tabel_inv_blast').hide();
             $('#modal-filter').modal('hide'); // Tutup modal setelah submit
         });
+
         $('#exampleInputEmail1').change(function() {
 
             $('.alert-danger').addClass('d-none');
@@ -122,8 +126,13 @@
         $('#btn_upload').click(function(e) {
             e.preventDefault();
 
+            // Ambil nilai input
+            var fin_month = $('#fin_month3').val();
+            var fin_year = $('#fin_year3').val();
             var formData = new FormData();
             formData.append('file', $('input[type=file]')[0].files[0]);
+            formData.append('fin_month', fin_month);
+            formData.append('fin_year', fin_year);
 
             $.ajax({
                 url: '/billing/import-invoices',
@@ -149,36 +158,41 @@
                         $('.alert-danger').addClass('d-none');
                         $('.alert-success').removeClass('d-none');
                         $('.alert-success').html(response.success);
+                        console.log("Tahun: " + fin_year + ", Bulan: " + fin_month);
+                        table.ajax.url("{{ route('filter.invoices') }}?tahun=" + fin_year +
+                            "&bulan=" + fin_month).load();
                     }
-                    // console.log(data);
-                    // $('#modal-import').modal('hide');
-                    // // Bersihkan form setelah upload berhasil
-                    // $('form')[0].reset();
-                    // // Refresh data atau tampilkan pesan sukses di sini
-                    // // Tampilkan notifikasi
-                    // $('#notification').removeClass('alert-danger').addClass('alert-success')
-                    //     .text(data.message).show();
+
                 },
-                // error: function(data) {
-                //     console.log(data);
-                //     // Handle error di sini
-                //     // Tampilkan notifikasi error
-                //     $('#notification').removeClass('alert-success').addClass('alert-danger')
-                //         .text('Error uploading file. Please try again.').show();
-                // }
+
             });
         });
 
         // Bersihkan isian file saat modal dibuka
         $('#modal-import').on('show.bs.modal', function(e) {
             $('#exampleInputEmail1').val('');
+            $('#fin_month3').val('');
+            $('#fin_year3').val('');
+
             $('.alert-danger').addClass('d-none');
             $('.alert-danger').html('');
 
             $('.alert-success').addClass('d-none');
             $('.alert-success').html('');
         });
+        // Bersihkan isian file saat modal dibuka
+        $('#modal-import2').on('show.bs.modal', function(e) {
+            $('#file_outstanding').val('');
+            $('#fin_month2').val('');
+            $('#fin_year2').val('');
+            $('#reminder_no').val('');
 
+            $('.alert-danger').addClass('d-none');
+            $('.alert-danger').html('');
+
+            $('.alert-success').addClass('d-none');
+            $('.alert-success').html('');
+        });
         // btn upload outstanding
 
         $('#btn_upload_outstanding').click(function(e) {
@@ -189,12 +203,6 @@
             var fin_year = $('#fin_year2').val();
             var reminder_no = $('#reminder_no').val();
             var file = $('#file_outstanding')[0].files[0];
-
-            // Lakukan pengecekan input
-            // if (!fin_month || !fin_year || !reminder_no || !file) {
-            //     alert('Harap isi semua field!');
-            //     return; // Berhenti jika ada field yang kosong
-            // }
 
             // Buat objek FormData dan tambahkan data
             var formData = new FormData();
@@ -234,28 +242,38 @@
                         $('.alert-danger').addClass('d-none');
                         $('.alert-success').removeClass('d-none');
                         $('.alert-success').html(response.success);
+                        console.log("Tahun: " + fin_year + ", Bulan: " + fin_month +
+                            ", reminder_no:" + reminder_no);
+                        table.ajax.url(
+                            "{{ route('filter.invoices_reminder') }}?tahun=" +
+                            fin_year +
+                            "&bulan=" + fin_month +
+                            "&reminder_no=" + reminder_no).load();
                     }
 
-                    // console.log(data);
-                    // $('#modal-import2').modal('hide');
-                    // // Bersihkan form setelah upload berhasil
-                    // $('#import_form_outstanding')[0].reset();
-                    // // Refresh data atau tampilkan pesan sukses di sini
-                    // // Tampilkan notifikasi
-                    // $('#notification').removeClass('alert-danger').addClass('alert-success')
-                    //     .text(data.message).show();
+
                 },
-                // error: function(xhr, textStatus, errorThrown) {
-                //     console.log(xhr);
-                //     // Handle error di sini
-                //     // Tampilkan notifikasi error
-                //     $('#notification').removeClass('alert-success').addClass('alert-danger')
-                //         .text('Error uploading file. Please try again.').show();
-                // }
+
             });
         });
 
+        // Bersihkan isian file saat modal dibuka
+        $('#modal-proses').on('show.bs.modal', function(e) {
 
+            // $('#fin_bulan').val('');
+            // $('#fin_tahun').val('');
+            // $('#reminder_no2').val('');
+            // $('#tower').val('');
+            // $('#tower2').val('');
+            // $('#lantai').val('');
+            // $('#lantai2').val('');
+
+            $('.alert-danger').addClass('d-none');
+            $('.alert-danger').html('');
+
+            $('.alert-success').addClass('d-none');
+            $('.alert-success').html('');
+        });
         // Btn preview
 
         $('#btn_preview').click(function() {
@@ -265,17 +283,65 @@
             var tower2 = $('#tower2').val();
             var lantai = $('#lantai').val();
             var lantai2 = $('#lantai2').val();
+            var reminder_no = $('#reminder_no2').val();
 
-            console.log("Tahun: " + tahun + ", Bulan: " + bulan + ", Tower:" + tower + " to " + tower2 +
-                ", Lantai:" + lantai + " to " + lantai2); // Cek nilai yang dikirim
-            table_blast.ajax.url("{{ route('billing.preview') }}?tahun=" + tahun + "&bulan=" + bulan +
-                    "&tower=" + tower + "&tower2=" + tower2 + "&lantai=" + lantai + "&lantai2=" +
-                    lantai2)
-                .load();
-            $('#tabel_inv_billing').hide();
-            $('#tabel_inv_blast').show();
+            // Buat objek FormData dan tambahkan data
+            var formData = new FormData();
+            formData.append('fin_bulan', bulan);
+            formData.append('fin_tahun', tahun);
+            formData.append('reminder_no', reminder_no);
+            formData.append('tower', tower);
+            formData.append('tower2', tower2);
+            formData.append('lantai', lantai);
+            formData.append('lantai2', lantai2);
 
-            $('#modal-proses').modal('hide'); // Tutup modal setelah submit
+            // Debug: Cetak nilai-nilai formData di konsol
+            console.log("FormData Content: , Bulan: " + bulan + ", tahun: " + tahun +
+                ", reminder_no: " + reminder_no + ", tower: " + tower + " dan " + tower2 +
+                ", lantai: " + lantai + " sampai " + lantai2);
+
+            $.ajax({
+                url: "{{ route('billing.getpreview') }}",
+                method: "POST", // Menggunakan method: 'POST'
+                data: formData,
+                contentType: false,
+                processData: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    if (response.errors) {
+                        console.log(response.errors);
+                        $('.alert-success').addClass('d-none');
+                        $('.alert-danger').removeClass('d-none');
+                        $('.alert-danger').html("<ul>");
+                        $.each(response.errors, function(key, value) {
+                            $('.alert-danger').find('ul').append("<li>" + value +
+                                "</li>");
+                        });
+                        $('.alert-danger').append("</ul>");
+                    } else {
+                        $('.alert-danger').addClass('d-none');
+                        $('.alert-success').removeClass('d-none');
+                        $('.alert-success').html(response.success);
+
+                        console.log("Tahun: " + tahun + ", Bulan: " + bulan + ", Tower:" +
+                            tower + " to " + tower2 +
+                            ", Lantai:" + lantai + " to " + lantai2
+                        ); // Cek nilai yang dikirim
+                        table_blast.ajax.url("{{ route('billing.preview') }}?fin_tahun=" +
+                                tahun + "&fin_bulan=" + bulan +
+                                "&tower=" + tower + "&tower2=" + tower2 + "&lantai=" +
+                                lantai + "&lantai2=" +
+                                lantai2 + "&reminder_no=" + reminder_no)
+                            .load();
+
+                        $('#tabel_inv_billing').hide();
+                        $('#tabel_inv_blast').show();
+                        $('#modal-proses').modal('hide'); // Tutup modal setelah submit
+                    }
+                },
+            });
         });
 
         $('#btn_kirim').click(function() {
@@ -285,9 +351,11 @@
             var tower2 = $('#tower2').val();
             var lantai = $('#lantai').val();
             var lantai2 = $('#lantai2').val();
+            var reminder_no = $('#reminder_no2').val();
 
             console.log("Tahun: " + tahun + ", Bulan: " + bulan + ", Tower:" + tower + " to " + tower2 +
-                ", Lantai:" + lantai + " to " + lantai2); // Cek nilai yang dikirim
+                ", Lantai:" + lantai + " to " + lantai2 + " reminder_no: " + reminder_no
+            ); // Cek nilai yang dikirim
             $.ajax({
                 url: "{{ route('billing.kirim-blast-inv') }}",
                 type: "GET",
@@ -297,7 +365,8 @@
                     tower: tower,
                     tower2: tower2,
                     lantai: lantai,
-                    lantai2: lantai2
+                    lantai2: lantai2,
+                    reminder_no: reminder_no,
                 },
                 success: function(data) {
                     $('#notification').removeClass('alert-danger').addClass('alert-success')

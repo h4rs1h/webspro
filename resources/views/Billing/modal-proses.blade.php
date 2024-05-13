@@ -6,6 +6,8 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        <div class="alert alert-danger d-none"></div>
+        <div class="alert alert-success d-none"></div>
         <div class="modal-body">
 
             <div class="form-group row">
@@ -134,7 +136,23 @@
                     @enderror
                 </div>
             </div>
-
+            <div class="form-group">
+                <label for="reminder">Tipe Blast Invoice</label>
+                <select class="form-control" name="reminder_no" id="reminder_no2">
+                    <option value="">-- Pilih --</option>
+                    <option value="0">Invoice Bulanan</option>
+                    @foreach ($reminder_no as $item)
+                        @if (old('reminder_no') == $item['id'])
+                            )
+                            <option value="{{ $item['id'] }}" selected>
+                                {{ $item['name'] }}</option>
+                        @else
+                            <option value="{{ $item['id'] }}">
+                                {{ $item['name'] }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
 
         </div>
         <div class="modal-footer justify-content-between">
