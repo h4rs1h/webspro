@@ -94,6 +94,7 @@
         $('#modal-filter').on('show.bs.modal', function(e) {
             $('#fin_year').val('');
             $('#fin_month').val('');
+            $('#reminder_no3').val('');
 
             $('.alert-danger').addClass('d-none');
             $('.alert-danger').html('');
@@ -105,10 +106,12 @@
         $('#btn-filter').click(function() {
             var tahun = $('#fin_year').val();
             var bulan = $('#fin_month').val();
+            var reminder_no = $('#reminder_no3').val();
 
-
-            console.log("Tahun: " + tahun + ", Bulan: " + bulan); // Cek nilai yang dikirim
-            table.ajax.url("{{ route('filter.invoices') }}?tahun=" + tahun + "&bulan=" + bulan).load();
+            console.log("Tahun: " + tahun + ", Bulan: " + bulan + "reminder_no: " +
+                reminder_no); // Cek nilai yang dikirim
+            table.ajax.url("{{ route('filter.invoices') }}?tahun=" + tahun + "&bulan=" + bulan +
+                "&reminder_no=" + reminder_no).load();
             $('#tabel_inv_billing').show();
             $('#tabel_inv_blast').hide();
             $('#modal-filter').modal('hide'); // Tutup modal setelah submit

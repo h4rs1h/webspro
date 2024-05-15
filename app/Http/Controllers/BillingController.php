@@ -75,9 +75,12 @@ class BillingController extends Controller
         // dd($request->all());
         $bulan = $request->bulan;
         $tahun = $request->tahun;
-        // dd($bulan, $tahun);
+        $reminder_no = $request->reminder_no;
+
+        // dd($bulan, $tahun, $reminder_no);
         $invoices = InvoicePesan::where('fin_year', $tahun)
             ->where('fin_month', $bulan)
+            ->where('reminder_no', $reminder_no)
             // ->limit(10)
             ->get();
         // Mengembalikan data menggunakan DataTables
@@ -422,9 +425,9 @@ class BillingController extends Controller
 
             $file->storeAs('DataInvoice', $namafile);
 
-            // ImportFile::dispatch(public_path('storage/DataInvoice/' . $namafile))->onQueue('whatsappBlast');
-            Excel::import(new InvoiceImport(), public_path('storage/DataInvoice/' . $namafile));
-            return response()->json(['success' => 'File ' . $namafile . ' has been uploaded and data imported successfully']);
+            ImportFile::dispatch(public_path('storage/DataInvoice/' . $namafile))->onQueue('whatsappBlast');
+            // Excel::import(new InvoiceImport(), public_path('storage/DataInvoice/' . $namafile));
+            return response()->json(['success' => 'File ' . $namafile . ' successfully upload, silahkan tunggu proses import data disistem.']);
         }
     }
     function import_outstanding(Request $request)
@@ -460,7 +463,7 @@ class BillingController extends Controller
             // ImportFile::dispatch($path);
             ImportOutstandingInvoice::dispatch($bulan, $tahun, $reminder_no, $path, public_path('storage/DataInvOutstansing/' . $namafile))->onQueue('whatsappBlast');
             // Excel::import(new InvoiceOutstandingImport($bulan, $tahun, $reminder_no, $path/* public_path('storage/DataInvOutstansing/' . $namafile)*/), public_path('storage/DataInvOutstansing/' . $namafile));
-            return response()->json(['success' => 'File ' . $namafile . ' has been uploaded and data imported successfully.']);
+            return response()->json(['success' => 'File ' . $namafile . ' successfully upload, silahkan tunggu proses import data disistem.']);
             //  bulan: ' . $bulan . ' tahun: ' . $tahun . ' reminder: ' . $reminder_no . 'path simpan:' . $path . ' file: ' . public_path('storage/DataInvOutstansing/' . $namafile)]);
         }
     }

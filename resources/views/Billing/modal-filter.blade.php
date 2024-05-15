@@ -52,7 +52,24 @@
                             @enderror
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label for="reminder">Reminder
+                            No</label>
+                        <select class="form-control" name="reminder_no" id="reminder_no3">
+                            <option value="">-- Pilih --</option>
+                            <option value="0">Invoice Bulanan</option>
+                            @foreach ($reminder_no as $item)
+                                @if (old('reminder_no') == $item['id'])
+                                    )
+                                    <option value="{{ $item['id'] }}" selected>
+                                        {{ $item['name'] }}</option>
+                                @else
+                                    <option value="{{ $item['id'] }}">
+                                        {{ $item['name'] }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer justify-content-between">
