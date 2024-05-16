@@ -291,7 +291,8 @@ class BillingController extends Controller
                         ->join('invoice_reminder', function ($join) {
                             $join->on('vinvoice_pesan.fin_year', '=', 'invoice_reminder.fin_year')
                                 ->on('vinvoice_pesan.fin_month', '=', 'invoice_reminder.fin_month')
-                                ->on('vinvoice_pesan.debtor_acct', '=', 'invoice_reminder.debtor_acct');
+                                ->on('vinvoice_pesan.debtor_acct', '=', 'invoice_reminder.debtor_acct')
+                                ->on('vinvoice_pesan.reminder_no', '=', 'invoice_reminder.reminder_no');
                         })
                         ->select([
                             'vinvoice_pesan.debtor_acct', 'vinvoice_pesan.fin_month', 'vinvoice_pesan.fin_year',
@@ -315,7 +316,8 @@ class BillingController extends Controller
                         ->join('invoice_reminder', function ($join) {
                             $join->on('vinvoice_pesan.fin_year', '=', 'invoice_reminder.fin_year')
                                 ->on('vinvoice_pesan.fin_month', '=', 'invoice_reminder.fin_month')
-                                ->on('vinvoice_pesan.debtor_acct', '=', 'invoice_reminder.debtor_acct');
+                                ->on('vinvoice_pesan.debtor_acct', '=', 'invoice_reminder.debtor_acct')
+                                ->on('vinvoice_pesan.reminder_no', '=', 'invoice_reminder.reminder_no');
                         })
                         ->select([
                             'vinvoice_pesan.debtor_acct', 'vinvoice_pesan.fin_month', 'vinvoice_pesan.fin_year',
@@ -340,7 +342,8 @@ class BillingController extends Controller
                         ->join('invoice_reminder', function ($join) {
                             $join->on('vinvoice_pesan.fin_year', '=', 'invoice_reminder.fin_year')
                                 ->on('vinvoice_pesan.fin_month', '=', 'invoice_reminder.fin_month')
-                                ->on('vinvoice_pesan.debtor_acct', '=', 'invoice_reminder.debtor_acct');
+                                ->on('vinvoice_pesan.debtor_acct', '=', 'invoice_reminder.debtor_acct')
+                                ->on('vinvoice_pesan.reminder_no', '=', 'invoice_reminder.reminder_no');
                         })
                         ->select([
                             'vinvoice_pesan.debtor_acct', 'vinvoice_pesan.fin_month', 'vinvoice_pesan.fin_year',
@@ -365,7 +368,8 @@ class BillingController extends Controller
                         ->join('invoice_reminder', function ($join) {
                             $join->on('vinvoice_pesan.fin_year', '=', 'invoice_reminder.fin_year')
                                 ->on('vinvoice_pesan.fin_month', '=', 'invoice_reminder.fin_month')
-                                ->on('vinvoice_pesan.debtor_acct', '=', 'invoice_reminder.debtor_acct');
+                                ->on('vinvoice_pesan.debtor_acct', '=', 'invoice_reminder.debtor_acct')
+                                ->on('vinvoice_pesan.reminder_no', '=', 'invoice_reminder.reminder_no');
                         })
                         ->select([
                             'vinvoice_pesan.debtor_acct', 'vinvoice_pesan.fin_month', 'vinvoice_pesan.fin_year',
