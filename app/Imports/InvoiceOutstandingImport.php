@@ -45,8 +45,8 @@ class InvoiceOutstandingImport implements ToModel, WithStartRow
             'tung_ipl' => $row[7],
             'tung_dc' => $row[8],
             'tung_air' => $row[9],
-            'tung_denda' => $row[11],
-            'tung_asuransi' => $row[12],
+            'tung_denda' => $row[10],
+            'tung_asuransi' => $row[11],
             // 'deposit' => $deposit, // Gunakan nilai deposit yang sudah dikonversi
             'filename' => $this->filename,
         ]);
