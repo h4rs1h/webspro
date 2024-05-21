@@ -49,19 +49,14 @@
                         <table id="inv_sp" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
+                                    <th>No</th>
                                     <th>Unit ID</th>
                                     <th>Nama</th>
-                                    {{-- <th>IPL</th>
-                                    <th>DC</th>
-                                    <th>AIR</th> --}}
+                                    <th>Handphone</th>
+                                    <th>Tgl Kirim</th>
+                                    <th>Tagihan Bulan Ini</th>
+                                    <th>Tunggakan Sebelumnya</th>
                                     <th>Total Tagihan</th>
-                                    {{-- <th>IPL (Sblmnya)</th>
-                                    <th>DC (Sblmnya)</th>
-                                    <th>AIR (Sblmnya)</th>
-                                    <th>Denda</th>
-                                    <th>Asuransi (Sblmnya)</th> --}}
-                                    <th>Total (Sblmnya)</th>
-                                    <th>Total Seluruhnya</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,6 +68,7 @@
                         <table id="inv_blast" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
+                                    <th>No</th>
                                     <th>Unit ID</th>
                                     <th>Nama</th>
                                     <th>Handphone</th>

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
 
 class CollectionController extends Controller
 {
@@ -67,32 +68,31 @@ class CollectionController extends Controller
     }
     function json(Request $request)
     {
-        // dd($request->all());
-        $bulan = $request->bulan;
-        $tahun = $request->tahun;
-        $reminder_no = $request->sp;
-        $tgl_cetak = $request->tgl_cetak;
-        $tgl_batas_bayar = $request->tgl_batas_bayar;
-        $tipe_sp = $request->tipe_sp;
-        // dd($bulan, $tahun, $tgl_cetak, $request->sp, $request->tgl_cetak);
         $invsp = new InvoiceSP;
 
-        if (!empty($bulan) and !empty($tahun)) {
-            // dd($tahun, $bulan, $reminder_no, $tgl_cetak, $tgl_batas_bayar);
+        if ($request->draw > 1) {
+            $bulan = $request->bulan;
+            $tahun = $request->tahun;
+            $reminder_no = $request->reminder_no;
+            $tipe_sp = $request->tipe_sp;
+            $tgl_cetak = $request->tgl_cetak;
+            $tgl_batas_bayar = $request->tgl_batas_bayar;
+
             $invoices = $invsp->getDataSP($tahun, $bulan, $reminder_no, $tgl_cetak, $tgl_batas_bayar, $tipe_sp);
+        } else {
+            $invoices = $invsp->getDataAwal($request->sp);
         }
-        // else {
-        //     $invoices = $invsp->getreminder($reminder_no);
-        // }
-        dd($invoices);
-        return DataTables::of($invoices)->make(true);
+
+        return DataTables::of($invoices)
+            ->addIndexColumn()
+            ->make(true);
     }
     function preview(Request $request)
     {
         // dd($request->all());
         $bulan = $request->bulan;
         $tahun = $request->tahun;
-        $reminder_no = $request->sp;
+        $reminder_no = $request->reminder_no;
         $tgl_cetak = $request->tgl_cetak;
         $tgl_batas_bayar = $request->tgl_batas_bayar;
         $tipe_sp = $request->tipe_sp;
@@ -111,210 +111,181 @@ class CollectionController extends Controller
             $invoices = $invsp->getreminder($reminder_no);
         }
         // dd($invoices);
-        return DataTables::of($invoices)->make(true);
+        return DataTables::of($invoices)
+            ->addIndexColumn()
+            ->make(true);
     }
     function proseskirimblastsp(Request $request)
     {
-        // dd($request->all());
-        $bulan = $request->bulan;
-        $tahun = $request->tahun;
-        $reminder_no = $request->sp;
-        $tgl_cetak = $request->tgl_cetak;
-        $tgl_batas_bayar = $request->tgl_batas_bayar;
-        $tipe_sp = $request->tipe_sp;
+        $validasi = Validator::make($request->all(), [
+            'fin_year' => 'required',
+            'fin_month' => 'required',
+            'tipe_sp' => 'required',
+            'tgl_cetak' => 'required',
+            'tgl_batas_bayar' => 'required',
 
-        $now = Carbon::now();
+        ], [
+            'fin_year.required' => 'Wajib isi tahun',
+            'fin_month.required' => 'Wajib isi bulan',
+            'tipe_sp.required' => 'Wajib isi Tipe SP',
+            'tgl_cetak.required' => 'Wajib isi Tanggal Kirim',
+            'tgl_batas_bayar.required' => 'Wajib isi Tanggal Batas Bayar',
 
-        $null = 'null';
-        $status = 'Prosess';
-        $tipe = 'SP' . $reminder_no;
+        ]);
 
-        if (isset($request->tipe) && $request->tipe != null) {
-            $ass = $request->tipe;
+        if ($validasi->fails()) {
+            return response()->json(['errors' => $validasi->errors()]);
         } else {
-            $ass = '';
-        }
+            $bulan = $request->fin_month;
+            $tahun = $request->fin_year;
+            $reminder_no = $request->reminder_no;
+            $tgl_cetak = $request->tgl_cetak;
+            $tgl_batas_bayar = $request->tgl_batas_bayar;
+            $tipe_sp = $request->tipe_sp;
 
-        // dd($bulan, $tahun, $tgl_cetak, $tgl_batas_bayar, $reminder_no);
-        if ($reminder_no == '1') {
-            if ($tipe_sp == '1') {
-                $simpan = DB::table('outboxs')->insertUsing(
-                    ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
-                    DB::table('vinvoicesp1')->select([
-                        'debtor_acct', 'fin_month', 'fin_year',
-                        DB::raw("'" . $now . "' as tglkirim"),
-                        DB::raw("null as tglsending"),
-                        'wa', 'isi_pesan',
-                        DB::raw("'" . $status . "' as status"),
-                        DB::raw("'" . $tipe . "' as tipe"),
-                        DB::raw("'" . $now . "' as created_at"),
-                        'reminder_no'
-                    ])
-                        ->where('fin_year', $tahun)
-                        ->where('fin_month', $bulan)
-                        ->whereNotNull('wa')
-                        ->where('tgl_cetak', $tgl_cetak)
-                );
+            if (isset($request->tipe) && $request->tipe != null) {
+                $ass = $request->tipe;
             } else {
-                $simpan = DB::table('outboxs')->insertUsing(
-                    ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
-                    DB::table('vinvoicesp1_ass')->select([
-                        'debtor_acct', 'fin_month', 'fin_year',
-                        DB::raw("'" . $now . "' as tglkirim"),
-                        DB::raw("null as tglsending"),
-                        'wa', 'isi_pesan',
-                        DB::raw("'" . $status . "' as status"),
-                        DB::raw("'" . $tipe . "' as tipe"),
-                        DB::raw("'" . $now . "' as created_at"),
-                        'reminder_no'
-                    ])
-                        ->where('fin_year', $tahun)
-                        ->where('fin_month', $bulan)
-                        ->whereNotNull('wa')
-                        ->where('tgl_cetak', $tgl_cetak)
-                );
+                $ass = '';
             }
-        } elseif ($reminder_no == '2') {
-            if ($tipe_sp == '1') {
-                $simpan = DB::table('outboxs')->insertUsing(
-                    ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
-                    DB::table('vinvoicesp2')->select([
-                        'debtor_acct', 'fin_month', 'fin_year',
-                        DB::raw("'" . $now . "' as tglkirim"),
-                        DB::raw("null as tglsending"),
-                        'wa', 'isi_pesan',
-                        DB::raw("'" . $status . "' as status"),
-                        DB::raw("'" . $tipe . "' as tipe"),
-                        DB::raw("'" . $now . "' as created_at"),
-                        'reminder_no'
-                    ])
-                        ->where('fin_year', $tahun)
-                        ->where('fin_month', $bulan)
-                        ->whereNotNull('wa')
-                        ->where('tgl_cetak', $tgl_cetak)
-                );
-            } else {
-                $simpan = DB::table('outboxs')->insertUsing(
-                    ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
-                    DB::table('vinvoicesp2_ass')->select([
-                        'debtor_acct', 'fin_month', 'fin_year',
-                        DB::raw("'" . $now . "' as tglkirim"),
-                        DB::raw("null as tglsending"),
-                        'wa', 'isi_pesan',
-                        DB::raw("'" . $status . "' as status"),
-                        DB::raw("'" . $tipe . "' as tipe"),
-                        DB::raw("'" . $now . "' as created_at"),
-                        'reminder_no'
-                    ])
-                        ->where('fin_year', $tahun)
-                        ->where('fin_month', $bulan)
-                        ->whereNotNull('wa')
-                        ->where('tgl_cetak', $tgl_cetak)
-                );
+            $hasil = DB::select("call get_proses_sp('" . $tahun . "','" . $bulan . "','" . $reminder_no . "','" . $tgl_cetak . "','" . $tgl_batas_bayar . "','" . $tipe_sp . "')");
+            foreach ($hasil as $h) {
+                $simpan = $h->jmlproses;
             }
-        } elseif ($reminder_no == '3') {
-            if ($tipe_sp == '1') {
-                $simpan = DB::table('outboxs')->insertUsing(
-                    ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
-                    DB::table('vinvoicesp3')->select([
-                        'debtor_acct', 'fin_month', 'fin_year',
-                        DB::raw("'" . $now . "' as tglkirim"),
-                        DB::raw("null as tglsending"),
-                        'wa', 'isi_pesan',
-                        DB::raw("'" . $status . "' as status"),
-                        DB::raw("'" . $tipe . "' as tipe"),
-                        DB::raw("'" . $now . "' as created_at"),
-                        'reminder_no'
-                    ])
-                        ->where('fin_year', $tahun)
-                        ->where('fin_month', $bulan)
-                        ->whereNotNull('wa')
-                        ->where('tgl_cetak', $tgl_cetak)
-                );
+
+            if ($simpan > 0) {
+                return response()->json(['success' => 'Sukses memproses sebanyak ' . $simpan . ' data, bulan: ' . $bulan . ' tahun: ' . $tahun . 'reminder_no:' . $reminder_no . ' tipe_sp:' . $tipe_sp . ' tgl_cetak:' . $tgl_cetak . ' tgl_batas_bayar :' . $tgl_batas_bayar . ' Proses kirim SP sudah dilakukan, silahkan cek menu outbox.']);
             } else {
-                $simpan = DB::table('outboxs')->insertUsing(
-                    ['debtor_acct', 'fin_month', 'fin_year', 'tglKirim', 'tglsending', 'wa', 'pesan', 'status', 'tipe', 'created_at', 'reminder_no'],
-                    DB::table('vinvoicesp3_ass')->select([
-                        'debtor_acct', 'fin_month', 'fin_year',
-                        DB::raw("'" . $now . "' as tglkirim"),
-                        DB::raw("null as tglsending"),
-                        'wa', 'isi_pesan',
-                        DB::raw("'" . $status . "' as status"),
-                        DB::raw("'" . $tipe . "' as tipe"),
-                        DB::raw("'" . $now . "' as created_at"),
-                        'reminder_no'
-                    ])
-                        ->where('fin_year', $tahun)
-                        ->where('fin_month', $bulan)
-                        ->whereNotNull('wa')
-                        ->where('tgl_cetak', $tgl_cetak)
-                );
+                return response()->json(['errors' => ['file' => $simpan . ' Gagal menyimpan data Blast ke tabel outboxs.']]);
+                // return response()->json(['errors' => 'Gagal menyimpan data Blast ke tabel outboxs.']);
             }
         }
-        // dd($simpan);
-        if ($simpan) {
-            // Berhasil
+    }
+    function proseskirimblastsp_sample(Request $request)
+    {
+        $validasi = Validator::make($request->all(), [
+            'fin_year' => 'required',
+            'fin_month' => 'required',
+            'tipe_sp' => 'required',
+            'tgl_cetak' => 'required',
+            'tgl_batas_bayar' => 'required',
 
-            return response()->json([
-                'remove' => 'alert-danger',
-                'add' => 'alert-success',
-                'message' => 'Proses Kirim Blast SP  successfully'
-            ]);
+        ], [
+            'fin_year.required' => 'Wajib isi tahun',
+            'fin_month.required' => 'Wajib isi bulan',
+            'tipe_sp.required' => 'Wajib isi Tipe SP',
+            'tgl_cetak.required' => 'Wajib isi Tanggal Kirim',
+            'tgl_batas_bayar.required' => 'Wajib isi Tanggal Batas Bayar',
+
+        ]);
+
+        if ($validasi->fails()) {
+            return response()->json(['errors' => $validasi->errors()]);
         } else {
-            // Gagal
+            $bulan = $request->fin_month;
+            $tahun = $request->fin_year;
+            $reminder_no = $request->reminder_no;
+            $tgl_cetak = $request->tgl_cetak;
+            $tgl_batas_bayar = $request->tgl_batas_bayar;
+            $tipe_sp = $request->tipe_sp;
 
-            return response()->json([
-                'add' => 'alert-danger',
-                'remove' => 'alert-success',
-                'message' => 'Gagal menyimpan data Blast ke tabel outboxs.'
-            ]);
+            if (isset($request->tipe) && $request->tipe != null) {
+                $ass = $request->tipe;
+            } else {
+                $ass = '';
+            }
+            $hasil = DB::select("call get_proses_sp_sampel('" . $tahun . "','" . $bulan . "','" . $reminder_no . "','" . $tgl_cetak . "','" . $tgl_batas_bayar . "','" . $tipe_sp . "')");
+            foreach ($hasil as $h) {
+                $simpan = $h->jmlproses;
+            }
+
+            if ($simpan > 0) {
+                return response()->json(['success' => 'Sukses memproses sebanyak ' . $simpan . ' data, bulan: ' . $bulan . ' tahun: ' . $tahun . 'reminder_no:' . $reminder_no . ' tipe_sp:' . $tipe_sp . ' tgl_cetak:' . $tgl_cetak . ' tgl_batas_bayar :' . $tgl_batas_bayar . ' Proses kirim SP sudah dilakukan, silahkan cek menu outbox.']);
+            } else {
+                return response()->json(['errors' => ['file' => $simpan . ' Gagal menyimpan data Blast ke tabel outboxs.']]);
+                // return response()->json(['errors' => 'Gagal menyimpan data Blast ke tabel outboxs.']);
+            }
         }
     }
     function upload(Request $request)
     {
-        // dd($request->all());
-        $validateData = $request->validate([
-            'fin_month' => 'required',
+        $validasi = Validator::make($request->all(), [
             'fin_year' => 'required',
+            'fin_month' => 'required',
             'tipe_sp' => 'required',
             'tgl_cetak' => 'required',
             'tgl_batas_bayar' => 'required',
             'file' => 'required|file|mimes:xls,xlsx',
+        ], [
+            'fin_year.required' => 'Wajib isi tahun',
+            'fin_month.required' => 'Wajib isi bulan',
+            'tipe_sp.required' => 'Wajib isi Tipe SP',
+            'tgl_cetak.required' => 'Wajib isi Tanggal Kirim',
+            'tgl_batas_bayar.required' => 'Wajib isi Tanggal Batas Bayar',
+            'file.required' => 'File wajib diisi',
+            'file.mimes' => 'Format file wajib xls atau xlsx',
         ]);
-        // dd($request->all());
-        $bulan = $request->fin_month;
-        $tahun = $request->fin_year;
-        $tgl_cetak = $request->tgl_cetak;
-        $tgl_batas_bayar = $request->tgl_batas_bayar;
-        $tipe_sp = $request->tipe_sp;
 
-        $reminder_no = $request->reminder_no;
-        $reminder_no_ass = $request->reminder_no_ass;
-
-        if ($reminder_no == 1) {
-            $tgl_tempo_awal = $request->tgl_batas_bayar;
-            $tgl_tempo_akhir = $request->tgl_batas_bayar;
-        } elseif ($reminder_no == 'asuransi') {
-            $tgl_tempo_awal = $request->tgl_tempo_akhir;
-            $tgl_tempo_akhir = $request->tgl_tempo_akhir;
+        if ($validasi->fails()) {
+            return response()->json(['errors' => $validasi->errors()]);
         } else {
-            $tgl_tempo_awal = $request->tgl_tempo_awal;
-            $tgl_tempo_akhir = $request->tgl_tempo_akhir;
-        }
 
-        // dd($validateData);
-        $file = $request->file('file');
-        $namafile = $file->getClientOriginalName();
-        // $file->move('DataInvoiceSP', $namafile);
-        $path = $file->storeAs('DataInvoiceSP', $namafile);
-        //dd($namafile, $file, public_path('/DataInvoice/' . $namafile));
-        $path = str_replace(public_path(), '', $path);
-        Excel::import(new InvoiceSPImport($bulan, $tahun, $tgl_cetak, $tgl_batas_bayar, $tgl_tempo_awal, $tgl_tempo_akhir, $reminder_no, $tipe_sp, $reminder_no_ass, $path /* public_path('storage/DataInvoiceSP/' . $namafile)*/), public_path('storage/DataInvoiceSP/' . $namafile));
-        // Excel::import(new InvoiceSPImport(), public_path('/DataInvoiceSP/' . $namafile));
-        // return redirect('/invoicesp');
-        return response()->json([
-            'remove' => 'alert-danger',
-            'add' => 'alert-success', 'message' => 'File ' . $namafile . ' has been uploaded and data imported successfully'
+            // dd($request->all());
+            $bulan = $request->fin_month;
+            $tahun = $request->fin_year;
+            $tgl_cetak = $request->tgl_cetak;
+            $tgl_batas_bayar = $request->tgl_batas_bayar;
+            $tipe_sp = $request->tipe_sp;
+
+            $reminder_no = $request->reminder_no;
+            $reminder_no_ass = $request->reminder_no_ass;
+
+            if ($reminder_no == 1) {
+                $tgl_tempo_awal = $request->tgl_batas_bayar;
+                $tgl_tempo_akhir = $request->tgl_batas_bayar;
+            } elseif ($reminder_no == 'asuransi') {
+                $tgl_tempo_awal = $request->tgl_tempo_akhir;
+                $tgl_tempo_akhir = $request->tgl_tempo_akhir;
+            } else {
+                $tgl_tempo_awal = $request->tgl_tempo_awal;
+                $tgl_tempo_akhir = $request->tgl_tempo_akhir;
+            }
+
+
+            $file = $request->file('file');
+            $namafile = $file->getClientOriginalName();
+            // $file->move('DataInvoiceSP', $namafile);
+            $path = $file->storeAs('DataInvoiceSP', $namafile);
+
+            $path = str_replace(public_path(), '', $path);
+            Excel::import(new InvoiceSPImport($bulan, $tahun, $tgl_cetak, $tgl_batas_bayar, $tgl_tempo_awal, $tgl_tempo_akhir, $reminder_no, $tipe_sp, $reminder_no_ass, $path /* public_path('storage/DataInvoiceSP/' . $namafile)*/), public_path('storage/DataInvoiceSP/' . $namafile));
+            // Excel::import(new InvoiceSPImport(), public_path('/DataInvoiceSP/' . $namafile));
+
+            return response()->json(['success' => 'File ' . $namafile . ' successfully upload, silahkan tunggu proses import data disistem.']);
+        }
+    }
+    function getpreview(Request $request)
+    {
+        $validasi = Validator::make($request->all(), [
+            'fin_year' => 'required',
+            'fin_month' => 'required',
+            'tipe_sp' => 'required',
+            'tgl_cetak' => 'required',
+            'tgl_batas_bayar' => 'required',
+
+        ], [
+            'fin_year.required' => 'Wajib isi tahun',
+            'fin_month.required' => 'Wajib isi bulan',
+            'tipe_sp.required' => 'Wajib isi Tipe SP',
+            'tgl_cetak.required' => 'Wajib isi Tanggal Kirim',
+            'tgl_batas_bayar.required' => 'Wajib isi Tanggal Batas Bayar',
+
         ]);
+
+        if ($validasi->fails()) {
+            return response()->json(['errors' => $validasi->errors()]);
+        } else {
+            return response()->json(['success' => 'Preview Berhasil, silahkan tutup form untuk melihat detail data']);
+        }
     }
 }

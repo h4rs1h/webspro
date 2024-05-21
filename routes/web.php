@@ -106,8 +106,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/collection', 'index');
         Route::get('/collection/json', 'json')->name('filter.collection');
         Route::get('/collection/preview', 'preview')->name('collection.preview');
-        Route::get('/collection/kirim-blast-sp', 'proseskirimblastsp')->name('collection.proses-kirim-sp');
+        Route::post('/collection/kirim-blast-sp', 'proseskirimblastsp');
+        Route::post('/collection/kirim-blast-sp-sample', 'proseskirimblastsp_sample');
         Route::post('/collection/upload', 'upload')->name('collection.upload');
+        Route::post('/collection/getpreview', 'getpreview')->name('collection.getpreview');
     });
 
     Route::controller(LaporanController::class)->group(function () {

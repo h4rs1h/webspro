@@ -8,6 +8,8 @@
         </div>
         <div class="modal-body">
             <div class="card-body">
+                <div class="alert alert-danger d-none"></div>
+                <div class="alert alert-success d-none"></div>
                 <form id="filter_form">
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-5 col-form-label">Tahun</label>
@@ -94,12 +96,14 @@
                 <input type="hidden" id="reminder_no2" value="{{ $reminder }}" name="reminder_no">
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" id="btn-reset">Reset</button>
-                <button type="button" class="btn btn-primary" id="btn-filter">Show SP {{ $reminder }}</button>
+                {{-- <button type="button" class="btn btn-default" id="btn-reset">Reset</button> --}}
+                {{-- <button type="button" class="btn btn-primary" id="btn-filter">Show SP {{ $reminder }}</button> --}}
                 <button type="button" class="btn btn-primary" id="btn-preview-sp">Preview Pesan SP
                     {{ $reminder }}</button>
-                <button type="button" class="btn btn-primary" id="btn-proses-sp">Kirim SP {{ $reminder }}</button>
-
+                <button type="button" class="btn btn-primary" id="btn-proses-sp">Proses Kirim SP
+                    {{ $reminder }}</button>
+                <button type="button" class="btn btn-primary" id="btn-proses-sp-sample">Sample SP
+                    {{ $reminder }}</button>
                 {{-- @if ($reminder == '1')
                     <input type="hidden" id="tipe" value="asuransi" name="tipe">
                     <button type="button" class="btn btn-primary" id="btn-preview-sp-asuransi">Preview SP

@@ -8,6 +8,8 @@
                 </button>
             </div>
             <div class="card card-primary">
+                <div class="alert alert-danger d-none"></div>
+                <div class="alert alert-success d-none"></div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -15,7 +17,6 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="bulan">Bulan</label>
-
                                         <select class="form-control" name="fin_month" id="fin_month">
                                             <option value="">-- Pilih --</option>
                                             @foreach ($fin_month as $item)
