@@ -27,7 +27,12 @@ class PerangkatController extends Controller
             ->get();
 
         // Mengembalikan data menggunakan DataTables
-        return DataTables::of($data)->make(true);
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($data) {
+                return view('perangkat.tombol')->with('data', $data);
+            })
+            ->make(true);
     }
     function getdetail(Request $request)
     {

@@ -32,7 +32,7 @@
                                                     <table id="daftarhp" class="table table-bordered table-hover">
                                                         <thead>
                                                             <tr>
-                                                                {{-- <th>No</th> --}}
+                                                                <th>No</th>
                                                                 <th>Owner</th>
                                                                 <th>No WA</th>
                                                                 <th>API Key</th>

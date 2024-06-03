@@ -3,48 +3,77 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">
+            <div class="row">
                 <div class="col-sm-6">
-                    <h1>{{ $title }}</h1>
+                    {{-- <h1>{{ $title }}</h1> --}}
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Rere</a></li>
-                        <li class="breadcrumb-item active">{{ $title }}</li>
-                    </ol>
-                </div>
+
             </div>
         </div><!-- /.container-fluid -->
     </section>
-
-    <!-- Main content -->
     <section class="content">
+        <div class="row">
+            <div class="col-12">
 
-        <!-- Default box -->
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Title</h3>
+                <div class="card">
+                    <div class="card-body">
+                        <div id="notification" class="alert" style="display:none;"></div>
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#modal-blast_tenant_news">
+                            Blast Tenant News
+                        </button>
 
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button>
+                    </div>
                 </div>
             </div>
-            <div class="card-body">
-                Start creating your amazing application!
-            </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-                Footer
-            </div>
-            <!-- /.card-footer-->
         </div>
-        <!-- /.card -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>{{ $title }}</h3>
+                    </div>
+                    <div class="card-body" id="tabel_sum_rere">
+                        <table id="sum_rere" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Tanggal</th>
+                                    <th>Judul Pesan</th>
+                                    <th>Rencana Kirim</th>
+                                    <th>Sukses</th>
+                                    <th>Not Exists</th>
+                                    <th>Failed</th>
+                                    <th>Offline</th>
 
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-body" id="tabel_sum_rere_blast" style="display:none;">
+
+                        <table id="sum_rere_blast" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Unit ID</th>
+                                    <th>Nama</th>
+                                    <th>Handphone</th>
+                                    <th>Isi Pesan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-    <!-- /.content -->
+    <div class="modal fade" id="modal-blast_tenant_news">
+        {{-- memisahkan scritp modal filter --}}
+        @include('Rere.modal-blast_tenant_news')
+    </div>
 @endsection

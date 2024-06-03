@@ -388,5 +388,45 @@
 
             $('#modal-proses').modal('hide'); // Tutup modal setelah submit
         });
+
+        $('#btn_kirim-sample').click(function() {
+            var tahun = $('#fin_tahun').val();
+            var bulan = $('#fin_bulan').val();
+            var reminder_no = $('#reminder_no2').val();
+
+            console.log("Tahun: " + tahun + ", Bulan: " + bulan + " reminder_no: " +
+                reminder_no); // Cek nilai yang dikirim
+            $.ajax({
+                url: "{{ route('billing.kirim-blast-inv-sampel') }}",
+                type: "GET",
+                data: {
+                    tahun: tahun,
+                    bulan: bulan,
+                    reminder_no: reminder_no,
+                },
+                success: function(response) {
+                    if (response.errors) {
+                        console.log(response.errors);
+                        $('.alert-success').addClass('d-none');
+                        $('.alert-danger').removeClass('d-none');
+                        $('.alert-danger').html("<ul>");
+                        $.each(response.errors, function(key, value) {
+                            $('.alert-danger').find('ul').append("<li>" + value +
+                                "</li>");
+                        });
+                        $('.alert-danger').append("</ul>");
+                    } else {
+                        $('.alert-danger').addClass('d-none');
+                        $('.alert-success').removeClass('d-none');
+                        $('.alert-success').html(response.success);
+                        console.log("Tahun: " + tahun + ", Bulan: " + bulan);
+                        // $('#tabel_inv_sp').hide();
+                        // $('#tabel_inv_blast').show();
+                        // $('#modal-filter').modal('hide'); // Tutup modal setelah submit
+                    }
+                }
+            });
+            // $('#modal-proses').modal('hide'); // Tutup modal setelah submit
+        });
     });
 </script>

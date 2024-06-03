@@ -100,6 +100,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/billing/json-preview', 'preview')->name('billing.preview');
         Route::post('/billing/getpreview', 'getpreview')->name('billing.getpreview');
         Route::get('/billing/kirim-blast-inv', 'proseskirimblast')->name('billing.kirim-blast-inv');
+        Route::get('/billing/kirim-blast-inv-sampel', 'proseskirimsampelblast')->name('billing.kirim-blast-inv-sampel');
     });
 
     Route::controller(CollectionController::class)->group(function () {
@@ -128,6 +129,11 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/template/update', 'update');
     });
 
+
+    Route::controller(RereController::class)->group(function () {
+        Route::get('/rere', 'index');
+        Route::post('/rere/getpreview', 'getpreview')->name('rere.getpreview');
+    });
 
     Route::get('/pdf/coba', function () {
         return view('pdf.template');

@@ -105,6 +105,13 @@
         </li>
     </ul>
 </li>
+<li class="nav-header">RERE</li>
+<li class="nav-item">
+    <a href="/rere" class="nav-link">
+        <i class="fas fa-print nav-icon"></i>
+        <p>Tenan News</p>
+    </a>
+</li>
 <li class="nav-header">LAPORAN</li>
 <li class="nav-item">
     <a href="/laporan" class="nav-link">

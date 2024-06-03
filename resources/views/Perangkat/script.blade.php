@@ -15,11 +15,16 @@
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,
-                "buttons": ["csv", "excel", "pdf", "print"],
+                //    "buttons": ["csv", "excel", "pdf", "print"],
                 "processing": true,
                 "serverSide": true,
                 "ajax": '/perangkat/json',
                 "columns": [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    }, {
                         "data": 'level',
                         "name": 'level'
                     },
@@ -40,15 +45,13 @@
                         "name": 'api_endpoin_url'
                     },
                     {
-                        "data": null,
-                        "name": 'action',
-                        "render": function(data, type, row) {
-                            return '<button type="button" class="btn btn-info btn-xs edit" data-id="' +
-                                data.id + '">Edit</button>&nbsp;';
-                        }
+                        "data": 'aksi',
+                        "name": 'Aksi'
+
                     },
                 ]
-            }).buttons().container().appendTo('#daftarhp_wrapper .col-md-6:eq(0)');
+            });
+            //.buttons().container().appendTo('#daftarhp_wrapper .col-md-6:eq(0)');
 
             // Event listener untuk tombol edit
             $('#daftarhp').on('click', '.edit', function() {

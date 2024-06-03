@@ -401,6 +401,26 @@ class BillingController extends Controller
             return response()->json(['message' => 'Gagal menyimpan data ke tabel outboxs.']);
         }
     }
+    function proseskirimsampelblast(Request $request)
+    {
+        // dd($request->all());
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+
+        $reminder_no = $request->reminder_no;
+
+        $hasil = DB::select("call get_proses_inv_sampel('" . $tahun . "','" . $bulan . "','" . $reminder_no . "')");
+        foreach ($hasil as $h) {
+            $simpan = $h->jmlproses;
+        }
+
+        if ($simpan > 0) {
+            return response()->json(['success' => 'Sukses memproses sebanyak ' . $simpan . ' data, bulan: ' . $bulan . ' tahun: ' . $tahun . 'reminder_no:' . $reminder_no . ' Proses kirim Sampel Invoice sudah dilakukan, silahkan cek menu outbox.']);
+        } else {
+            return response()->json(['errors' => ['file' => $simpan . ' Gagal menyimpan data Blast ke tabel outboxs.']]);
+            // return response()->json(['errors' => 'Gagal menyimpan data Blast ke tabel outboxs.']);
+        }
+    }
     function import(Request $request)
     {
 
