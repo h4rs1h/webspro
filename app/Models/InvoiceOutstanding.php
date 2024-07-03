@@ -25,6 +25,7 @@ class InvoiceOutstanding extends Model
         'tung_air',
         'tung_denda',
         'tung_asuransi',
+        'deposit',
         'filename',
     ];
 
