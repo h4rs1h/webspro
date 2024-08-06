@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\BackupDatabaseJob;
 use Illuminate\Console\Scheduling\Schedule;
 use App\Console\Commands\ProcessWhatsappBlast;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -24,6 +25,8 @@ class Kernel extends ConsoleKernel
         // Menjalankan perintah queue:work setiap menit
         $schedule->command('whatsapp:process')->everyMinute()->withoutOverlapping();
         // $schedule->command('inspire')->hourly();
+
+
     }
 
     /**
