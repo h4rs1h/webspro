@@ -226,7 +226,7 @@ class BillingController extends Controller
                         ->where('fin_year', $tahun)
                         ->where('fin_month', $bulan)
                         ->whereNotNull('isi_pesan')
-                        ->where('tagihan_dibayar', '0')
+                        ->whereNotIn('tagihan_dibayar', ['0'])
                 );
             } elseif ($tower == '0' and $tower2 == '0' and $lantai != '0' and $lantai2 != '0') {
                 $simpan = DB::table('outboxs')->insertUsing(
@@ -245,7 +245,7 @@ class BillingController extends Controller
                         ->where('fin_month', $bulan)
                         ->whereBetween('lantai', [$lantai, $lantai2])
                         ->whereNotNull('isi_pesan')
-                        ->where('tagihan_dibayar', '0')
+                        ->whereNotIn('tagihan_dibayar', ['0'])
                 );
             } elseif ($tower !== '0' and $tower2 !== '0' and $lantai == '0' and $lantai2 == '0') {
                 $simpan = DB::table('outboxs')->insertUsing(
@@ -264,7 +264,7 @@ class BillingController extends Controller
                         ->where('fin_month', $bulan)
                         ->whereBetween('tower', [$tower, $tower2])
                         ->whereNotNull('isi_pesan')
-                        ->where('tagihan_dibayar', '0')
+                        ->whereNotIn('tagihan_dibayar', ['0'])
                 );
             } elseif ($tower != '0' and $tower2 != '0' and $lantai != '0' and $lantai2 != '0') {
                 $simpan = DB::table('outboxs')->insertUsing(
@@ -284,7 +284,7 @@ class BillingController extends Controller
                         ->whereBetween('tower', [$tower, $tower2])
                         ->whereBetween('lantai', [$lantai, $lantai2])
                         ->whereNotNull('isi_pesan')
-                        ->where('tagihan_dibayar', '0')
+                        ->whereNotIn('tagihan_dibayar', ['0'])
                 );
             }
         } else {
@@ -312,7 +312,7 @@ class BillingController extends Controller
                         ->where('vinvoice_pesan.fin_month', $bulan)
                         ->whereNotNull('vinvoice_pesan.isi_pesan')
                         ->where('invoice_reminder.reminder_no', $reminder_no)
-                        ->where('vinvoice_pesan.tagihan_dibayar', '0')
+                        ->whereNotIn('vinvoice_pesan.tagihan_dibayar', '0')
                 );
             } elseif ($tower == '0' and $tower2 == '0' and $lantai != '0' and $lantai2 != '0') {
                 $simpan = DB::table('outboxs')->insertUsing(
@@ -339,7 +339,7 @@ class BillingController extends Controller
                         ->whereBetween('vinvoice_pesan.lantai', [$lantai, $lantai2])
                         ->whereNotNull('vinvoice_pesan.isi_pesan')
                         ->where('invoice_reminder.reminder_no', $reminder_no)
-                        ->where('vinvoice_pesan.tagihan_dibayar', '0')
+                        ->whereNotIn('vinvoice_pesan.tagihan_dibayar', '0')
                 );
             } elseif ($tower !== '0' and $tower2 !== '0' and $lantai == '0' and $lantai2 == '0') {
                 $simpan = DB::table('outboxs')->insertUsing(
@@ -366,7 +366,7 @@ class BillingController extends Controller
                         ->whereBetween('vinvoice_pesan.tower', [$tower, $tower2])
                         ->whereNotNull('vinvoice_pesan.isi_pesan')
                         ->where('invoice_reminder.reminder_no', $reminder_no)
-                        ->where('vinvoice_pesan.tagihan_dibayar', '0')
+                        ->whereNotIn('vinvoice_pesan.tagihan_dibayar', '0')
                 );
             } elseif ($tower != '0' and $tower2 != '0' and $lantai != '0' and $lantai2 != '0') {
                 $simpan = DB::table('outboxs')->insertUsing(
@@ -394,7 +394,7 @@ class BillingController extends Controller
                         ->whereBetween('vinvoice_pesan.lantai', [$lantai, $lantai2])
                         ->whereNotNull('vinvoice_pesan.isi_pesan')
                         ->where('invoice_reminder.reminder_no', $reminder_no)
-                        ->where('vinvoice_pesan.tagihan_dibayar', '0')
+                        ->whereNotIn('vinvoice_pesan.tagihan_dibayar', '0')
                 );
             }
         }
