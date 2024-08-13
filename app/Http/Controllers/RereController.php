@@ -98,6 +98,7 @@ class RereController extends Controller
             ];
             // dd($simpan);
             $idnews = RereModel::create($simpan)->id;
+            DB::select("call get_pesan_rere_insert_outboxs('" . $idnews . "')");
             return response()->json([
                 'success' => 'Form Isi tersimpan id:' . $idnews . 'Data Tahun' . $tgl[0] . ' bulan' . $tgl[1] . ' Title: ' . $title . ' Tgl_pesan: ' . $tgl_pesan . ' Jam_pesan: ' . $jam_pesan . ' isi_pesan: ' . $isi_pesan . ' tower: ' . $tower . ' dan ' . $tower2 . ' lantai: ' . $lantai . ' sampai ' . $lantai2
             ]);
