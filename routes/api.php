@@ -23,4 +23,5 @@ Route::controller(ProsesKirimWaController::class)->group(function () {
     Route::get('/kirimsp', 'kirimsp');
     Route::get('/run-script', 'runScript')->name('run.script');
     Route::get('/kirimwajob', 'kirimbyJobs')->name('kirimbyJobs');
+    Route::get('/kirimbyJobsRere', 'kirimbyJobsRere')->name('kirimbyJobsRere');
 });

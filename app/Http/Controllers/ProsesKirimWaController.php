@@ -97,4 +97,38 @@ class ProsesKirimWaController extends Controller
             'message' => 'Pesan sudah berhasil didaftarkan pada antrian, dan akan berjalan di background'
         ]);
     }
+    function kirimbyJobsRere()
+    {
+        $url = env('WOOWA_URL_SEND') . 'send_message';
+        $keys = env('WOOWA_KEY_RERE');
+
+        $data = Outbox::wherenull('tglsending')
+            ->wherenull('job')
+            ->wherein('tipe', ['rere_news'])
+            ->orderbyraw('id')
+            // ->limit(10)
+            ->get();
+
+        // Jika data kosong, kembalikan response data kosong
+        if ($data->isEmpty()) {
+            return response()->json([
+                'message' => 'Tidak ada data yang harus diproses',
+                'remove' => 'alert-success',
+                'add' => 'alert-danger'
+            ]);
+        }
+
+        // Jika ada data, lanjutkan proses
+        foreach ($data as $item) {
+            SendMessageWA::dispatch($keys, $url, $item->id, $item->wa, $item->pesan)->onQueue('whatsappBlast');
+            Outbox::where('id', $item->id)
+                ->update(['job' => now()]);
+        }
+
+        return response()->json([
+            'remove' => 'alert-danger',
+            'add' => 'alert-success',
+            'message' => 'Pesan sudah berhasil didaftarkan pada antrian, dan akan berjalan di background'
+        ]);
+    }
 }

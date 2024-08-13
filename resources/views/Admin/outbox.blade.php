@@ -27,6 +27,9 @@
                         <button type="button" class="btn btn-primary" id="btn_proses_job">
                             Proses Daftar Antrian
                         </button>
+                        <button type="button" class="btn btn-primary" id="btn_proses_job_rere">
+                            Proses Antrian Rere News
+                        </button>
                     </div>
                 </div>
             </div>
