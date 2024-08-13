@@ -83,6 +83,18 @@
 
             });
         });
+        $('#btn_proses_job_rere').click(function() {
+            $.ajax({
+                url: '/api/kirimbyJobsRere',
+                type: 'GET',
+                success: function(response) {
+                    // Tampilkan result di div notifikasi
+                    $('#notification').removeClass(response.remove).addClass(response.add)
+                        .text(response.message).show();
+                },
+
+            });
+        });
 
     });
 </script>
