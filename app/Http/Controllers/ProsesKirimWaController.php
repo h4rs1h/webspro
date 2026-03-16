@@ -65,6 +65,9 @@ class ProsesKirimWaController extends Controller
 
     function kirimbyJobs()
     {
+        $minDelay = (int) 5;
+        $maxDelay = (int) 10;
+
         $url = env('WOOWA_URL_SEND') . 'send_message';
         $keys = env('WOOWA_KEY');
 
@@ -83,12 +86,23 @@ class ProsesKirimWaController extends Controller
                 'add' => 'alert-danger'
             ]);
         }
+        $totalDelay = 0;
 
         // Jika ada data, lanjutkan proses
-        foreach ($data as $item) {
-            SendMessageWA::dispatch($keys, $url, $item->id, $item->wa, $item->pesan)->onQueue('whatsappBlast');
+        foreach ($data as $index => $item) {
+            if ($index > 0) {
+                $totalDelay += random_int($minDelay, $maxDelay);
+            }
+            
+            $scheduledAt = now()->addSeconds($totalDelay);
+
+            SendMessageWA::dispatch($keys, $url, $item->id, $item->wa, $item->pesan)
+            ->delay($scheduledAt)
+            ->onQueue('whatsappBlast');
             Outbox::where('id', $item->id)
-                ->update(['job' => now()]);
+                ->update(['job' => now(),
+                'scheduled_at' => $scheduledAt,
+                'status_proses' => 'queued']);
         }
 
         return response()->json([

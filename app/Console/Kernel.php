@@ -23,10 +23,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('queue:restart')->everyFiveMinutes();
         // Menjalankan perintah queue:work setiap menit
-        $schedule->command('whatsapp:process')->everyMinute()->withoutOverlapping();
+     //    $schedule->command('whatsapp:process')->everyMinute()->withoutOverlapping();
         // $schedule->command('inspire')->hourly();
-
-
+        $schedule->command('whatsapp:dispatch')->everyMinute()->withoutOverlapping();
+        $schedule->command('whatsapp:retry-failed')->everyTenMinutes()->withoutOverlapping();
     }
 
     /**

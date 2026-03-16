@@ -41,7 +41,8 @@ class ProcessWhatsappBlast extends Command
             // }
         }
 
-
+            $this->info('Processing WhatsApp Blast jobs...');
+            $this->call('queue:work', ['--queue' => 'whatsappblast']);
 
         if ($jobCount > 0) {
             $this->info('Processing WhatsApp Blast jobs...');
