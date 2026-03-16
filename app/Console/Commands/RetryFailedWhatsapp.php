@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Models\Outbox;
+use App\Jobs\SendMessageWA;
 
 class RetryFailedWhatsapp extends Command
 {
